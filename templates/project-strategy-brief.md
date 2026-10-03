@@ -1,63 +1,76 @@
-# Template 01 — Project Strategy Brief
+# 01. Project Strategy Brief
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 01 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Project Lead / Strategist
+**Approval:** Client confirms factual accuracy
 
-| | |
+## Purpose
+Capture the commercial reality of the client before anyone audits or designs the website.
+
+## Project details
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 00 — Commercial Brief](../workflows/stage-00-commercial-brief/README.md) |
-| Filled by prompt(s) | 0B ([prompts](../workflows/stage-00-commercial-brief/prompts.md)) |
-| Validated by | 0C |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Client | [[Client name]] |
+| Domain | [[domain]] |
+| Project lead | [[name]] |
+| Strategist | [[name]] |
+| Designer | [[name]] |
+| Developer | [[name]] |
+| Kick-off date | [[date]] |
+| Target launch | [[date]] |
 
-## 1. Project details
+## Why the client hired us
 
+| Field | Entry |
+|---|---|
+| Commercial problem | [[What business problem is the website expected to solve?]] |
+| Primary business target | [[Revenue / leads / bookings / market position / expansion]] |
+| Website role in acquisition | [[Primary lead source / trust layer / SEO acquisition / booking layer / other]] |
+| Known brand problem | [[Current perception or positioning issue]] |
 
+## Business model
 
-## 2. Why the client hired us
+| Field | Entry |
+|---|---|
+| Locations now | [[...]] |
+| Planned locations | [[...]] |
+| Current practitioners | [[...]] |
+| Planned team growth | [[...]] |
+| Main revenue services | [[...]] |
+| Services to grow | [[...]] |
+| Current lead sources | [[...]] |
+| Current booking method | [[...]] |
 
+## Audience
 
+| Field | Entry |
+|---|---|
+| Primary patient/customer | [[Who are they and what are they trying to achieve?]] |
+| What they need to believe before booking | [[...]] |
+| Primary objections / anxieties | [[...]] |
 
-## 3. Business model
+## Constraints and risks
 
+| Field | Entry |
+|---|---|
+| Compliance / regulatory constraints | [[...]] |
+| Technology / CMS | [[...]] |
+| Budget / scope constraints | [[...]] |
+| Hard deadline | [[...]] |
+| Known SEO dependencies | [[...]] |
 
+## Success statement
 
-## 4. Audience
+| Field | Entry |
+|---|---|
+| This redesign succeeds if... | [[One commercial sentence]] |
+| This redesign fails even if it looks good if... | [[One sentence]] |
 
+## Definition of Done
 
-
-## 5. Growth model
-
-
-
-## 6. Acquisition / booking
-
-
-
-## 7. SEO / search priorities
-
-
-
-## 8. Brand problem
-
-
-
-## 9. Constraints / risks
-
-
-
-## 10. Success statement
-
-- This redesign succeeds if…
-- This redesign fails even if it looks good if…
-
-## 11. Open questions
-
-| Question | Owner | Needed by |
-|---|---|---|
-| | | |
-
-## 12. Definition of Done check
-
-Paste the 0C validator result (PASS / FAIL / BLOCKED per item).
+- [ ] Business objective is explicit.
+- [ ] Growth model and priority services are understood.
+- [ ] Audience and buying anxieties are documented.
+- [ ] Website role in acquisition is clear.
+- [ ] Known SEO/compliance constraints are captured.
+- [ ] Client confirms the factual brief.

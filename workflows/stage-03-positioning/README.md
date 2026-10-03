@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Strategist *(default role)* | Project Lead *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Strategist | Creative / Project Lead | Strategic approval | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -41,32 +43,42 @@ Route: **3A → 3B + 3C → 3D → 3E**
 
 ## Output
 
-**Positioning Thesis + Brand Architecture**
+**Positioning Thesis**
 
 - Template 04 — [Positioning Thesis](../../templates/positioning-thesis.md)
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 3 — Positioning*
 
-- [ ] Three-second perception
-- [ ] Wrong perception
-- [ ] Positioning thesis (25 words or fewer)
-- [ ] Priority services
-- [ ] Brand architecture
-- [ ] 3D validator returns PASS on every test
-- [ ] Client strategic approval recorded
-- [ ] Positioning added to LOCKED DECISIONS in the Master Project Context
+- [ ] Desired perception written.
+- [ ] Wrong perception written.
+- [ ] Positioning thesis agreed internally.
+- [ ] Priority services/categories identified.
+- [ ] Clinic/practitioner relationship defined.
+- [ ] Future growth test passed.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] No visual design begins until this is internally approved. *(SOP Stage 3)*
+- [ ] 3D validator returns PASS *(Workflow Index step 7)*
+- [ ] Client strategic approval recorded in the Approval Record *(SOP Stage 3 / Tracker)*
+- [ ] Approved positioning added to LOCKED DECISIONS in the Master Project Context *(Deployment Guide (Version control))*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Client strategic approval**
-- Required: client approval
-- On approval, lock: **Positioning** (add to LOCKED DECISIONS in the Master Project Context)
+- Approval required: **Yes**
+- Gate: Client strategic approval
+- On approval, lock: **Positioning**. Add it to LOCKED DECISIONS in the Master Project Context.
+
+## Method
+
+- SOP: [Stage 3 — Positioning](../../sop/website-redesign-sop.md#stage-3--positioning)
+- Playbook: [4. Positioning Thesis](../../playbook/website-strategy-playbook.md#4-positioning-thesis)
+- Playbook: [11. Brand Architecture](../../playbook/website-strategy-playbook.md#11-brand-architecture)
 
 ## Handoffs and client communication
 

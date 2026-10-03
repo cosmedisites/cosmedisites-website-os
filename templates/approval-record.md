@@ -1,38 +1,63 @@
-# Template 12 — Approval Record
+# 12. Approval Record
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 12 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Project Lead
+**Approval:** Client sign-off
 
-| | |
+## Purpose
+Create an auditable record of what the client has approved and prevent previously settled decisions from drifting.
+
+## Project
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 09 — Approval Gate](../workflows/stage-09-approval/README.md) |
-| Filled by prompt(s) | 9A, 9B, 9C ([prompts](../workflows/stage-09-approval/prompts.md)) |
-| Validated by | 9E (change control) |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Client | [[...]] |
+| Review date | [[...]] |
+| Attendees | [[...]] |
 
-## Decisions
+## Approval table
 
-| Decision | Status (Approved / Changes Requested / Pending / Locked / N/A) | Approver | Date | Decision level (1–5) | Feedback | Locked? |
-|---|---|---|---|---|---|---|
-| Positioning | | | | 2 | | |
-| Visual direction | | | | 5 | | |
-| Navigation / user journey | | | | 3 | | |
-| Service hierarchy | | | | | | |
-| Practitioner hierarchy | | | | | | |
-| Homepage structure | | | | 3 | | |
-| Photography direction | | | | 5 | | |
+| Field | Entry |
+|---|---|
+| Positioning | [Approved / Changes requested / Pending] |
+| Visual direction | [Approved / Changes requested / Pending] |
+| Navigation / user journey | [Approved / Changes requested / Pending] |
+| Service hierarchy | [Approved / Changes requested / Pending] |
+| Practitioner hierarchy | [Approved / Changes requested / Pending] |
+| Homepage structure | [Approved / Changes requested / Pending] |
+| Photography direction | [Approved / Changes requested / Pending] |
 
-## Change requests
+## Feedback classification
 
-| Client feedback | Feedback class | Decision level | Reopens approved decision? | Action | Owner | Deadline |
-|---|---|---|---|---|---|---|
-| | | | | | | |
+| Field | Entry |
+|---|---|
+| Strategic | Changes positioning or business direction. |
+| Accuracy | Correct factual error immediately. |
+| User / UX | Investigate against actual user behaviour / comprehension. |
+| Compliance | Correct immediately. |
+| Preference | Assess against strategy; do not automatically redesign. |
+| New information | Assess which previous decisions are genuinely affected. |
 
-## Revision plan
+## Revision control
 
-MUST CHANGE · SHOULD CHANGE · DO NOT CHANGE · NEEDS DECISION
+| Field | Entry |
+|---|---|
+| Round 1 | Strategic direction. |
+| Round 2 | Refinement against agreed strategic feedback. |
+| After approval | Approved decisions are locked unless new facts, business changes, user evidence, technical constraints or compliance requirements materially change the brief. |
 
-## Rule
+## Decision log
 
-Never infer approval from silence. A locked decision reopens only through 9E change control.
+| Field | Entry |
+|---|---|
+| Decision | [[...]] |
+| Status | [[...]] |
+| Owner | [[...]] |
+| Date | [[...]] |
+| Notes | [[...]] |
+
+## Definition of Done
+
+- [ ] Every strategic decision has a status.
+- [ ] Feedback is classified before action.
+- [ ] Locked decisions are identified.
+- [ ] Client has a clear record of what happens next.

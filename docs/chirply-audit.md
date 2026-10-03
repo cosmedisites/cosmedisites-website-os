@@ -3,7 +3,7 @@
 **Question:** can Chirply, which CosmediSites already uses, be the operational front end for the
 Website OS, so that we avoid adding ClickUp or Notion?
 
-**Date:** 2026-10-03 · **Method:** read-only inspection through Chirply's built-in MCP server.
+**Date:** 2026-10-03 (updated for Source Pack v1.0) · **Method:** read-only inspection through Chirply's built-in MCP server.
 That covers the live action catalogue (2,418 actions), live trigger/action registries, a few
 read-only data calls, and Chirply's in-app knowledge base. Nothing was created, changed or sent.
 
@@ -25,7 +25,7 @@ What this means:
   (build your own apps) **off**: "the App Marketplace is switched off for this account by the
   agency that manages it". **The CosmediSites plan may differ.**
 - Phase 2 of the [implementation plan](implementation-plan.md) therefore includes a short
-  hands-on verification in the real CosmediSites workspace (tests V1–V9 below). The
+  hands-on verification in the real CosmediSites workspace (tests V1–V10 below). The
   recommendation is conditional on those tests.
 
 ### Evidence labels
@@ -126,10 +126,12 @@ Evidence: OBSERVED-catalogue. **Rating: AMBER.** Use **project tasks** for deliv
 ### E. Approvals
 
 - No native approval feature for project items. MISSING.
-- A **custom object "Approval Record"** can hold: Project (text or link), Decision, Status (select:
-  Pending / Approved / Changes Requested / Locked / N/A), Approver (text or `contact_link` for the
-  client approver), Date, Feedback (text), Decision level (select 1–5), Locked (checkbox). INFERRED;
-  the field kinds are OBSERVED-catalogue.
+- A **custom object "Approval Record"** can mirror the Operational Tracker's *Approvals* tab
+  column for column: Decision, Level, Owner, Status (select: Pending / Approved / Changes
+  Requested / Locked / N/A, the Tracker's list), Date, Client / Approver (`contact_link` or text),
+  Feedback Classification (select: Strategic / Accuracy / User / UX / Compliance / Preference /
+  New Information, the Tracker's list), Notes. Add Project, Locked (checkbox) and Evidence link.
+  INFERRED; the field kinds are OBSERVED-catalogue.
 - `custom_record_updated` can trigger on a field changing to a value (for example Status =
   Approved). OBSERVED-live (trigger registry).
 - Formal client sign-off documents can use **e-signature** (`documents_send`, with audit trail).
@@ -139,7 +141,11 @@ Evidence: OBSERVED-catalogue. **Rating: AMBER.** Use **project tasks** for deliv
 
 ### F. Content / input tracker
 
-Possible as a custom object, but the tracker is a 20–60-row table per project with many columns.
+The methodology already provides this as the **Content Inputs** tab of the Operational Tracker v1.0.
+It has 9 columns, the status list Not Requested / Requested / Received / Verified / N/A, and 12 seeded
+rows (see [templates/operational-tracker.md](../templates/operational-tracker.md)).
+
+Rebuilding it in Chirply is possible as a custom object, but the tracker is a 20–60-row table per project with many columns.
 Chirply has native **Google Sheets** triggers (`google_sheets_row_new`, `google_sheets_row_updated`)
 and a Sheets action, so a Sheet in the project Drive folder can still drive Chirply automations.
 Clients can upload inputs through **Chirply forms** (file question: images, PDF, Word, text, up to
@@ -150,16 +156,20 @@ Clients can upload inputs through **Chirply forms** (file question: images, PDF,
 ### G. Proof inventory
 
 Custom objects lack formulas, roll-ups and relation fields. The proof inventory is evidence-heavy
-and reviewed line by line, which is a spreadsheet job.
+and reviewed line by line, which is a spreadsheet job. The Operational Tracker already has a
+**Proof Inventory** tab with exactly the required columns and validated drop-downs (Type, Applies
+To, Verified?, Consent / Permission).
 
 **Rating: needs companion → Google Sheets in the project Drive folder** (already in the stack; not a new tool).
 
 ### H. QA (three separate gates)
 
-Three parent tasks in a "Stage 12 — QA" list (Compliance, Strategy/UX, Technical/SEO). Each has
-one subtask per check, a gate owner, and a final "Gate sign-off" subtask. The detailed issue log
-(URL, severity, fix, retest) lives in the QA sheet/doc in Drive. No enforcement. INFERRED from
-OBSERVED-catalogue features.
+The check level (29 checks across the three gates, with Not Checked / Pass / Fix / N/A) already exists
+as the Tracker's **QA** tab, with columns Gate, Check, Owner, Status, Issue / Fix, Sign-off / Date.
+Chirply only needs the **gate level**: three parent tasks in "Stage 12 — QA" (Compliance, Strategy/UX,
+Technical/SEO). Each has its SOP owner (Compliance Reviewer; Independent QA Reviewer; Developer + SEO
+Lead) and a "Gate sign-off" subtask, and links to the QA tab. This keeps each check in one place.
+No enforcement. INFERRED from OBSERVED-catalogue features.
 
 **Rating: AMBER.**
 
@@ -235,11 +245,11 @@ generated through the API (see [automation map](automation-map.md), A8).
 | DoD checklists | Must | ❌ | ✅ subtasks | – | – | – | **AMBER** | Verify UX (V2) |
 | Task owner/due/status/attachments | Must | ✅ | – | – | – | – | **GREEN** | |
 | Task comments | Should | CRM ✅ / project ❓ | – | – | – | – | **AMBER** | V3 |
-| Approvals with statuses | Must | ❌ | ✅ custom object | ✅ triggers | – | – | **AMBER** | |
+| Approvals with statuses | Must | ❌ | ✅ custom object (Tracker *Approvals* columns) | ✅ triggers | – | – | **AMBER** | Same status list as Tracker |
 | Client e-sign approval | Nice | ✅ documents | – | – | – | – | **GREEN** | |
-| Content / input tracker | Must | – | Possible | ✅ Sheets triggers | **Google Sheets** (existing) | – | **AMBER** | |
-| Proof inventory | Must | – | Weak | – | **Google Sheets** (existing) | – | **AMBER** | |
-| Three QA gates | Must | – | ✅ tasks + subtasks | – | Drive issue log | – | **AMBER** | |
+| Content / input tracker | Must | – | Possible | ✅ Sheets triggers | **Tracker *Content Inputs* tab (Google Sheets)** | – | **AMBER** | Already part of the methodology |
+| Proof inventory | Must | – | Weak | – | **Tracker *Proof Inventory* tab** | – | **AMBER** | Already part of the methodology |
+| Three QA gates | Must | – | ✅ gate tasks + sign-off | – | **Tracker *QA* tab** (check level) | – | **AMBER** | One home per check |
 | Stage-transition automations | Should | ✅ deal-stage triggers | – | ✅ webhook → API | Apps Script glue (existing Workspace) | Project-task triggers | **AMBER** | |
 | Date-relative 30/60/90 | Should | ✅ `due_in_days` | – | – | – | Date-field trigger | **AMBER** | Fire on stage move |
 | Internal notifications / Slack | Should | Partly (email) | – | ✅ webhook | – | Native Slack | **AMBER** | |
@@ -262,10 +272,11 @@ confirms the design or triggers the fallback.
 | V3 | Comment on a project task, and attach a link and a file | Both possible | Comments go on the deal timeline instead (acceptable) |
 | V4 | Paste GitHub/Drive links into a project task description | Links clickable | Put links in deal URL fields and a project notebook |
 | V5 | Pipeline with 15 stages + a `deal_stage_changed` workflow that creates a task and sends an internal email | Fires reliably | **Fallback trigger** for automation |
-| V6 | Custom object "Approval Record" + `custom_record_updated` trigger on Status | Fires on change | Approvals tracked as deal fields (weaker) |
+| V6 | Custom object "Approval Record" + `custom_record_updated` trigger on Status | Fires on change | Approvals stay in the Tracker *Approvals* tab, as designed in the methodology; no approval automations |
 | V7 | Workflow `webhook` action calling Chirply's own REST API (`projects_save_task`) | Task created | Provisioning runs from Apps Script instead (fine) |
 | V8 | Is `appDev` / App Marketplace enabled, and who is the managing agency? | Known | Informational only |
 | V9 | Report builder: projects by stage and owner over the redesign pipeline | Works | Digest only |
+| V10 | Can project board columns be renamed to the Tracker's stage statuses (Not Started / In Progress / Blocked / Ready for Review / Complete / N/A)? | Yes | Use the deal *Health* field plus task completion; Blocked and Ready for Review go in the task title prefix |
 
 **Fallback rule:** if **V2 or V5 fails**, Chirply can't run delivery, and we move to Option B
 (see [operating architecture](operating-architecture.md#fallback-option-b)).
@@ -275,8 +286,9 @@ confirms the design or triggers the fallback.
 ## Recommendation
 
 **Option A: Chirply is the main operational front end, configured as specified in the
-[operational stage spec](operational-stage-spec.md). The tabular trackers live in Google Sheets in
-the project Drive folder.** No new platform. This is conditional on V2 and V5 passing in the
+[operational stage spec](operational-stage-spec.md). The methodology's own Operational Tracker
+v1.0, as a Google Sheet per project, holds the tabular registers (Content Inputs, Proof Inventory,
+QA checks, Measurement).** No new platform. This is conditional on V2 and V5 passing in the
 CosmediSites workspace.
 
 Why not add ClickUp or Notion now:
@@ -288,8 +300,10 @@ Why not add ClickUp or Notion now:
   a human decision with an automated flag.
 - Chirply already owns the client relationship and communications. A second tool would split
   "where is this project?" across two systems and need syncing.
-- Google Sheets and Drive are already in use. Treating them as the companion for tabular
-  evidence adds no software.
+- Google Sheets and Drive are already in use, and the **Operational Tracker v1.0 is already part of
+  the methodology**. Using its tabular tabs as the companion adds no software and changes no method.
+  Chirply takes over only the tabs it does better (stage status, approvals, dashboard). See the
+  [tab split](../templates/operational-tracker.md#how-the-tracker-is-used-with-chirply).
 
 Full detail: [operating architecture](operating-architecture.md).
 

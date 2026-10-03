@@ -1,62 +1,74 @@
-# Template 03 — Strategic Diagnosis
+# 03. Strategic Diagnosis
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 03 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Strategist
+**Approval:** Internal unless stated
 
-| | |
+## Purpose
+Explain why change is required without jumping prematurely into colours, fonts or layouts.
+
+## Current perception
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 02 — Strategic Diagnosis](../workflows/stage-02-diagnosis/README.md) |
-| Filled by prompt(s) | 2A, 2B ([prompts](../workflows/stage-02-diagnosis/prompts.md)) |
-| Validated by | 2C |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Today the website signals... | [[...]] |
 
-## 1. Current perception
+## Desired perception
 
+| Field | Entry |
+|---|---|
+| The business needs to signal... | [[...]] |
 
+## Commercial weaknesses
 
-## 2. Desired perception
+| Field | Entry |
+|---|---|
+| Issue | [[...]] |
+| Business impact | [[...]] |
 
+## Trust weaknesses
 
+| Field | Entry |
+|---|---|
+| Issue | [[...]] |
+| Missing proof | [[...]] |
 
-## 3. Commercial weaknesses
+## UX weaknesses
 
-For each: evidence · consequence · priority · confidence
+| Field | Entry |
+|---|---|
+| Issue | [[...]] |
+| Patient consequence | [[...]] |
 
-## 4. Trust weaknesses
+## Brand architecture
 
+| Field | Entry |
+|---|---|
+| Current issue | [[...]] |
+| Future requirement | [[...]] |
 
+## Scalability
 
-## 5. UX / discovery weaknesses
+| Field | Entry |
+|---|---|
+| What breaks as the clinic grows? | [[...]] |
 
+## Priority opportunities
 
+| Field | Entry |
+|---|---|
+| 1 | [[...]] |
+| 2 | [[...]] |
+| 3 | [[...]] |
 
-## 6. Brand architecture weaknesses
+## Diagnosis in one sentence
 
+| Field | Entry |
+|---|---|
+| Statement | [[...]] |
 
+## Definition of Done
 
-## 7. Search / information architecture risks
-
-
-
-## 8. Scalability risks
-
-
-
-## 9. Priority opportunities
-
-
-
-## 10. Diagnosis in one sentence
-
-
-
-## Priority stack
-
-| Issue | Why it matters | Evidence | Priority (P0–P3) | Later stage that must solve it |
-|---|---|---|---|---|
-| | | | | |
-
-## 11. Definition of Done check
-
-Paste the 2C red-team result.
+- [ ] Diagnosis can be understood without discussing visual taste.
+- [ ] Commercial, trust, UX and scalability issues are separated.
+- [ ] Top three opportunities are prioritised.
+- [ ] Diagnosis traces back to evidence.

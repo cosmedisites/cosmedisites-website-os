@@ -1,26 +1,54 @@
-# Template 10 — Photography Brief
+# 10. Photography Brief
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 10 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Designer / Content Lead
+**Approval:** Internal unless stated
 
-| | |
-|---|---|
-| Stage | [Stage 07 — Proof + Content + Photography](../workflows/stage-07-proof-content-photography/README.md) |
-| Filled by prompt(s) | 7C ([prompts](../workflows/stage-07-proof-content-photography/prompts.md)) |
-| Validated by | 7D |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+## Purpose
+Create photography that carries the positioning rather than relying on generic stock imagery.
 
 ## Art direction
 
-Desired feeling · lighting · environment · skin / retouching · wardrobe / clinical cues · avoid
+| Field | Entry |
+|---|---|
+| Desired feeling | [[...]] |
+| Lighting | [[...]] |
+| Colour / environment | [[...]] |
+| Skin / retouching | [[...]] |
+| Avoid | [[...]] |
 
 ## Shot list
 
-| Shot | Subject | Page / component | Orientation / ratio | Framing / crop | Action / moment | Consent required? | Priority |
-|---|---|---|---|---|---|---|---|
-| | | | | | | | |
+| Field | Entry |
+|---|---|
+| Practitioner portraits | [Matched framing, individual + team] |
+| Consultations | [Patient/model interaction, listening, planning] |
+| Clinic interiors | [Daylight, key rooms, arrival] |
+| Treatment preparation | [Hands, equipment, preparation] |
+| Treatment detail | [Subtle clinical moments; avoid shock imagery] |
+| Natural skin | [Texture, close-ups] |
+| Before / after | [Consented, matched framing / lighting / timing] |
 
-## Rules
+## Shot specification
 
-Results need real patient imagery with proper consent. Practitioner portraits must be real. AI or stock images may appear only as clearly labelled art-direction stand-ins during design.
+| Field | Entry |
+|---|---|
+| Shot | [[...]] |
+| Page / component | [[...]] |
+| Orientation | [Portrait / Landscape / Square] |
+| Crop / focal point | [[...]] |
+| Subject | [[...]] |
+| Consent required? | [[Yes / No]] |
+
+## Stand-in rules
+
+| Field | Entry |
+|---|---|
+| AI imagery | May be used only as clearly labelled art-direction stand-ins. |
+| Never fabricate | Practitioner portraits, before/after results, credentials or clinical evidence. |
+
+## Definition of Done
+
+- [ ] Hero, team, treatment, interior and results needs are covered.
+- [ ] Image ratios / orientations are known.
+- [ ] Patient/model consent requirements are identified.
+- [ ] Stand-in imagery is clearly labelled and not treated as final.

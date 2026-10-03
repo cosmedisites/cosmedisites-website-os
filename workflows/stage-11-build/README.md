@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Developer *(default role)* | Designer *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Developer | Designer | No | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -44,27 +46,36 @@ Route: **11A + 11B + 11C → 11D**
 
 ## Output
 
-**Build Handoff + implementation variance**
+**Implemented build**
 
 - Template 14 — [Build Handoff](../../templates/build-handoff.md)
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 11 — Build*
 
-- [ ] Designer → Developer handoff complete, with no material UX decision left to the developer
-- [ ] SEO → Developer handoff complete, with every MUST item addressed
-- [ ] Content mapped to templates without factual changes
-- [ ] 11D shows no outstanding CRITICAL variance
+- [ ] Developer is implementing approved decisions.
+- [ ] Material UX decisions are not being invented during development.
+- [ ] Desktop/mobile states are implemented.
+- [ ] SEO/migration requirements are implemented.
+- [ ] Tracking requirements are implemented.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] 11D shows no outstanding CRITICAL variance *(Workflow Index step 7 / prompt 11D)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Internal**
-- Internal sign-off only
+- Approval required: **No**
+- Gate: Internal
+
+## Method
+
+- SOP: [Stage 11 — Build](../../sop/website-redesign-sop.md#stage-11--build)
+- Playbook: [22. Build Handoff](../../playbook/website-strategy-playbook.md#22-build-handoff)
 
 ## Handoffs and client communication
 

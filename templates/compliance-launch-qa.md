@@ -1,33 +1,66 @@
-# Template 15 — Compliance + Launch QA
+# 15. Compliance + Launch QA
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 15 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Compliance Reviewer / Independent QA / Developer + SEO Lead
+**Approval:** Internal unless stated
 
-| | |
+## Purpose
+Run three distinct sign-offs: regulated-content compliance, strategy/UX integrity and technical/SEO quality.
+
+## A. Compliance review
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 12 — QA](../workflows/stage-12-qa/README.md) |
-| Filled by prompt(s) | 12A, 12B, 12C ([prompts](../workflows/stage-12-qa/prompts.md)) |
-| Validated by | 12D, 12E |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Claims | [Pass / Fix] |
+| Credentials | [Pass / Fix] |
+| Practitioner titles | [Pass / Fix] |
+| Treatment terminology | [Pass / Fix] |
+| Before/after usage | [Pass / Fix] |
+| Testimonials | [Pass / Fix] |
+| Promotional language | [Pass / Fix] |
+| Pricing claims | [Pass / Fix] |
+| Guarantees / outcomes | [Pass / Fix] |
+| Patient consent | [Pass / Fix] |
 
-## Three separate gates
+## B. Strategy / UX QA
 
-Run each gate on its own checklist so one type of QA cannot hide another:
-- [Compliance](../qa/compliance.md)
-- [Strategy / UX](../qa/strategy-ux.md)
-- [Technical / SEO](../qa/technical-seo.md)
+| Field | Entry |
+|---|---|
+| Positioning survives implementation | [Pass / Fix] |
+| Trust appears early enough | [Pass / Fix] |
+| User journeys work | [Pass / Fix] |
+| Clinic/practitioner hierarchy is correct | [Pass / Fix] |
+| CTAs are clear | [Pass / Fix] |
+| Mobile works | [Pass / Fix] |
+| Scalability preserved | [Pass / Fix] |
 
-## Consolidated triage (12D)
+## C. Technical / SEO QA
 
-| Source gate | Issue | Impact | Priority (P0–P3) | Owner | Fix status | Retest owner |
-|---|---|---|---|---|---|---|
-| | | | | | | |
+| Field | Entry |
+|---|---|
+| Indexability | [Pass / Fix] |
+| Metadata | [Pass / Fix] |
+| Canonicals | [Pass / Fix] |
+| Redirects | [Pass / Fix] |
+| Schema | [Pass / Fix] |
+| Internal links | [Pass / Fix] |
+| Performance | [Pass / Fix] |
+| Forms / booking | [Pass / Fix] |
+| Tracking | [Pass / Fix] |
+| Responsive behaviour | [Pass / Fix] |
+| Broken links | [Pass / Fix] |
+| Consent implementation | [Pass / Fix] |
 
-## Launch status
+## Sign-off
 
-Total P0 · Total P1 · outstanding compliance / technical / strategy blockers · Recommended: GO / NO-GO / CONDITIONAL
+| Field | Entry |
+|---|---|
+| Compliance | [[name/date]] |
+| Strategy / UX | [[name/date]] |
+| Technical / SEO | [[name/date]] |
+| Launch approved by | [[name/date]] |
 
-## Launch blocker decision (12E, only if needed)
+## Definition of Done
 
-Conditions · owner · deadline · rollback trigger
+- [ ] All three QA gates completed separately.
+- [ ] Blocking issues resolved or explicitly accepted.
+- [ ] Launch owner has final sign-off.

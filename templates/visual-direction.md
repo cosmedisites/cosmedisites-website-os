@@ -1,43 +1,84 @@
-# Template 07 — Visual Direction
+# 07. Visual Direction
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 07 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Designer
+**Approval:** Client visual-direction approval
 
-| | |
+## Purpose
+Translate positioning into a coherent visual system that can be defended strategically.
+
+## Visual thesis
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 05 — Visual Direction](../workflows/stage-05-visual-direction/README.md) |
-| Filled by prompt(s) | 5A, 5C ([prompts](../workflows/stage-05-visual-direction/prompts.md)) |
-| Validated by | 5D |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| The site should feel like... | [[...]] |
+| It should not feel like... | [[...]] |
 
-## Visual principles
+## Palette
 
-| Area | What it must communicate | Recommended behaviour | Avoid | Strategic reason |
-|---|---|---|---|---|
-| Palette / contrast | | | | |
-| Typography | | | | |
-| Spacing / density | | | | |
-| Photography | | | | |
-| Buttons / CTA hierarchy | | | | |
-| Cards / containers | | | | |
-| Iconography | | | | |
-| Motion | | | | |
-| Evidence / data presentation | | | | |
-| Dark / light section use | | | | |
+| Field | Entry |
+|---|---|
+| Primary background | [[hex + role]] |
+| Secondary background | [[hex + role]] |
+| Primary text | [[hex + role]] |
+| Accent | [[hex + restrained usage]] |
 
-## Design brief buckets
+## Typography
 
-LOCKED · REQUIRED · FLEXIBLE · OPEN · DO NOT DO
+| Field | Entry |
+|---|---|
+| Primary typeface | [[...]] |
+| Headline behaviour | [[...]] |
+| Body behaviour | [[...]] |
+| Editorial contrast | [[...]] |
 
-## Mockup links (Figma)
+## Spacing / layout
 
+| Field | Entry |
+|---|---|
+| Density | [[...]] |
+| Content width | [[...]] |
+| Section rhythm | [[...]] |
 
+## Buttons / CTAs
 
-## Definition of Done check
+| Field | Entry |
+|---|---|
+| Primary | [[...]] |
+| Secondary | [[...]] |
+| Usage rule | [[...]] |
 
-Paste the 5D validator result (KEEP / CHANGE / OPEN, then PASS / FAIL / BLOCKED).
+## Cards / containers
 
-## Approval
+| Field | Entry |
+|---|---|
+| When to use | [[...]] |
+| When not to use | [[...]] |
 
-Approved by: · Date: · Locked: Yes / No
+## Photography language
+
+| Field | Entry |
+|---|---|
+| Light | [[...]] |
+| Subjects | [[...]] |
+| Avoid | [[...]] |
+
+## Motion
+
+| Field | Entry |
+|---|---|
+| Allowed | [[...]] |
+| Avoid | [[...]] |
+
+## Strategic rationale
+
+| Field | Entry |
+|---|---|
+| Why this system fits the positioning | [[...]] |
+
+## Definition of Done
+
+- [ ] Every major design choice has a strategic rationale.
+- [ ] System works on desktop and mobile.
+- [ ] Photography direction is defined.
+- [ ] CTA hierarchy is unambiguous.
+- [ ] Client-facing explanation avoids internal design jargon.

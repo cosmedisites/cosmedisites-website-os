@@ -35,14 +35,8 @@ CATALOG = ROOT / "prompts" / "prompt-catalog.csv"
 DIST = ROOT / "dist"
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-KIND_LABEL = {"run": "RUN", "validate": "VALIDATE", "client": "CLIENT-FACING"}
-APPROVAL_LABEL = {
-    "client": "Required: client approval",
-    "conditional": "Conditional: client approval where the sitemap/URL changes are material",
-    "client-meeting": "Required: client review meeting held",
-    "client-inputs": "Client must supply inputs; no strategic sign-off at this stage",
-    "internal": "Internal sign-off only",
-}
+SOP = ROOT / "sop" / "website-redesign-sop.md"
+PLAYBOOK = ROOT / "playbook" / "website-strategy-playbook.md"
 
 errors: list[str] = []
 
@@ -101,20 +95,33 @@ def blob(cfg: dict, rel: str, anchor: str | None = None) -> str:
     return f"{url}#{anchor}" if anchor else url
 
 
-def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors: dict) -> str:
+def doc_anchors(path: Path, pattern: str) -> dict[str, tuple[str, str]]:
+    """Map a key (stage number / section number) to (heading text, anchor) for H1 headings."""
+    out = {}
+    for m in re.finditer(pattern, path.read_text(encoding="utf-8"), re.M):
+        out[m.group("key")] = (m.group("text").strip(), gh_anchor(m.group("text")))
+    return out
+
+
+def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors: dict,
+               sop: dict, playbook: dict) -> str:
     sid = stage["id"]
     prompts_rel = "prompts.md"
+    sop_text, sop_anchor = sop[str(stage["sop_stage"])]
+    statuses = " · ".join(cfg["statuses"]["stage"])
     lines = [
         f"# STAGE {sid} — {stage['name'].upper()}",
         "",
         "<!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->",
         "",
         "> This is the stage card: what you need to work this stage. Day-to-day status lives in the",
-        "> operational tool (Chirply); this card and the files it links to are the source.",
+        "> operational tool (Chirply). This card and the files it links to are the source.",
         "",
-        "| Status | Owner | Reviewer | Deadline |",
-        "|---|---|---|---|",
-        f"| *set per project* | {stage['owner_role']} *(default role)* | {stage['reviewer_role']} *(default role)* | *set per project* |",
+        "| Status | Owner | Reviewer | Client involved | Deadline |",
+        "|---|---|---|---|---|",
+        f"| *set per project* | {stage['owner']} | {stage['reviewer']} | {stage['client_involved']} | *set per project* |",
+        "",
+        f"Status values: {statuses}.",
         "",
         "## Objective",
         "",
@@ -158,28 +165,33 @@ def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors:
         lines.append(f"- Template {meta['number']} — [{meta['title']}](../../templates/{t}.md)")
     for g in stage.get("qa_gates", []):
         meta = cfg["qa_gates"][g]
-        lines.append(f"- QA gate — [{meta['title']}](../../{meta['file']}) *(owner: {meta['owner_role']})*")
-    lines += [
-        "",
-        "## Definition of Done",
-        "",
-        "> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow",
-        "> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile",
-        "> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).",
-        "",
-    ]
+        lines.append(f"- QA gate — [{meta['title']}](../../{meta['file']}) *(owner: {meta['owner']})*")
+    if stage.get("tracker_tabs"):
+        tabs = ", ".join(stage["tracker_tabs"])
+        lines.append(f"- Project Tracker tab(s): {tabs} ([structure](../../templates/operational-tracker.md))")
+    src = stage["dod_source"]
+    src_label = f"SOP v1.0, {sop_text}" if src == "SOP" else src
+    lines += ["", "## Definition of Done", "", f"*Source: {src_label}*", ""]
     lines += [f"- [ ] {item}" for item in stage["dod"]]
+    if stage.get("gate_checks"):
+        lines += ["", "**Also required before moving stage:**", ""]
+        lines += [f"- [ ] {g['check']} *({g['source']})*" for g in stage["gate_checks"]]
     lines += [
         "",
-        "Do not move stage until every item passes, or an authorised exception is recorded.",
+        "> Never move to the next stage because the previous one feels approximately finished.",
+        "> Move when its Definition of Done has been met, or an authorised exception is recorded.",
         "",
         "## Approval",
         "",
-        f"- Gate: **{stage['gate']}**",
-        f"- {APPROVAL_LABEL[stage['approval']]}",
+        f"- Approval required: **{stage['approval']}**",
+        f"- Gate: {stage['gate']}",
     ]
     if stage.get("locks"):
-        lines.append(f"- On approval, lock: **{stage['locks']}** (add to LOCKED DECISIONS in the Master Project Context)")
+        lines.append(f"- On approval, lock: **{stage['locks']}**. Add it to LOCKED DECISIONS in the Master Project Context.")
+    lines += ["", "## Method", "", f"- SOP: [{sop_text}](../../sop/website-redesign-sop.md#{sop_anchor})"]
+    for n in stage.get("playbook", []):
+        text, anchor = playbook[str(n)]
+        lines.append(f"- Playbook: [{text}](../../playbook/website-strategy-playbook.md#{anchor})")
     extras = []
     for h in stage.get("handoffs", []):
         extras.append(f"- [{h} — {catalog[h]['name']}](../../prompts/team-handoffs/role-handoff-prompts.md#{anchors[h]})")
@@ -191,32 +203,58 @@ def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors:
     if nxt:
         lines.append(f"[Stage {nxt['id']} — {nxt['name']}](../{nxt['slug']}/README.md)")
     else:
-        lines.append("End of workflow. Log OS improvements found in 14E as GitHub Issues.")
+        lines.append("End of workflow. Log reusable learning from 14E as GitHub Issues.")
     lines.append("")
     return "\n".join(lines)
 
 
-def stage_config(cfg: dict, catalog: dict, anchors: dict) -> dict:
+README = ROOT / "README.md"
+TABLE_RE = re.compile(r"(<!-- stages-table:start[^>]*-->\n)(.*?)(<!-- stages-table:end -->)", re.S)
+
+
+def readme_with_table(cfg: dict) -> str:
+    rows = ["| # | Stage | Owner (SOP) | Output | Approval required |", "|---|---|---|---|---|"]
+    for s in cfg["stages"]:
+        rows.append(f"| {s['id']} | [{s['name']}](workflows/{s['slug']}/README.md) | {s['owner']} "
+                    f"| {s['output']} | {s['approval']} |")
+    text = README.read_text(encoding="utf-8")
+    if not TABLE_RE.search(text):
+        errors.append("README.md: stages-table markers missing")
+        return text
+    return TABLE_RE.sub(lambda m: m.group(1) + "\n".join(rows) + "\n" + m.group(3), text)
+
+
+def stage_config(cfg: dict, catalog: dict, anchors: dict, sop: dict, playbook: dict) -> dict:
     stages = []
     for i, s in enumerate(cfg["stages"]):
         base = f"workflows/{s['slug']}"
         nxt = cfg["stages"][i + 1]["id"] if i + 1 < len(cfg["stages"]) else None
+        sop_text, sop_anchor = sop[str(s["sop_stage"])]
         stages.append({
             "id": s["id"],
             "name": s["name"],
             "task_name": f"S{s['id']} — {s['name']} — {s['route']}",
             "objective": s["objective"],
-            "default_owner_role": s["owner_role"],
-            "default_reviewer_role": s["reviewer_role"],
+            "owner": s["owner"],
+            "reviewer": s["reviewer"],
+            "client_involved": s["client_involved"],
             "approval": s["approval"],
+            "approval_type": s["approval_type"],
             "gate": s["gate"],
             "locks": s.get("locks"),
             "next_stage": nxt,
             "output": s["output"],
             "definition_of_done": s["dod"],
+            "definition_of_done_source": s["dod_source"],
+            "gate_checks": s.get("gate_checks", []),
+            "tracker_tabs": s.get("tracker_tabs", []),
             "links": {
                 "stage_card": blob(cfg, f"{base}/README.md"),
-                "sop": blob(cfg, "sop/website-redesign-sop.md"),
+                "sop": {"title": sop_text, "url": blob(cfg, "sop/website-redesign-sop.md", sop_anchor)},
+                "playbook": [
+                    {"title": playbook[str(n)][0], "url": blob(cfg, "playbook/website-strategy-playbook.md", playbook[str(n)][1])}
+                    for n in s.get("playbook", [])
+                ],
                 "templates": [
                     {"title": f"Template {cfg['templates'][t]['number']} — {cfg['templates'][t]['title']}",
                      "url": blob(cfg, f"templates/{t}.md")} for t in s["templates"]
@@ -226,7 +264,7 @@ def stage_config(cfg: dict, catalog: dict, anchors: dict) -> dict:
                      "url": blob(cfg, f"{base}/prompts.md", anchors[p["id"]])} for p in s["prompts"]
                 ],
                 "qa_gates": [
-                    {"title": cfg["qa_gates"][g]["title"], "owner_role": cfg["qa_gates"][g]["owner_role"],
+                    {"title": cfg["qa_gates"][g]["title"], "owner": cfg["qa_gates"][g]["owner"],
                      "url": blob(cfg, cfg["qa_gates"][g]["file"])} for g in s.get("qa_gates", [])
                 ],
                 "handoffs": [
@@ -241,7 +279,7 @@ def stage_config(cfg: dict, catalog: dict, anchors: dict) -> dict:
                 ],
             },
         })
-    return {"os_version": VERSION, "stages": stages, "roles": cfg["roles"]}
+    return {"os_version": VERSION, "statuses": cfg["statuses"], "roles": cfg["roles"], "stages": stages}
 
 
 def all_prompts(cfg: dict) -> str:
@@ -282,6 +320,8 @@ def main() -> int:
     cfg = yaml.safe_load(REGISTRY.read_text(encoding="utf-8"))
     catalog = load_catalog()
     anchors = index_prompt_files(catalog)
+    sop = doc_anchors(SOP, r"^# (?P<text>Stage (?P<key>\d+) — .+)$")
+    playbook = doc_anchors(PLAYBOOK, r"^# (?P<text>(?P<key>\d+)\. .+)$")
 
     ids = [s["id"] for s in cfg["stages"]]
     if ids != [f"{i:02d}" for i in range(15)]:
@@ -299,6 +339,17 @@ def main() -> int:
                 errors.append(f"templates/{t}.md missing")
         if not any(p["kind"] == "validate" for p in s["prompts"]) and not s.get("no_validator_reason"):
             errors.append(f"stage {s['id']}: no validator prompt (add one, or set no_validator_reason)")
+        if str(s.get("sop_stage")) not in sop:
+            errors.append(f"stage {s['id']}: SOP has no '# Stage {s.get('sop_stage')} —' heading")
+        for n in s.get("playbook", []):
+            if str(n) not in playbook:
+                errors.append(f"stage {s['id']}: Playbook has no section {n}")
+        for g in s.get("qa_gates", []):
+            if g not in cfg["qa_gates"]:
+                errors.append(f"stage {s['id']}: unknown QA gate {g}")
+        for field in ("owner", "reviewer", "client_involved", "approval", "approval_type", "dod", "dod_source"):
+            if not s.get(field):
+                errors.append(f"stage {s['id']}: missing {field}")
         for ref in s.get("handoffs", []) + s.get("client_comms", []):
             if ref not in catalog:
                 errors.append(f"stage {s['id']}: unknown reference {ref}")
@@ -314,13 +365,20 @@ def main() -> int:
     stale = []
     for i, s in enumerate(cfg["stages"]):
         nxt = cfg["stages"][i + 1] if i + 1 < len(cfg["stages"]) else None
-        card = stage_card(cfg, s, nxt, catalog, anchors)
+        card = stage_card(cfg, s, nxt, catalog, anchors, sop, playbook)
         path = ROOT / "workflows" / s["slug"] / "README.md"
         if check:
             if not path.exists() or path.read_text(encoding="utf-8") != card:
                 stale.append(str(path.relative_to(ROOT)))
         else:
             path.write_text(card, encoding="utf-8")
+
+    readme = readme_with_table(cfg)
+    if check:
+        if README.read_text(encoding="utf-8") != readme:
+            stale.append("README.md (stages table)")
+    else:
+        README.write_text(readme, encoding="utf-8")
 
     check_links()
     if stale:
@@ -334,7 +392,7 @@ def main() -> int:
     (DIST / "prompt-catalog.json").write_text(
         json.dumps(list(catalog.values()), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     (DIST / "stage-config.json").write_text(
-        json.dumps(stage_config(cfg, catalog, anchors), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        json.dumps(stage_config(cfg, catalog, anchors, sop, playbook), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"OK: {len(cfg['stages'])} stages, {len(catalog)} prompts. dist/ written.")
     return 0
 

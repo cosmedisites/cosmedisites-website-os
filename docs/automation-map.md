@@ -35,7 +35,7 @@ Everything else reacts to it.
 | | |
 |---|---|
 | **Trigger** | Deal created in the "Website Redesign" pipeline (from the deal template) |
-| **Action** | Chirply `webhook` → Apps Script: (1) create the Chirply project with 15 task lists, stage tasks (description = stage card + links), DoD subtasks and reviewer subtasks from the **current release's** `stage-config.json`; (2) assign default owners from the deal's role fields; (3) copy the Drive folder template (`00_Admin` … `14_Measurement`, plus Input Tracker, Proof Inventory and QA Log sheets and the MPC Doc); (4) write the Drive URLs back to the deal fields; (5) set `OS version` |
+| **Action** | Chirply `webhook` → Apps Script: (1) create the Chirply project with 15 task lists, stage tasks (description = stage card + links), DoD subtasks and reviewer subtasks from the **current release's** `stage-config.json`; (2) assign owners from the deal's role fields, per the SOP owner of each stage; (3) copy the Drive folder template (`00_Admin` … `14_Measurement`, plus the Project Tracker Sheet from Operational Tracker v1.0 and the MPC Doc); (4) write the Drive URLs back to the deal fields; (5) set `OS version` |
 | **System** | Chirply → Apps Script → Chirply REST API + Drive API |
 | **Owner** | Operations / OS maintainer |
 | **Failure condition** | Webhook fails or the script errors part-way. The script is idempotent (it checks for an existing project linked to the deal) and emails the Project Lead the error |
@@ -70,8 +70,8 @@ Everything else reacts to it.
 
 | | |
 |---|---|
-| **Trigger** | Apps Script, daily at 08:00, over every active project's Input Tracker sheet |
-| **Action** | Rows with Status = Requested and Due date < today: one **internal** email per owner listing overdue items by project. For P0/blocking items: create a Chirply task "Chase client: <items>" linked to the deal, with prompt **10B** in the description |
+| **Trigger** | Apps Script, daily at 08:00, over every active project's Tracker *Content Inputs* tab |
+| **Action** | Rows with Status = Requested and Due Date < today: one **internal** email per owner listing overdue items by project. For P0/blocking items: create a Chirply task "Chase client: <items>" linked to the deal, with prompt **10B** in the description |
 | **System** | Apps Script → Gmail / Chirply API |
 | **Owner** | Project Lead |
 | **Failure condition** | Sheet structure changed (missing columns). The script reports the bad sheet instead of skipping it silently |
@@ -82,7 +82,7 @@ Everything else reacts to it.
 | | |
 |---|---|
 | **Trigger** | `deal_stage_changed` → `12 QA` |
-| **Action** | Create the three QA parent tasks (Compliance / Strategy-UX / Technical-SEO), each with one subtask per check from `qa/*.md` in the release, a gate owner (from deal role fields) and a `Gate sign-off` subtask. Create the QA Issue Log tabs if they're missing |
+| **Action** | Create the three QA gate tasks: Compliance (Compliance Reviewer), Strategy / UX (Independent QA Reviewer), Technical / SEO (Developer + SEO Lead). Owners come from the deal role fields. Each has a `Gate sign-off` subtask and a link to the Tracker *QA* tab, which already lists the 29 checks as Not Checked. Check-level status is not duplicated in Chirply |
 | **System** | Chirply → Apps Script → Chirply API |
 | **Owner** | Project Lead |
 | **Failure condition** | Gate owner field empty → task assigned to the Project Lead, flagged |
@@ -115,7 +115,7 @@ Everything else reacts to it.
 | | |
 |---|---|
 | **Trigger** | Apps Script, Mondays 07:30 |
-| **Action** | One email to the team: per active project, the stage, owner, target launch, Health/blocker, overdue stage tasks, open DoD items, pending approvals, overdue inputs and QA gate status |
+| **Action** | One email to the team: per active project, the stage, owner, target launch, Health/blocker, overdue stage tasks, open DoD items, pending approvals, plus the Tracker *Dashboard* KPIs (stages complete, open inputs, QA fixes open) |
 | **System** | Apps Script → Chirply API + Sheets → Gmail |
 | **Owner** | Project Lead (as reader); OS maintainer (as script owner) |
 | **Failure condition** | Script error → the digest isn't sent, and the maintainer gets an alert |

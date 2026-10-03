@@ -1,40 +1,64 @@
-# Template 16 — Post-Launch Measurement Baseline
+# 16. Post-Launch Measurement Baseline
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 16 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Strategist / Project Lead
+**Approval:** Internal unless stated
 
-| | |
+## Purpose
+Capture the launch-day baseline so future reviews compare outcomes rather than opinions.
+
+## Baseline window
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 13 — Launch](../workflows/stage-13-launch/README.md) |
-| Filled by prompt(s) | 13D ([prompts](../workflows/stage-13-launch/prompts.md)) |
-| Validated by | — |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Period | [[e.g. previous 28 / 90 days]] |
+| Launch date | [[date]] |
 
-## Window
+## Acquisition
 
-Launch date: · Comparison window:
+| Field | Entry |
+|---|---|
+| Organic sessions | [[...]] |
+| Direct sessions | [[...]] |
+| Paid sessions | [[...]] |
+| Top landing pages | [[...]] |
 
-## Metrics
+## Commercial
 
-| Metric | Source | Baseline period | Value | Tracking confidence | Known change at launch |
-|---|---|---|---|---|---|
-| Total sessions | | | | | |
-| Organic sessions | | | | | |
-| Priority landing-page clicks / impressions | | | | | |
-| Booking starts | | | | | |
-| Booking completions | | | | | |
-| Calls | | | | | |
-| Forms / enquiries | | | | | |
-| Conversion rate | | | | | |
-| Mobile share / mobile conversion | | | | | |
-| Priority service performance | | | | | |
-| Local / GBP actions | | | | | |
+| Field | Entry |
+|---|---|
+| Booking starts | [[...]] |
+| Booking completions | [[...]] |
+| Calls | [[...]] |
+| Forms / enquiries | [[...]] |
+| Conversion rate | [[...]] |
 
-## Measurement gaps
+## Search
 
-Record missing tracking as a gap. Never invent a baseline.
+| Field | Entry |
+|---|---|
+| Priority queries | [[...]] |
+| Priority landing-page clicks | [[...]] |
+| Impressions | [[...]] |
+| GBP / local actions | [[... / N/A]] |
 
-## Data handling
+## Mobile
 
-Store raw exports in the client's Drive folder only. Never commit analytics exports to this repository.
+| Field | Entry |
+|---|---|
+| Mobile share | [[...]] |
+| Mobile conversion | [[...]] |
+| Key friction observed | [[...]] |
+
+## Tracking confidence
+
+| Field | Entry |
+|---|---|
+| Known gaps | [[...]] |
+| Changes made at launch | [[...]] |
+
+## Definition of Done
+
+- [ ] Launch date and comparison period are recorded.
+- [ ] Commercial conversion baseline exists where tracking permits.
+- [ ] Priority search and landing-page baseline exists.
+- [ ] Known tracking limitations are documented.

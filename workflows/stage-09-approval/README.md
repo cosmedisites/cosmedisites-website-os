@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Project Lead *(default role)* | Strategist *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Project Lead | — | Yes | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -41,31 +43,41 @@ Route: **9A + 9B → 9C + 9D; use 9E for reopened decisions**
 
 ## Output
 
-**Approval Record + revision plan**
+**Approval Record**
 
 - Template 12 — [Approval Record](../../templates/approval-record.md)
+- Project Tracker tab(s): Approvals ([structure](../../templates/operational-tracker.md))
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: Template 12 (the SOP has no checklist for Stage 9)*
 
-- [ ] Every decision classified (Approved / Changes Requested / Pending / Locked / Not discussed)
-- [ ] No approval inferred from silence
-- [ ] Every change request has an owner and a deadline
-- [ ] Revision plan protects LOCKED decisions
-- [ ] Follow-up sent to the client asking for specific outstanding decisions
-- [ ] Client sign-off recorded
-- [ ] Approved decisions added to LOCKED DECISIONS in the Master Project Context
+- [ ] Every strategic decision has a status.
+- [ ] Feedback is classified before action.
+- [ ] Locked decisions are identified.
+- [ ] Client has a clear record of what happens next.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] Explicit decisions recorded for positioning, visual direction, navigation/user journey, service hierarchy, practitioner hierarchy, homepage structure and photography direction *(SOP Stage 9)*
+- [ ] Nothing enters full build until required strategic decisions are approved. *(SOP Stage 9)*
+- [ ] Approved decisions added to LOCKED DECISIONS in the Master Project Context *(SOP Revision Control / Deployment Guide)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Client sign-off**
-- Required: client approval
-- On approval, lock: **Approved strategic decisions** (add to LOCKED DECISIONS in the Master Project Context)
+- Approval required: **Yes**
+- Gate: Client sign-off
+- On approval, lock: **Approved strategic decisions**. Add it to LOCKED DECISIONS in the Master Project Context.
+
+## Method
+
+- SOP: [Stage 9 — Approval Gate](../../sop/website-redesign-sop.md#stage-9--approval-gate)
+- Playbook: [17. Client Feedback Classification](../../playbook/website-strategy-playbook.md#17-client-feedback-classification)
+- Playbook: [18. Revision Control](../../playbook/website-strategy-playbook.md#18-revision-control)
+- Playbook: [19. Approval Gate](../../playbook/website-strategy-playbook.md#19-approval-gate)
 
 ## Handoffs and client communication
 

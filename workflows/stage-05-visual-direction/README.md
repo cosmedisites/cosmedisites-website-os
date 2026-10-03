@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Designer *(default role)* | Strategist *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Designer | Strategist / Creative Lead | Approval | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -41,31 +43,39 @@ Route: **5A → 5B + 5C → 5D**
 
 ## Output
 
-**Visual Direction**
+**Visual Direction / Style System**
 
 - Template 07 — [Visual Direction](../../templates/visual-direction.md)
 - Template 05 — [Current → Proposed Summary](../../templates/current-proposed-summary.md)
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 5 — Visual Direction*
 
-- [ ] Every visual principle traces back to positioning or user behaviour
-- [ ] Current → Proposed comparison complete
-- [ ] Desired category perception achieved; wrong category avoided
-- [ ] No Level 5 visual choice undermines a Level 1–4 decision
-- [ ] No placeholder mistaken for proof
-- [ ] 5D validator returns PASS
-- [ ] Client approval recorded
+- [ ] Every major visual choice has a strategic rationale.
+- [ ] System supports desktop and mobile.
+- [ ] Photography direction is defined.
+- [ ] CTA hierarchy is unambiguous.
+- [ ] Client-facing explanation avoids internal design jargon.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] 5D validator returns PASS *(Workflow Index step 7)*
+- [ ] Client visual-direction approval recorded in the Approval Record *(SOP Stage 5 / Tracker)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Client approval**
-- Required: client approval
+- Approval required: **Yes**
+- Gate: Client approval
+
+## Method
+
+- SOP: [Stage 5 — Visual Direction](../../sop/website-redesign-sop.md#stage-5--visual-direction)
+- Playbook: [5. Before / After Direction](../../playbook/website-strategy-playbook.md#5-before--after-direction)
+- Playbook: [7. Visual System](../../playbook/website-strategy-playbook.md#7-visual-system)
 
 ## Next
 

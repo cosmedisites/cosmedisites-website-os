@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Project Lead *(default role)* | Strategist *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Project Lead | Strategist / Designer | Yes | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -46,22 +48,31 @@ Route: **8A → 8B → 8C → 8D**
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 8 — Client Strategy Review*
 
-- [ ] All ten 8D red-team questions answered CLEAR
-- [ ] The decisions the client must approve are explicit
-- [ ] No new strategy introduced in the deck
-- [ ] Presenter notes ready
-- [ ] Review meeting held
+- [ ] Deck tells a strategic story.
+- [ ] Commercial outcome is explicit.
+- [ ] Client approval items are explicit.
+- [ ] Inputs/next steps are separated from approvals.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] Internal quality test passed: someone who did not work on the design can answer the 60-second questions *(Playbook §23)*
+- [ ] 8D red team returns PASS *(Workflow Index step 7)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Review meeting**
-- Required: client review meeting held
+- Approval required: **Review meeting**
+- Gate: Review meeting
+
+## Method
+
+- SOP: [Stage 8 — Client Strategy Review](../../sop/website-redesign-sop.md#stage-8--client-strategy-review)
+- Playbook: [16. Client Strategy Presentation](../../playbook/website-strategy-playbook.md#16-client-strategy-presentation)
+- Playbook: [23. Internal Quality Test](../../playbook/website-strategy-playbook.md#23-internal-quality-test)
 
 ## Handoffs and client communication
 

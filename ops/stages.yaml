@@ -1,20 +1,25 @@
 # CosmediSites Website OS — stage registry
 #
-# This file is the single source of stage metadata. `scripts/build.py` uses it to:
-#   - generate every workflows/stage-*/README.md (the human-facing "stage card");
-#   - generate dist/stage-config.json (the payload the operational tool —
-#     Chirply — uses to build stage records, checklists and knowledge links).
+# The single source of stage metadata. `scripts/build.py` uses it to generate:
+#   - every workflows/stage-*/README.md (the human-facing "stage card");
+#   - dist/stage-config.json (the payload the operational tool, Chirply, uses for
+#     stage tasks, Definition-of-Done subtasks and knowledge links).
 #
-# Provenance of each field (important — see CONTRIBUTING.md):
-#   objective, route, output, gate, prompts  -> AI Workflow Pack v1.0 (verbatim or near-verbatim)
-#   dod                                      -> INTERIM: compiled from the stage's validator prompt(s)
-#                                               in the AI Workflow Pack. Website Redesign SOP v1.0 is
-#                                               authoritative and must be reconciled on import.
-#   owner_role / reviewer_role               -> INFERRED from prompt wording + handoff prompts.
-#                                               Confirm against SOP v1.0.
-#   approval                                 -> derived from the pack's "Gate" column.
+# Provenance (reconciled against Website OS Source Pack v1.0):
+#   owner / reviewer / client_involved -> Website Redesign SOP v1.0 (Tracker v1.0 where the SOP is silent)
+#   approval                           -> Operational Tracker v1.0, "Approval Required?" column
+#   gate                               -> AI Workflow Pack v1.0, Workflow Index "Gate" column
+#   objective / route / prompts        -> AI Workflow Pack v1.0
+#   output                             -> SOP v1.0
+#   dod                                -> SOP v1.0 Definition of Done, verbatim. Where the SOP has no
+#                                         checklist (Stages 9, 13, 14), the stage's template DoD, verbatim.
+#                                         `dod_source` records which.
+#   gate_checks                        -> additional gate conditions stated elsewhere in the source
+#                                         material; each one cites its source.
+#   playbook                           -> related Playbook sections (editorial cross-reference only)
 #
-# Edit this file (via pull request), then run: python3 scripts/build.py
+# Change via pull request (methodology class if `dod`, owners or stages change),
+# then run: python3 scripts/build.py
 
 repo_url: https://github.com/cosmedisites/cosmedisites-website-os
 default_branch: main
@@ -23,9 +28,14 @@ stages:
   - id: "00"
     name: Commercial Brief
     slug: stage-00-commercial-brief
+    sop_stage: 0
     objective: Convert discovery information into a commercial brief that governs every downstream decision.
-    owner_role: Strategist
-    reviewer_role: Project Lead
+    owner: Project Lead / Strategist
+    reviewer: Project Lead
+    client_involved: "Yes"
+    approval: Client factual confirmation
+    approval_type: client
+    gate: Client factual confirmation
     route: "0A → 0B → 0C; use 0D if blocked"
     prompts:
       - {id: 0A, kind: run}
@@ -34,34 +44,33 @@ stages:
       - {id: 0D, kind: client, note: only if OPEN items block strategy}
     output: Project Strategy Brief
     templates: [project-strategy-brief]
-    gate: Client factual confirmation
-    approval: client
+    playbook: [1, 2, 15]
     handoffs: [H01]
     client_comms: [C01, C02]
+    dod_source: SOP
     dod:
-      - Primary commercial objective stated
-      - Measurable success metric recorded (or marked OPEN)
-      - Priority revenue services identified
-      - Services / categories to grow identified
-      - Target audience and main anxieties defined
-      - Current and planned locations recorded
-      - Current and planned team recorded
-      - Current lead sources and booking method recorded
-      - Website's role in acquisition stated
-      - Known SEO priorities recorded
-      - Compliance / operational constraints recorded
-      - Actual business reason for the redesign stated
-      - "“This redesign succeeds if…” and “fails even if it looks good if…” completed"
-      - No inference presented as fact (0C)
-      - Client has confirmed the facts
-      - Master Project Context created
+      - Business objective is explicit.
+      - Growth model and priority services are understood.
+      - Audience and buying anxieties are documented.
+      - Website role in acquisition is clear.
+      - Known SEO/compliance constraints are captured.
+      - Client confirms the factual brief.
+    gate_checks:
+      - {check: "The team can answer: What does this business need the new website to achieve? What would make the redesign commercially unsuccessful even if it looked excellent?", source: "SOP Stage 0"}
+      - {check: "0C validator returns PASS", source: "Workflow Index step 7"}
+      - {check: "Master Project Context created in the project Drive folder", source: "AI Workflow Pack README (Recommended workspace)"}
 
   - id: "01"
     name: Evidence
     slug: stage-01-evidence
+    sop_stage: 1
     objective: Build a factual picture of the current site, competitors and available performance evidence before prescribing solutions.
-    owner_role: Strategist
-    reviewer_role: Project Lead
+    owner: Strategist
+    reviewer: Project Lead
+    client_involved: "No"
+    approval: "No"
+    approval_type: internal
+    gate: Internal
     route: "1A + 1B → 1C → 1D"
     prompts:
       - {id: 1A, kind: run}
@@ -70,28 +79,33 @@ stages:
       - {id: 1D, kind: validate}
     output: Evidence Pack
     templates: [evidence-pack]
-    gate: Internal
-    approval: internal
+    playbook: [3]
+    dod_source: SOP
     dod:
-      - Current desktop site reviewed
-      - Mobile reviewed
-      - Key page types reviewed
-      - Competitor set reviewed
-      - KEEP / CHANGE / MISSING / UNCERTAIN all used appropriately
-      - Main revenue services and growth priorities considered
-      - Proof inventory started
-      - Booking journey considered
-      - Brand architecture / future growth considered
-      - Evidence separated from inference
-      - Summary diagnosis supported by the evidence
-      - 1D validator returns PASS
+      - Website reviewed.
+      - Mobile reviewed.
+      - Competitors reviewed.
+      - Existing assets classified.
+      - Revenue-driving services identified.
+      - Growth priorities identified.
+      - Proof inventory started.
+      - Key unknowns identified.
+      - Strategic diagnosis drafted.
+    gate_checks:
+      - {check: "Diagnostic sentence written: “The existing site currently communicates X. The business needs to become Y. The primary barriers are A, B and C.”", source: "SOP Stage 1"}
+      - {check: "1D validator returns PASS", source: "Workflow Index step 7"}
 
   - id: "02"
     name: Strategic Diagnosis
     slug: stage-02-diagnosis
+    sop_stage: 2
     objective: Turn evidence into a prioritised explanation of what is suppressing the business outcome, without jumping prematurely to visual solutions.
-    owner_role: Strategist
-    reviewer_role: Project Lead
+    owner: Strategist
+    reviewer: Project Lead
+    client_involved: "No"
+    approval: "No"
+    approval_type: internal
+    gate: Internal
     route: "2A → 2B → 2C"
     prompts:
       - {id: 2A, kind: run}
@@ -99,23 +113,28 @@ stages:
       - {id: 2C, kind: validate}
     output: Strategic Diagnosis
     templates: [strategic-diagnosis]
-    gate: Internal
-    approval: internal
+    playbook: [2]
+    dod_source: SOP
     dod:
-      - Current and desired perception stated
-      - Every weakness has evidence, consequence, priority and confidence
-      - Issues prioritised P0–P3 (2B)
-      - Diagnosis stated in one sentence
-      - Diagnosis could not be pasted unchanged onto another clinic
-      - No visual prescriptions (colour, type, UI styling)
-      - Red team (2C) returns PASS
+      - Diagnosis can be understood without discussing colours/fonts.
+      - Commercial, trust, UX and scalability issues are separated.
+      - Top three opportunities are prioritised.
+      - Every major conclusion traces back to evidence.
+    gate_checks:
+      - {check: "2C red team returns PASS", source: "Workflow Index step 7"}
 
   - id: "03"
     name: Positioning
     slug: stage-03-positioning
+    sop_stage: 3
     objective: Define the market perception, brand architecture and strategic ideas the new website must make obvious.
-    owner_role: Strategist
-    reviewer_role: Project Lead
+    owner: Strategist
+    reviewer: Creative / Project Lead
+    client_involved: Strategic approval
+    approval: "Yes"
+    approval_type: client
+    gate: Client strategic approval
+    locks: Positioning
     route: "3A → 3B + 3C → 3D → 3E"
     prompts:
       - {id: 3A, kind: run}
@@ -123,28 +142,35 @@ stages:
       - {id: 3C, kind: run}
       - {id: 3D, kind: validate}
       - {id: 3E, kind: client}
-    output: Positioning Thesis + Brand Architecture
+    output: Positioning Thesis
     templates: [positioning-thesis]
-    gate: Client strategic approval
-    approval: client
-    locks: Positioning
+    playbook: [4, 11]
     handoffs: [H02, H03]
+    dod_source: SOP
     dod:
-      - Three-second perception
-      - Wrong perception
-      - Positioning thesis (25 words or fewer)
-      - Priority services
-      - Brand architecture
-      - 3D validator returns PASS on every test
-      - Client strategic approval recorded
-      - Positioning added to LOCKED DECISIONS in the Master Project Context
+      - Desired perception written.
+      - Wrong perception written.
+      - Positioning thesis agreed internally.
+      - Priority services/categories identified.
+      - Clinic/practitioner relationship defined.
+      - Future growth test passed.
+    gate_checks:
+      - {check: "No visual design begins until this is internally approved.", source: "SOP Stage 3"}
+      - {check: "3D validator returns PASS", source: "Workflow Index step 7"}
+      - {check: "Client strategic approval recorded in the Approval Record", source: "SOP Stage 3 / Tracker"}
+      - {check: "Approved positioning added to LOCKED DECISIONS in the Master Project Context", source: "Deployment Guide (Version control)"}
 
   - id: "04"
     name: IA + SEO
     slug: stage-04-ia-seo
+    sop_stage: 4
     objective: Protect valuable search equity while structuring the site around patient intent, commercial priorities and future growth.
-    owner_role: SEO Lead
-    reviewer_role: Strategist
+    owner: Strategist + SEO Lead
+    reviewer: Project Lead
+    client_involved: Yes if structure changes
+    approval: Conditional (required where service presentation materially changes)
+    approval_type: conditional
+    gate: Conditional client approval
     route: "4A → 4B + 4C → 4D → 4E"
     prompts:
       - {id: 4A, kind: run}
@@ -152,57 +178,64 @@ stages:
       - {id: 4C, kind: run}
       - {id: 4D, kind: run}
       - {id: 4E, kind: validate}
-    output: Sitemap / SEO Architecture
+    output: Approved Sitemap + SEO Architecture Map
     templates: [sitemap-seo-architecture]
-    gate: Conditional client approval
-    approval: conditional
+    playbook: [21, 8]
     handoffs: [H04]
+    dod_source: SOP
     dod:
-      - Every primary page has a distinct purpose
-      - Priority commercial services have landing pages
-      - Concern pages are useful, not thin duplicates
-      - Practitioner pages fit the brand architecture
-      - Locations structured consistently
-      - Valuable existing URLs protected
-      - Removed URLs have sensible decisions
-      - Internal links support patient journeys
-      - Navigation understandable without industry knowledge
-      - Future practitioners / treatments / locations can be added
-      - Cannibalisation risks identified
-      - Redirects known before build
-      - Launch-critical SEO risks listed
+      - Every primary page has a purpose.
+      - Every primary page has a user/search intent.
+      - Existing high-value URLs have a retain/merge/redirect decision.
+      - Navigation model is defined.
+      - Internal linking is defined.
+      - Location/practitioner architecture is explicit.
+      - Redirect requirements are known before build.
+    gate_checks:
+      - {check: "4E validator returns PASS", source: "Workflow Index step 7"}
 
   - id: "05"
     name: Visual Direction
     slug: stage-05-visual-direction
+    sop_stage: 5
     objective: Translate approved positioning into a coherent, defensible visual system without allowing aesthetic preference to rewrite strategy.
-    owner_role: Designer
-    reviewer_role: Strategist
+    owner: Designer
+    reviewer: Strategist / Creative Lead
+    client_involved: Approval
+    approval: "Yes"
+    approval_type: client
+    gate: Client approval
     route: "5A → 5B + 5C → 5D"
     prompts:
       - {id: 5A, kind: run}
       - {id: 5B, kind: run}
       - {id: 5C, kind: run}
       - {id: 5D, kind: validate}
-    output: Visual Direction
+    output: Visual Direction / Style System
     templates: [visual-direction, current-proposed-summary]
-    gate: Client approval
-    approval: client
+    playbook: [5, 7]
+    dod_source: SOP
     dod:
-      - Every visual principle traces back to positioning or user behaviour
-      - Current → Proposed comparison complete
-      - Desired category perception achieved; wrong category avoided
-      - No Level 5 visual choice undermines a Level 1–4 decision
-      - No placeholder mistaken for proof
-      - 5D validator returns PASS
-      - Client approval recorded
+      - Every major visual choice has a strategic rationale.
+      - System supports desktop and mobile.
+      - Photography direction is defined.
+      - CTA hierarchy is unambiguous.
+      - Client-facing explanation avoids internal design jargon.
+    gate_checks:
+      - {check: "5D validator returns PASS", source: "Workflow Index step 7"}
+      - {check: "Client visual-direction approval recorded in the Approval Record", source: "SOP Stage 5 / Tracker"}
 
   - id: "06"
     name: Page + Component System
     slug: stage-06-page-system
+    sop_stage: 6
     objective: Create reusable page and component patterns that scale across treatments, concerns, practitioners, locations and future growth.
-    owner_role: Designer
-    reviewer_role: Strategist
+    owner: Designer / UX Lead
+    reviewer: Strategist
+    client_involved: "No"
+    approval: Internal
+    approval_type: internal
+    gate: Internal / included in review
     route: "6A + 6B + 6C + 6D → 6E"
     prompts:
       - {id: 6A, kind: run}
@@ -210,23 +243,29 @@ stages:
       - {id: 6C, kind: run}
       - {id: 6D, kind: run}
       - {id: 6E, kind: validate}
-    output: Page / Component System
+    output: Page System + Component Library
     templates: [page-component-system]
-    gate: Internal / included in review
-    approval: internal
+    playbook: [10, 9, 14]
+    dod_source: SOP
     dod:
-      - Homepage architecture defined section by section
-      - Each page template has a distinct job
-      - Component library specified, including empty / missing-data behaviour
-      - Mobile behaviour defined deliberately (not just "stack vertically")
-      - 6E scalability scenarios pass with no routine growth needing an architecture change
+      - Required page types have a template.
+      - Core components are reusable.
+      - Responsive behaviour is defined.
+      - New treatments/practitioners/locations can be added without redesigning the system.
+    gate_checks:
+      - {check: "6E scalability validator shows no routine growth scenario requiring an architecture change", source: "Workflow Index step 7 / prompt 6E"}
 
   - id: "07"
     name: Proof + Content + Photography
     slug: stage-07-proof-content-photography
+    sop_stage: 7
     objective: Build the evidence, content and image inputs needed to make the strategy believable without fabricating authority.
-    owner_role: Content Lead
-    reviewer_role: Compliance Reviewer
+    owner: Content Lead
+    reviewer: Strategist / Compliance Reviewer
+    client_involved: Client supplies inputs
+    approval: "No"
+    approval_type: client-inputs
+    gate: Client supplies inputs
     route: "7A + 7B + 7C → 7D + 7E"
     prompts:
       - {id: 7A, kind: run}
@@ -234,25 +273,33 @@ stages:
       - {id: 7C, kind: run}
       - {id: 7D, kind: validate}
       - {id: 7E, kind: client}
-    output: Proof Inventory + Photography Brief + content gaps
-    templates: [proof-inventory, photography-brief]
-    gate: Client supplies inputs
-    approval: client-inputs
+    output: Proof Inventory + Content/Input Tracker + Photography Brief
+    templates: [proof-inventory, content-input-tracker, photography-brief]
+    tracker_tabs: [Proof Inventory, Content Inputs]
+    playbook: [12, 13]
     handoffs: [H06]
     client_comms: [C05]
+    dod_source: SOP
     dod:
-      - Proof Inventory built, with verification and consent status on every item
-      - Content gap plan prioritised P0–P3
-      - Photography brief and shot list complete
-      - Claims validated (7D); no UNSUPPORTED claim remains in client copy
-      - Client input request sent (7E)
+      - Proof gaps are known.
+      - Each missing input has an owner.
+      - Photography requirements are defined.
+      - Patient/model consent requirements are identified.
+      - Design does not depend on evidence nobody can supply.
+    gate_checks:
+      - {check: "7D claims validator shows no UNSUPPORTED claim left in client copy", source: "Workflow Index step 7 / prompt 7D"}
 
   - id: "08"
     name: Client Strategy Review
     slug: stage-08-client-review
+    sop_stage: 8
     objective: Turn the approved internal strategy into a concise client presentation that earns decisions rather than vague feedback.
-    owner_role: Project Lead
-    reviewer_role: Strategist
+    owner: Project Lead
+    reviewer: Strategist / Designer
+    client_involved: "Yes"
+    approval: Review meeting
+    approval_type: client-meeting
+    gate: Review meeting
     route: "8A → 8B → 8C → 8D"
     prompts:
       - {id: 8A, kind: run}
@@ -261,22 +308,30 @@ stages:
       - {id: 8D, kind: validate}
     output: Client Strategy Deck
     templates: [client-strategy-deck]
-    gate: Review meeting
-    approval: client-meeting
+    playbook: [16, 23]
     client_comms: [C03]
+    dod_source: SOP
     dod:
-      - All ten 8D red-team questions answered CLEAR
-      - The decisions the client must approve are explicit
-      - No new strategy introduced in the deck
-      - Presenter notes ready
-      - Review meeting held
+      - Deck tells a strategic story.
+      - Commercial outcome is explicit.
+      - Client approval items are explicit.
+      - Inputs/next steps are separated from approvals.
+    gate_checks:
+      - {check: "Internal quality test passed: someone who did not work on the design can answer the 60-second questions", source: "Playbook §23"}
+      - {check: "8D red team returns PASS", source: "Workflow Index step 7"}
 
   - id: "09"
     name: Approval Gate
     slug: stage-09-approval
+    sop_stage: 9
     objective: Convert client feedback into explicit decisions, controlled revisions and locked strategic choices.
-    owner_role: Project Lead
-    reviewer_role: Strategist
+    owner: Project Lead
+    reviewer: "—"
+    client_involved: "Yes"
+    approval: "Yes"
+    approval_type: client
+    gate: Client sign-off
+    locks: Approved strategic decisions
     route: "9A + 9B → 9C + 9D; use 9E for reopened decisions"
     prompts:
       - {id: 9A, kind: run}
@@ -284,83 +339,94 @@ stages:
       - {id: 9C, kind: run}
       - {id: 9D, kind: client}
       - {id: 9E, kind: validate, note: only when an approved decision is challenged}
-    output: Approval Record + revision plan
+    output: Approval Record
     templates: [approval-record]
-    gate: Client sign-off
-    approval: client
-    locks: Approved strategic decisions
+    tracker_tabs: [Approvals]
+    playbook: [17, 18, 19]
     handoffs: [H08]
     client_comms: [C04, C06]
+    dod_source: Template 12 (the SOP has no checklist for Stage 9)
     dod:
-      - Every decision classified (Approved / Changes Requested / Pending / Locked / Not discussed)
-      - No approval inferred from silence
-      - Every change request has an owner and a deadline
-      - Revision plan protects LOCKED decisions
-      - Follow-up sent to the client asking for specific outstanding decisions
-      - Client sign-off recorded
-      - Approved decisions added to LOCKED DECISIONS in the Master Project Context
+      - Every strategic decision has a status.
+      - Feedback is classified before action.
+      - Locked decisions are identified.
+      - Client has a clear record of what happens next.
+    gate_checks:
+      - {check: "Explicit decisions recorded for positioning, visual direction, navigation/user journey, service hierarchy, practitioner hierarchy, homepage structure and photography direction", source: "SOP Stage 9"}
+      - {check: "Nothing enters full build until required strategic decisions are approved.", source: "SOP Stage 9"}
+      - {check: "Approved decisions added to LOCKED DECISIONS in the Master Project Context", source: "SOP Revision Control / Deployment Guide"}
 
   - id: "10"
     name: Production Inputs
     slug: stage-10-production-inputs
+    sop_stage: 10
     objective: Get every approved content, evidence and technical input into a verified state before full production/build depends on it.
-    owner_role: Project Lead
-    reviewer_role: Strategist
+    owner: Project Lead / Content Lead
+    reviewer: Project Lead
+    client_involved: "Yes"
+    approval: "No"
+    approval_type: internal
+    gate: Internal gate
     route: "10A → 10B/10C → 10D"
     prompts:
       - {id: 10A, kind: run}
       - {id: 10B, kind: client}
       - {id: 10C, kind: run}
       - {id: 10D, kind: validate}
-    output: Content / Input Tracker + build readiness
+    output: Content & Input Tracker
     templates: [content-input-tracker]
-    gate: Internal gate
-    approval: internal
+    tracker_tabs: [Content Inputs]
+    dod_source: SOP
     dod:
-      - Strategic approvals recorded
-      - Required screens approved
-      - Mobile states defined
-      - Sitemap / URL map approved
-      - Redirect requirements known
-      - Primary copy approved or clearly owned
-      - Practitioner facts verified
-      - Proof required by the design is available
-      - Photography final, or placeholders explicitly controlled
-      - Booking / contact details known
-      - Tracking requirements known
-      - Compliance-critical unknowns resolved
-      - Open items have owners and do not block build
-      - 10D Build Readiness Gate returns PASS
+      - Every required input has an owner.
+      - Every input has a status.
+      - Pending items have a deadline.
+      - Received information is verified before publication.
+    gate_checks:
+      - {check: "10D Build Readiness Gate returns PASS", source: "Workflow Index step 7"}
 
   - id: "11"
     name: Build
     slug: stage-11-build
+    sop_stage: 11
     objective: Translate approved strategy, design, content and SEO requirements into an implementation package with minimal ambiguity.
-    owner_role: Developer
-    reviewer_role: Designer
+    owner: Developer
+    reviewer: Designer
+    client_involved: "No"
+    approval: "No"
+    approval_type: internal
+    gate: Internal
     route: "11A + 11B + 11C → 11D"
     prompts:
       - {id: 11A, kind: run}
       - {id: 11B, kind: run}
       - {id: 11C, kind: run}
       - {id: 11D, kind: validate}
-    output: Build Handoff + implementation variance
+    output: Implemented build
     templates: [build-handoff]
-    gate: Internal
-    approval: internal
+    playbook: [22]
     handoffs: [H05]
+    dod_source: SOP
     dod:
-      - Designer → Developer handoff complete, with no material UX decision left to the developer
-      - SEO → Developer handoff complete, with every MUST item addressed
-      - Content mapped to templates without factual changes
-      - 11D shows no outstanding CRITICAL variance
+      - Developer is implementing approved decisions.
+      - Material UX decisions are not being invented during development.
+      - Desktop/mobile states are implemented.
+      - SEO/migration requirements are implemented.
+      - Tracking requirements are implemented.
+    gate_checks:
+      - {check: "11D shows no outstanding CRITICAL variance", source: "Workflow Index step 7 / prompt 11D"}
 
   - id: "12"
     name: QA
     slug: stage-12-qa
+    sop_stage: 12
     objective: Run separate regulated-content, strategy/UX and technical/SEO sign-offs so one type of QA cannot hide another.
-    owner_role: Project Lead
-    reviewer_role: Compliance Reviewer
+    owner: Named QA owners (see gates)
+    reviewer: Independent reviewers
+    client_involved: "No"
+    approval: Internal sign-off
+    approval_type: internal
+    gate: Internal sign-off
     route: "12A + 12B + 12C → 12D → 12E"
     prompts:
       - {id: 12A, kind: run, note: Compliance gate}
@@ -368,27 +434,33 @@ stages:
       - {id: 12C, kind: run, note: Technical / SEO gate}
       - {id: 12D, kind: validate}
       - {id: 12E, kind: validate, note: only if launching with open P0/P1 items}
-    output: Compliance / Strategy / Technical QA
+    output: Compliance + Strategy + Technical QA sign-off
     templates: [compliance-launch-qa]
+    tracker_tabs: [QA]
     qa_gates: [compliance, strategy-ux, technical-seo]
-    gate: Internal sign-off
-    approval: internal
+    playbook: [20, 23]
     handoffs: [H07]
     client_comms: [C07]
+    dod_source: SOP
     dod:
-      - Compliance gate signed off (qa/compliance.md)
-      - Strategy / UX gate signed off (qa/strategy-ux.md)
-      - Technical / SEO gate signed off (qa/technical-seo.md)
-      - Consolidated triage (12D) complete
-      - Zero P0 items, or a 12E GO / CONDITIONAL GO decision recorded with owner and rollback trigger
-      - Recommended launch status recorded
+      - Compliance gate signed off.
+      - Strategy/UX gate signed off.
+      - Technical/SEO gate signed off.
+      - Blocking issues resolved or explicitly accepted.
+    gate_checks:
+      - {check: "12D consolidated triage complete; any open P0 has a 12E GO / CONDITIONAL GO decision recorded with owner and rollback trigger", source: "Workflow Index step 7 / prompts 12D–12E"}
 
   - id: "13"
     name: Launch
     slug: stage-13-launch
+    sop_stage: 13
     objective: Launch in a controlled way, verify acquisition/measurement systems and capture the baseline required for post-launch learning.
-    owner_role: Developer
-    reviewer_role: Project Lead
+    owner: "Project Lead (technical owner: Developer)"
+    reviewer: Developer / SEO
+    client_involved: Client informed
+    approval: Launch sign-off
+    approval_type: launch
+    gate: Launch sign-off
     route: "13A → 13B → 13C + 13D; 13E as needed"
     prompts:
       - {id: 13A, kind: run}
@@ -396,25 +468,33 @@ stages:
       - {id: 13C, kind: client}
       - {id: 13D, kind: run}
       - {id: 13E, kind: run, note: first 7 days}
-    output: Launch runbook + baseline
     no_validator_reason: The AI Workflow Pack has no Stage 13 validator. The 13B runbook's PASS/FAIL fields are the check.
+    output: Launch Record + Measurement Baseline
     templates: [measurement-baseline]
-    gate: Launch sign-off
-    approval: internal
+    tracker_tabs: [Measurement]
+    playbook: [15]
     client_comms: [C08]
+    dod_source: Template 16 (the SOP has no checklist for Stage 13)
     dod:
-      - Launch plan approved
-      - Runbook executed, with a PASS / FAIL recorded for every step
-      - Measurement baseline captured, with gaps recorded as gaps
-      - Client launch notification sent
-      - 30 / 60 / 90-day reviews scheduled
+      - Launch date and comparison period are recorded.
+      - Commercial conversion baseline exists where tracking permits.
+      - Priority search and landing-page baseline exists.
+      - Known tracking limitations are documented.
+    gate_checks:
+      - {check: "Launch only after QA sign-off.", source: "SOP Stage 13"}
+      - {check: "Launch completed; tracking verified; baseline captured.", source: "Tracker (Stage Tracker)"}
 
   - id: "14"
     name: 30 / 60 / 90 Measurement
     slug: stage-14-measurement
+    sop_stage: 14
     objective: Use live behaviour and commercial/search data to decide what to keep, improve, test or scale after launch.
-    owner_role: Strategist
-    reviewer_role: Project Lead
+    owner: Strategist / Project Lead
+    reviewer: Project Lead
+    client_involved: Review as needed
+    approval: "No"
+    approval_type: internal
+    gate: Internal / client review
     route: "14A → 14B → 14C → 14D → 14E"
     prompts:
       - {id: 14A, kind: run, note: day 30}
@@ -422,44 +502,55 @@ stages:
       - {id: 14C, kind: run, note: day 90}
       - {id: 14D, kind: run}
       - {id: 14E, kind: run}
-    output: Post-launch review + learning
     no_validator_reason: The AI Workflow Pack has no Stage 14 validator. The 14D decisions are reviewed by the Project Lead.
+    output: 90-Day Redesign Performance Review
     templates: [30-60-90-review]
-    gate: Internal / client review
-    approval: internal
+    tracker_tabs: [Measurement]
+    playbook: [24, 15]
     client_comms: [C09]
+    dod_source: Template 17 (the SOP has no checklist for Stage 14)
     dod:
-      - 30-day review complete
-      - 60-day review complete
-      - 90-day review complete
-      - KEEP / IMPROVE / TEST / SCALE plan agreed
-      - Learning captured (14E); OS improvement issues logged in GitHub
+      - 30/60/90 reviews use the launch baseline.
+      - Actions are prioritised by commercial impact.
+      - At least one KEEP / IMPROVE / TEST / SCALE decision is recorded.
+      - Reusable learning is fed back into the playbook.
+    gate_checks:
+      - {check: "Reusable learning logged as GitHub Issues (IMPROVEMENT / TEST)", source: "SOP Stage 14 (\"Feed reusable learning back into the operating system\")"}
 
-# Template registry: number from the Template Pack v1.0 mapping.
+# Templates: number from the Template Pack v1.0. `source` = filename in the Source Pack.
 templates:
-  project-strategy-brief:   {number: "01", title: Project Strategy Brief}
-  evidence-pack:            {number: "02", title: Evidence Pack}
-  strategic-diagnosis:      {number: "03", title: Strategic Diagnosis}
-  positioning-thesis:       {number: "04", title: Positioning Thesis}
-  current-proposed-summary: {number: "05", title: Current → Proposed Summary}
-  sitemap-seo-architecture: {number: "06", title: Sitemap + SEO Architecture}
-  visual-direction:         {number: "07", title: Visual Direction}
-  page-component-system:    {number: "08", title: Page + Component System}
-  proof-inventory:          {number: "09", title: Proof Inventory}
-  photography-brief:        {number: "10", title: Photography Brief}
-  client-strategy-deck:     {number: "11", title: Client Strategy Deck}
-  approval-record:          {number: "12", title: Approval Record}
-  content-input-tracker:    {number: "13", title: Content / Input Tracker}
-  build-handoff:            {number: "14", title: Build Handoff}
-  compliance-launch-qa:     {number: "15", title: Compliance + Launch QA}
-  measurement-baseline:     {number: "16", title: Post-Launch Measurement Baseline}
-  30-60-90-review:          {number: "17", title: 30/60/90 Day Review}
+  project-strategy-brief:   {number: "01", title: Project Strategy Brief, source: 01_Project_Strategy_Brief.md}
+  evidence-pack:            {number: "02", title: Evidence Pack, source: 02_Evidence_Pack.md}
+  strategic-diagnosis:      {number: "03", title: Strategic Diagnosis, source: 03_Strategic_Diagnosis.md}
+  positioning-thesis:       {number: "04", title: Positioning Thesis, source: 04_Positioning_Thesis.md}
+  current-proposed-summary: {number: "05", title: Current → Proposed Summary, source: 05_Current_Proposed_Summary.md}
+  sitemap-seo-architecture: {number: "06", title: Sitemap + SEO Architecture, source: 06_Sitemap_SEO_Architecture.md}
+  visual-direction:         {number: "07", title: Visual Direction, source: 07_Visual_Direction.md}
+  page-component-system:    {number: "08", title: Page + Component System, source: 08_Page_Component_System.md}
+  proof-inventory:          {number: "09", title: Proof Inventory, source: 09_Proof_Inventory.md}
+  photography-brief:        {number: "10", title: Photography Brief, source: 10_Photography_Brief.md}
+  client-strategy-deck:     {number: "11", title: Client Strategy Deck, source: 11_Client_Strategy_Deck.md}
+  approval-record:          {number: "12", title: Approval Record, source: 12_Approval_Record.md}
+  content-input-tracker:    {number: "13", title: Content / Input Tracker, source: 13_Content_Input_Tracker.md}
+  build-handoff:            {number: "14", title: Build Handoff, source: 14_Build_Handoff.md}
+  compliance-launch-qa:     {number: "15", title: Compliance + Launch QA, source: 15_Compliance_Launch_QA.md}
+  measurement-baseline:     {number: "16", title: Post-Launch Measurement Baseline, source: 16_Post_Launch_Measurement_Baseline.md}
+  30-60-90-review:          {number: "17", title: 30 / 60 / 90 Day Review, source: 17_30_60_90_Day_Review.md}
 
+# QA gates: owners from SOP Stage 12.
 qa_gates:
-  compliance:    {title: Compliance QA, file: qa/compliance.md, prompt: 12A, owner_role: Compliance Reviewer}
-  strategy-ux:   {title: Strategy / UX QA, file: qa/strategy-ux.md, prompt: 12B, owner_role: Strategist}
-  technical-seo: {title: Technical / SEO QA, file: qa/technical-seo.md, prompt: 12C, owner_role: SEO Lead}
+  compliance:    {title: Compliance Review, file: qa/compliance.md, prompt: 12A, owner: Compliance Reviewer}
+  strategy-ux:   {title: Strategy / UX QA, file: qa/strategy-ux.md, prompt: 12B, owner: Independent QA Reviewer}
+  technical-seo: {title: Technical / SEO QA, file: qa/technical-seo.md, prompt: 12C, owner: Developer + SEO Lead}
 
+# Status vocabularies: Operational Tracker v1.0, "Lists" sheet.
+statuses:
+  stage:    [Not Started, In Progress, Blocked, Ready for Review, Complete, N/A]
+  approval: [Pending, Approved, Changes Requested, Locked, N/A]
+  input:    [Not Requested, Requested, Received, Verified, N/A]
+  qa:       [Not Checked, Pass, Fix, N/A]
+
+# Roles: SOP v1.0, "Project roles".
 roles:
   - Project Lead
   - Strategist
@@ -468,3 +559,4 @@ roles:
   - Developer
   - Content Lead
   - Compliance Reviewer
+  - Independent QA Reviewer

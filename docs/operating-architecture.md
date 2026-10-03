@@ -13,7 +13,8 @@ CHIRPLY ─────────────  team workflow · CRM · approva
    ▼
 GOOGLE DRIVE ────────  client files and project artefacts
    │                   Master Project Context (Google Doc) · filled templates
-   │                   Input Tracker + Proof Inventory + QA log (Google Sheets)
+   │                   Project Tracker (Google Sheet copy of Operational Tracker v1.0):
+   │                   Content Inputs · Proof Inventory · QA checks · Measurement
    │                   Apps Script = glue (Drive folder creation, sheet reminders, digest)
    ▼
 FIGMA ───────────────  design
@@ -36,11 +37,12 @@ Rule: **each fact has one home.** Other systems link to it rather than copying i
 | Project record (domain, team, launch date, objective, priority services) | Chirply deal | Master Project Context links back |
 | **Current stage** | **Chirply deal pipeline stage** | The Master Project Context `Current stage` line is updated at each transition, for AI context only |
 | Stage owner, due date, DoD progress | Chirply project: stage task + DoD subtasks | – |
-| Approvals (decision, approver, date, status, locked) | Chirply custom object `Approval Record` | Template 12 in Drive holds the narrative |
+| Approvals (decision, level, owner, status, date, approver, feedback class, locked) | Chirply custom object `Approval Record` (same columns as the Tracker *Approvals* tab) | Template 12 in Drive holds the narrative |
 | Locked strategic decisions (the wording) | Master Project Context, LOCKED DECISIONS section | Approval Record links to it |
 | Confirmed / inferred / open project facts | Master Project Context (Google Doc in Drive) | Chirply deal URL field |
 | Artefacts (brief, evidence pack, positioning…) | Google Drive project folder | Chirply deal URL fields / stage tasks |
-| Input tracker, proof inventory, QA issue log | Google Sheets in the project folder | Stage 07/10/12 tasks |
+| Content inputs, proof inventory, QA checks, measurement | Project Tracker Google Sheet (tabs *Content Inputs*, *Proof Inventory*, *QA*, *Measurement*) | Deal field `Project Tracker`; Stage 07/10/12/13/14 tasks |
+| Stage owners, reviewers, DoD (the definition) | GitHub (`ops/stages.yaml`, from SOP v1.0 and Tracker *Stage Tracker*) | Stage task descriptions |
 | Designs | Figma | Deal URL field |
 | Client emails, input requests, reminders, meeting notes | Chirply inbox / timeline | – |
 | Credentials | Password manager | Never stored elsewhere |
@@ -51,7 +53,7 @@ Rule: **each fact has one home.** Other systems link to it rather than copying i
 | System | Does | Does not |
 |---|---|---|
 | **GitHub** | Holds and versions the OS; reviews changes; publishes releases; logs improvement issues | Hold client data; serve as the team's daily UI |
-| **Chirply** | Project pipeline, stage tasks and DoD, owners and dates, approvals, client comms, reminders, automation, project-level reporting | Store long documents; hold evidence tables; hold credentials |
+| **Chirply** | Project pipeline, stage tasks and DoD, owners and dates, approvals, client comms, reminders, automation, project-level reporting | Store long documents; hold the tabular registers (Tracker Sheet does); hold credentials |
 | **Google Drive** | Client artefacts, Master Project Context, tracker sheets, restricted client assets; Apps Script glue | Track status (status lives in Chirply) |
 | **Figma** | Design files, prototypes, dev handoff inspect | Approval records (Chirply) |
 | **Claude / ChatGPT** | Drafting, analysis, validation against DoD | Approve anything; be the record |
@@ -63,6 +65,7 @@ in the CosmediSites workspace.
 
 **Chirply keeps:** CRM, client record, all client communication (inbox, templates, reminders,
 forms), the deal pipeline as the top-level project status, and approvals via e-signature where needed.
+The Project Tracker Sheet is used in full as the methodology designed it (all tabs live).
 
 **One companion handles:** stage tasks, DoD checklists, owners/reviewers/due dates, QA gates and
 the delivery dashboard.
@@ -84,7 +87,7 @@ holds only delivery tasks and links back to the Chirply deal.
 |---|---|---|
 | Canonical OS | GitHub, `cosmedisites` organisation, private repo `cosmedisites-website-os` | Possibly: **GitHub Team** is needed for branch protection and required reviews on a private repo |
 | Operational front end + CRM + client comms + automation | **Chirply** (existing) | No (pending plan check V1) |
-| Client files, Master Project Context, tabular trackers | **Google Drive / Sheets / Docs** (existing) | No |
+| Client files, Master Project Context, Project Tracker (Operational Tracker v1.0) | **Google Drive / Sheets / Docs** (existing) | No |
 | Glue scripts (Drive folders, sheet reminders, weekly digest, provisioning) | **Google Apps Script** (included with Google Workspace) | No |
 | Design | **Figma** (existing) | No |
 | AI execution | **Claude Projects** (one per client) and/or ChatGPT Projects | Existing |

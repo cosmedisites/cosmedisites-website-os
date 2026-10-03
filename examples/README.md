@@ -11,6 +11,10 @@ For each important artefact the OS aims to provide three things:
 Examples are added over time from real projects, **only after anonymisation**. There are none
 yet. The first ones should come from the Phase 6 pilot project.
 
+The Integra project was deliberately left out of the Source Pack because it is a real client
+example (Source Pack upload checklist). If it is used, create an **anonymised derivative first**
+that satisfies every rule below.
+
 ## Priority order for first examples
 
 1. Project Strategy Brief (Template 01)

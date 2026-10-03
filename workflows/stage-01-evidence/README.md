@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Strategist *(default role)* | Project Lead *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Strategist | Project Lead | No | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -44,29 +46,35 @@ Route: **1A + 1B → 1C → 1D**
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 1 — Evidence Pack*
 
-- [ ] Current desktop site reviewed
-- [ ] Mobile reviewed
-- [ ] Key page types reviewed
-- [ ] Competitor set reviewed
-- [ ] KEEP / CHANGE / MISSING / UNCERTAIN all used appropriately
-- [ ] Main revenue services and growth priorities considered
-- [ ] Proof inventory started
-- [ ] Booking journey considered
-- [ ] Brand architecture / future growth considered
-- [ ] Evidence separated from inference
-- [ ] Summary diagnosis supported by the evidence
-- [ ] 1D validator returns PASS
+- [ ] Website reviewed.
+- [ ] Mobile reviewed.
+- [ ] Competitors reviewed.
+- [ ] Existing assets classified.
+- [ ] Revenue-driving services identified.
+- [ ] Growth priorities identified.
+- [ ] Proof inventory started.
+- [ ] Key unknowns identified.
+- [ ] Strategic diagnosis drafted.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] Diagnostic sentence written: “The existing site currently communicates X. The business needs to become Y. The primary barriers are A, B and C.” *(SOP Stage 1)*
+- [ ] 1D validator returns PASS *(Workflow Index step 7)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Internal**
-- Internal sign-off only
+- Approval required: **No**
+- Gate: Internal
+
+## Method
+
+- SOP: [Stage 1 — Evidence Pack](../../sop/website-redesign-sop.md#stage-1--evidence-pack)
+- Playbook: [3. Evidence Before Preference](../../playbook/website-strategy-playbook.md#3-evidence-before-preference)
 
 ## Next
 

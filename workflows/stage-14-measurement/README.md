@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Strategist *(default role)* | Project Lead *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Strategist / Project Lead | Project Lead | Review as needed | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -45,28 +47,37 @@ The AI Workflow Pack has no Stage 14 validator. The 14D decisions are reviewed b
 
 ## Output
 
-**Post-launch review + learning**
+**90-Day Redesign Performance Review**
 
-- Template 17 — [30/60/90 Day Review](../../templates/30-60-90-review.md)
+- Template 17 — [30 / 60 / 90 Day Review](../../templates/30-60-90-review.md)
+- Project Tracker tab(s): Measurement ([structure](../../templates/operational-tracker.md))
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: Template 17 (the SOP has no checklist for Stage 14)*
 
-- [ ] 30-day review complete
-- [ ] 60-day review complete
-- [ ] 90-day review complete
-- [ ] KEEP / IMPROVE / TEST / SCALE plan agreed
-- [ ] Learning captured (14E); OS improvement issues logged in GitHub
+- [ ] 30/60/90 reviews use the launch baseline.
+- [ ] Actions are prioritised by commercial impact.
+- [ ] At least one KEEP / IMPROVE / TEST / SCALE decision is recorded.
+- [ ] Reusable learning is fed back into the playbook.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] Reusable learning logged as GitHub Issues (IMPROVEMENT / TEST) *(SOP Stage 14 ("Feed reusable learning back into the operating system"))*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Internal / client review**
-- Internal sign-off only
+- Approval required: **No**
+- Gate: Internal / client review
+
+## Method
+
+- SOP: [Stage 14 — 30 / 60 / 90 Day Review](../../sop/website-redesign-sop.md#stage-14--30--60--90-day-review)
+- Playbook: [24. Post-Launch Learning](../../playbook/website-strategy-playbook.md#24-post-launch-learning)
+- Playbook: [15. Business Outcomes](../../playbook/website-strategy-playbook.md#15-business-outcomes)
 
 ## Handoffs and client communication
 
@@ -74,4 +85,4 @@ Do not move stage until every item passes, or an authorised exception is recorde
 
 ## Next
 
-End of workflow. Log OS improvements found in 14E as GitHub Issues.
+End of workflow. Log reusable learning from 14E as GitHub Issues.

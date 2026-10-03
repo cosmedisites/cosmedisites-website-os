@@ -1,64 +1,62 @@
-# Template 04 — Positioning Thesis
+# 04. Positioning Thesis
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 04 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Strategist
+**Approval:** Strategic client approval
 
-| | |
-|---|---|
-| Stage | [Stage 03 — Positioning](../workflows/stage-03-positioning/README.md) |
-| Filled by prompt(s) | 3A, 3B, 3C ([prompts](../workflows/stage-03-positioning/prompts.md)) |
-| Validated by | 3D |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
-
-## Call: recommended direction
-
-
-
-## Why (4–6 evidence-based reasons)
-
-
+## Purpose
+Set the strategic direction that all later UX, content and visual decisions must serve.
 
 ## Three-second perception
 
-
+| Field | Entry |
+|---|---|
+| Within three seconds of landing, a prospective patient should understand that this is... | [[...]] |
 
 ## Wrong perception
 
+| Field | Entry |
+|---|---|
+| It should never be mistaken for... | [[...]] |
 
+## Positioning thesis
 
-## Positioning thesis (25 words or fewer)
+| Field | Entry |
+|---|---|
+| Primary thesis | [[Short decisive statement]] |
 
+## Supporting position
 
+| Field | Entry |
+|---|---|
+| What we want to be known for | [[...]] |
+| What makes it credible | [[...]] |
+| What is intentionally de-emphasised | [[...]] |
 
 ## Priority services / categories
 
-
-
-## What the brand must own
-
-
-
-## What practitioners may own
-
-
-
-## What the design must not signal
-
-
+| Field | Entry |
+|---|---|
+| Priority | [[...]] |
+| Why | [[Commercial + strategic rationale]] |
 
 ## Brand architecture
 
-CLINIC OWNS · PRACTITIONERS OWN · LOCATIONS OWN · SHARED PROOF · INTERNAL LINKING RELATIONSHIP · NAMING RULES · SCALABILITY RULES · DO NOT DO
+| Field | Entry |
+|---|---|
+| Clinic owns | [[Treatments / results / core authority / locations / etc.]] |
+| Practitioners own | [[Individual expertise / authored content / case attribution / etc.]] |
 
-## Open questions
+## Future-growth test
 
+| Field | Entry |
+|---|---|
+| If the clinic doubled in size tomorrow, would this positioning still work? | [[Yes / No + notes]] |
 
+## Definition of Done
 
-## Definition of Done check
-
-Paste the 3D validator result.
-
-## Approval
-
-Approved by: · Date: · Decision level: 2 (Positioning) · Locked: Yes / No
+- [ ] Three-second perception written.
+- [ ] Wrong perception written.
+- [ ] Positioning thesis agreed internally.
+- [ ] Priority services/categories identified.
+- [ ] Brand architecture defined.
+- [ ] Direction survives future-growth test.

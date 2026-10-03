@@ -30,12 +30,13 @@ The pack's standard buckets (AI Operating Rules §10) are used in every handoff:
 | OPEN | Known unknowns, each with owner and next action |
 | DO NOT CHANGE | Constraints that need explicit re-approval before changing |
 
-> **Note on "AVOID".** The brief for this repository lists LOCKED / FLEXIBLE / REQUIRED / **AVOID**
-> / OPEN for the strategist → designer handoff. The existing methodology already covers "avoid"
-> in two places: **DO NOT CHANGE** (H03) and the **DO NOT DO** bucket in the 5C Designer Execution
-> Prompt (plus "What the design must not signal" from 3B). The methodology hasn't been changed
-> silently. If the team wants a separate AVOID bucket, raise it as an IMPROVEMENT issue
-> (open question Q7 in the [implementation plan](implementation-plan.md)).
+> **Note on "AVOID".** The setup brief lists LOCKED / FLEXIBLE / REQUIRED / **AVOID** / OPEN for
+> the strategist → designer handoff. The source methodology (Playbook, SOP, Templates, AI pack)
+> doesn't define an AVOID bucket. It covers "avoid" through **DO NOT CHANGE** (H03), the
+> **DO NOT DO** bucket in prompt 5C, "What the design must not signal" (3B) and the *Avoid* rows in
+> Template 07. The methodology hasn't been changed silently. If the team wants a separate AVOID
+> bucket, raise it as an IMPROVEMENT issue (open question Q7 in the
+> [implementation plan](implementation-plan.md)).
 
 ## Strategist → Designer: required contents
 
@@ -57,7 +58,13 @@ Run H03 for the core handoff. Attach H04 and the 7B output when available.
 
 ## Designer → Developer: required contents
 
-A single **Build Handoff** (Template 14) assembled from three prompts:
+The authoritative list is **SOP Stage 11, "Developer receives"**, reinforced by Playbook §22
+(*Build Handoff*: "The designer should not hand the developer 'some screens'"). It is captured in a
+single **Build Handoff** (Template 14), assembled with three prompts:
+
+SOP list: approved screens · responsive behaviour · component library · typography · colour tokens ·
+button states · navigation behaviour · image ratios · content states · empty states · SEO architecture ·
+redirect requirements · approved copy/content · tracking requirements.
 
 | Must include | Prompt |
 |---|---|

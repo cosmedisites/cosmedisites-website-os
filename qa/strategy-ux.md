@@ -1,45 +1,37 @@
 # QA Gate — Strategy / UX QA
 
-> One of three separate Stage 12 gates. Each gate is signed off on its own so one type of QA cannot hide another.
-> Prompt: [12B](../workflows/stage-12-qa/prompts.md). Results feed [12D Consolidated QA Triage](../workflows/stage-12-qa/prompts.md) and [Template 15](../templates/compliance-launch-qa.md).
-> Copy this checklist into the project's QA record in Drive/Chirply. Do not fill it in here.
+> One of the three separate Stage 12 checks. **Treat these as three separate checks** (SOP Stage 12),
+> so one type of QA cannot hide another.
 
-**Default gate owner:** Strategist *(INFERRED role, confirm against SOP v1.0)*
+| | |
+|---|---|
+| Owner | **Independent QA Reviewer (SOP: "Independent reviewer")** (SOP Stage 12 B) |
+| Run with | Prompt [12B](../workflows/stage-12-qa/prompts.md) → [12D Consolidated QA Triage](../workflows/stage-12-qa/prompts.md) |
+| Record in | Project Tracker **QA** tab (Google Sheet in the project Drive folder) and [Template 15](../templates/compliance-launch-qa.md) |
+| Status values | Not Checked · Pass · Fix · N/A (Tracker v1.0) |
+| Method | [Playbook 23. Internal Quality Test](../playbook/website-strategy-playbook.md#23-internal-quality-test) |
 
-**Rule:** Audit the staging site against the approved strategy, not just against Figma. Status: PASS / FIX / NOT TESTABLE.
+## Rules
 
-## Checks
+- Audit the staging site against the approved strategy, not just against Figma. (Prompt 12B)
+- Run the 60-second internal quality test with someone who did not work deeply on the design. (Playbook §23)
 
-| # | Check | Owner | Status | Issue / fix | Sign-off / date |
-|---|---|---|---|---|---|
-| 1 | Three-second perception | | | | |
-| 2 | Wrong-category avoidance | | | | |
-| 3 | Trust visible early enough | | | | |
-| 4 | Priority services visible | | | | |
-| 5 | Patient discovery routes | | | | |
-| 6 | Clinic vs practitioner hierarchy | | | | |
-| 7 | Proof quality | | | | |
-| 8 | CTA clarity | | | | |
-| 9 | Booking friction | | | | |
-| 10 | Mobile hierarchy | | | | |
-| 11 | Results / reviews presentation | | | | |
-| 12 | Scalability | | | | |
-| 13 | Approved brand ideas visible without forced repetition | | | | |
-| 14 | 60-second test: what kind of clinic is this? | | | | |
-| 15 | 60-second test: what makes it different? | | | | |
-| 16 | 60-second test: what should a user do next? | | | | |
-| 17 | 60-second test: what makes it credible? | | | | |
-| 18 | 60-second test: how does a user find the right service? | | | | |
-| 19 | 60-second test: does it feel specific to this client? | | | | |
+## Checks (SOP Stage 12, verbatim)
 
-## Issues log
+| Check | Owner | Status | Issue / fix | Sign-off / date |
+|---|---|---|---|---|
+| Positioning survives implementation | | Not Checked | | |
+| Trust appears early enough | | Not Checked | | |
+| User journeys work | | Not Checked | | |
+| Clinic/practitioner hierarchy is correct | | Not Checked | | |
+| CTAs are clear | | Not Checked | | |
+| Mobile experience works | | Not Checked | | |
+| Future scalability remains intact | | Not Checked | | |
 
-| Check | Evidence | Impact | Required fix | Owner | Retest |
-|---|---|---|---|---|---|
-| | | | | | |
+> The prompt checks more detail than this list. Record extra findings in the issue/fix column against the closest SOP check.
 
 ## Gate sign-off
 
-- [ ] All BLOCKER/P0 items resolved or escalated to 12E
-- Signed off by: 
-- Date: 
+- [ ] Every check is Pass or N/A, or the Fix is explicitly accepted (SOP Stage 12 DoD: "Blocking issues resolved or explicitly accepted")
+- Signed off by:
+- Date:

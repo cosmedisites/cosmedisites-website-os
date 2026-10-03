@@ -1,13 +1,15 @@
 # Operational stage spec (Chirply)
 
 How the Website OS appears to the team inside Chirply. **Chirply behaves like the UI for GitHub:
-GitHub stays the source.**
+GitHub stays the source.** The SOP says the same: *"The project-management interface should behave
+like the UI for the operating system."*
 
 The team member never needs to understand the repository. They open their stage task and see
 everything they need, with links.
 
-> Configuration below uses Chirply features observed in the [audit](chirply-audit.md). Items marked
-> ⚑ depend on verification tests in the CosmediSites workspace.
+> The configuration uses Chirply features observed in the [audit](chirply-audit.md). Items marked
+> ⚑ depend on verification tests in the CosmediSites workspace. Statuses, roles, owners and
+> Definitions of Done come from the SOP v1.0 and Operational Tracker v1.0, via `ops/stages.yaml`.
 
 ---
 
@@ -16,11 +18,11 @@ everything they need, with links.
 ### 1.1 Pipeline: "Website Redesign"
 
 - Value tracking **off** (process board).
-- Stages, in order: `00 Commercial Brief`, `01 Evidence`, `02 Strategic Diagnosis`,
-  `03 Positioning`, `04 IA + SEO`, `05 Visual Direction`, `06 Page + Component System`,
-  `07 Proof + Content + Photography`, `08 Client Strategy Review`, `09 Approval Gate`,
-  `10 Production Inputs`, `11 Build`, `12 QA`, `13 Launch`, `14 Measurement`, plus outcome stages
-  `Complete` (won) and `Paused / Cancelled` (lost).
+- Stages, mirroring the SOP's *Project Board Structure*: `00 Brief`, `01 Evidence`, `02 Diagnosis`,
+  `03 Positioning`, `04 IA + SEO`, `05 Visual Direction`, `06 Page System`,
+  `07 Content + Proof + Photography`, `08 Client Review`, `09 Approval`, `10 Inputs`, `11 Build`,
+  `12 QA`, `13 Launch`, `14 Measurement`, plus outcome stages `Complete` (won) and
+  `Paused / Cancelled` (lost).
 
 ### 1.2 Deal = project record
 
@@ -30,80 +32,81 @@ everything they need, with links.
 | Company / contact | built-in link | Client and main client contact (approver) |
 | Owner | built-in user | **Project Lead** |
 | Domain | url | |
-| Strategist | select (team list) | No user-type field exists in Chirply |
-| Designer | select (team list) | |
-| Developer | select (team list) | |
-| SEO Lead | select (team list) | |
+| Strategist · SEO Lead · Designer · Developer · Content Lead · Compliance Reviewer · Independent QA Reviewer | select (team list), one field each | SOP roles. Chirply has no user-type custom field. One person may hold several roles, but every stage still has one named owner (SOP) |
 | Target launch | date | |
-| Commercial objective | textarea | One sentence, copied from the approved Strategy Brief |
+| Commercial objective | textarea | One sentence, from the approved Strategy Brief |
 | Priority services | multiselect or textarea | |
 | Health | select: On track / At risk / **Blocked** | Drives the "blocked projects" view |
 | Blocker | text | Required when Health = Blocked (by convention) |
 | Next approval due | date | Drives "upcoming approvals" |
 | OS version | select: v1.0, v1.1… | The OS version the project started on |
 | Master Project Context | url | Google Doc in the project Drive folder |
-| Project Strategy Brief | url | |
-| Drive folder | url | |
-| Figma | url | |
-| Client deck | url | |
-| Staging URL | url | |
-| Input Tracker | url | Google Sheet |
-| Proof Inventory | url | Google Sheet |
+| Project Tracker | url | Google Sheet copy of Operational Tracker v1.0 |
+| Project Strategy Brief · Drive folder · Figma · Client deck · Staging URL | url | |
 
 ### 1.3 Project = delivery workspace (one per deal)
 
-- **Task lists:** one per stage (`S00 Commercial Brief` … `S14 Measurement`).
-- **In each list:** one **stage task** named per the pack convention, e.g.
+- **Task lists:** one per stage (`S00 Brief` … `S14 Measurement`).
+- **In each list:** one **stage task**, named per the AI pack convention, e.g.
   `S03 — Positioning — 3A → 3B + 3C → 3D → 3E`.
-  - Assignees: stage owner (+ reviewer).
+  - Assignees: the stage **owner** (SOP) and the **reviewer**.
   - Due date: stage deadline.
+  - Status: the Tracker's stage statuses **Not Started / In Progress / Blocked / Ready for Review /
+    Complete / N/A**, as board columns. ⚑ V10; fallback: title prefix plus the deal Health field.
   - Description: the stage card (format below).
 - **Subtasks of the stage task:**
-  - one per Definition of Done item (from `ops/stages.yaml`);
-  - a final `✔ Reviewer sign-off — <role>` subtask assigned to the reviewer.
-- **Stage 12** has three parent tasks (`QA — Compliance`, `QA — Strategy / UX`,
-  `QA — Technical / SEO`). Each has one subtask per check in `qa/*.md` and a `Gate sign-off` subtask.
+  - one per **SOP Definition of Done** item;
+  - one per **"also required"** gate check (validator PASS, approval recorded, lock recorded);
+  - a final `✔ Reviewer sign-off — <reviewer>` subtask.
+- **Stage 12** has three gate tasks, `QA — Compliance` (Compliance Reviewer), `QA — Strategy / UX`
+  (Independent QA Reviewer) and `QA — Technical / SEO` (Developer + SEO Lead). Each has a single
+  `Gate sign-off` subtask. The 29 individual checks live in the Tracker **QA** tab and are not
+  duplicated as subtasks.
 
-### 1.4 Custom object: "Approval Record"
+### 1.4 Custom object: "Approval Record" (mirrors the Tracker *Approvals* tab)
 
-| Field | Type |
-|---|---|
-| Project | text (deal title) or url (deal link) |
-| Stage | select 00–14 |
-| Decision | text, e.g. "Positioning thesis" |
-| Status | select: **Pending / Approved / Changes Requested / Locked / N/A** |
-| Decision level | select: 1 Business strategy · 2 Positioning · 3 UX/IA · 4 Content/proof · 5 Visual |
-| Approver | contact_link (client) or text (internal) |
-| Decision date | date |
-| Feedback | text |
-| Locked | checkbox |
-| Evidence link | url (meeting notes / email / signed document) |
+| Field | Type | Values |
+|---|---|---|
+| Project | url (deal) | |
+| Decision | text | Positioning · Visual direction · Navigation / user journey · Service hierarchy · Practitioner hierarchy · Homepage structure · Photography direction · *project-specific* |
+| Level | select | L1 … L5 (combinations such as L1/L3 allowed, as in the Tracker) |
+| Owner | select (team) | |
+| Status | select | **Pending / Approved / Changes Requested / Locked / N/A** |
+| Date | date | |
+| Client / Approver | contact_link | |
+| Feedback Classification | select | Strategic / Accuracy / User / UX / Compliance / Preference / New Information |
+| Notes | text | |
+| Locked | checkbox | |
+| Evidence link | url | Meeting notes / email / signed document |
 
-Rule (from 9A): **never infer approval from silence.** Status changes only with an evidence link.
+Rule (9A): **never infer approval from silence.** Status changes only with an evidence link.
+A Locked decision reopens only through 9E change control (SOP *Revision Control*).
 
-### 1.5 Google Sheets (in the project Drive folder, linked from the deal)
+### 1.5 Project Tracker (Google Sheet in the project Drive folder)
 
-- **Input Tracker** (Template 13 columns)
-- **Proof Inventory** (Template 09 columns)
-- **QA Issue Log** (one tab per gate, 12A/12B/12C columns)
+A copy of Operational Tracker v1.0. Which tab is live where:
+[templates/operational-tracker.md](../templates/operational-tracker.md#how-the-tracker-is-used-with-chirply).
+In short: **Content Inputs, Proof Inventory, QA (check level) and Measurement live in the Sheet.
+Stage status, approvals and the dashboard live in Chirply.**
 
 ---
 
 ## 2. What a team member sees: the stage task
 
-The stage task description is generated from `dist/stage-config.json` (per release), so it always
-matches GitHub. Example for Stage 03:
+The description is generated from `dist/stage-config.json` (per release), so it always matches GitHub.
+Example for Stage 03:
 
 ```
 STAGE 03 — POSITIONING
-Status: In Progress        Owner: Sarah (Strategist)        Reviewer: Project Lead        Due: 14 Oct
+Status: In Progress     Owner: Sarah (Strategist)     Reviewer: Creative / Project Lead     Due: 14 Oct
+Client involved: Strategic approval
 
 OBJECTIVE
 Define the market perception, brand architecture and strategic ideas the new website must make obvious.
 
 INPUTS
-• Master Project Context → [open]           (deal field)
-• Project Strategy Brief → [open]  • Evidence Pack → [open]  • Strategic Diagnosis → [open]
+• Master Project Context → [open]   • Project Strategy Brief → [open]
+• Evidence Pack → [open]            • Strategic Diagnosis → [open]
 
 RUN
 • 3A Generate Positioning Directions → [open]
@@ -115,69 +118,73 @@ VALIDATE
 • 3D Positioning Validator → [open]
 
 OUTPUT
-Positioning Thesis + Brand Architecture → Template 04 [open]  → save to Drive: 04_Positioning/
+Positioning Thesis → Template 04 [open] → save to Drive: 03_Positioning/
 
-DEFINITION OF DONE        (ticked as subtasks below)
-☐ Three-second perception
-☐ Wrong perception
-☐ Positioning thesis (25 words or fewer)
-☐ Priority services
-☐ Brand architecture
-☐ 3D validator returns PASS on every test
-☐ Client strategic approval recorded
-☐ Positioning added to LOCKED DECISIONS in the Master Project Context
+DEFINITION OF DONE (SOP v1.0, Stage 3)           ticked as subtasks below
+☐ Desired perception written.
+☐ Wrong perception written.
+☐ Positioning thesis agreed internally.
+☐ Priority services/categories identified.
+☐ Clinic/practitioner relationship defined.
+☐ Future growth test passed.
+Also required:
+☐ No visual design begins until this is internally approved.  (SOP)
+☐ 3D validator returns PASS                                    (Workflow Index)
+☐ Client strategic approval recorded in the Approval Record
+☐ Approved positioning added to LOCKED DECISIONS in the MPC
 ☐ Reviewer sign-off
 
 APPROVAL
-Required: client strategic approval → create/update Approval Record "Positioning"
-On approval, lock: Positioning
+Required: Yes (client strategic approval). On approval, lock: Positioning.
+
+METHOD
+SOP Stage 3 → [open]   Playbook §4 Positioning Thesis → [open]   Playbook §11 Brand Architecture → [open]
 
 HANDOFFS
 • H02 Strategist → SEO Lead → [open]   • H03 Strategist → Designer → [open]
 
 NEXT
-Stage 04 — IA + SEO
-
-Stage card → [open]   SOP → [open]   OS version: v1.0
+Stage 04 — IA + SEO                      Stage card → [open]   OS version: v1.0
 ```
 
-Every `[open]` is a deep link (GitHub blob URL with heading anchor, or Drive URL). ⚑ V4 confirms
+Every `[open]` is a deep link (GitHub URL with heading anchor, or Drive URL). ⚑ V4 confirms
 links are clickable; if not, the same block goes in the project notebook, which accepts HTML.
 
 ## 3. Moving stage: the human gate
 
-1. The owner ticks the DoD subtasks and runs the validator. **Paste the PASS/FAIL/BLOCKED result into
-   the stage task as a comment** (or as a file link, if comments are unavailable: ⚑ V3).
-2. For client-gated stages, the Approval Record is set to **Approved** (with an evidence link).
-3. The reviewer ticks `✔ Reviewer sign-off`.
+1. The owner works through the DoD subtasks and runs the validator. **The PASS/FAIL/BLOCKED result is
+   pasted into the stage task as a comment** (or linked as a file if comments aren't available, ⚑ V3).
+2. For client-gated stages, the Approval Record is set to **Approved**, with an evidence link.
+3. The stage task moves to **Ready for Review**; the reviewer ticks `✔ Reviewer sign-off`; the task
+   moves to **Complete**.
 4. **The Project Lead moves the deal to the next pipeline stage.** This is the "stage complete" event.
-5. Automation (see [automation map](automation-map.md)) creates a "Confirm DoD — Stage NN" check
-   task if any DoD subtask is still open, and opens the next stage task.
+5. Automation ([automation map](automation-map.md)) flags any DoD item still open and opens the next
+   stage task.
 
-Moving a deal while DoD items are open is allowed only with an **authorised exception**: a comment
-on the stage task saying who authorised it, why, and which items remain. This matches the pack:
-"Do not move stage until PASS or an authorised exception is recorded."
+Moving a deal while DoD items are open requires an **authorised exception**: a comment on the stage
+task saying who authorised it, why, and which items remain (Workflow Index step 7).
 
 ## 4. Operational dashboard
 
-| Need | View in Chirply |
+| Need | Where |
 |---|---|
-| Active redesign projects, current stage, owner, target launch | Pipeline board "Website Redesign"; saved report over deals (stage × owner) |
-| Blocked projects | Deals filtered on Health = Blocked |
-| Upcoming approvals | Approval Record list, Status = Pending, sorted by date; deal field `Next approval due` |
-| Missing inputs | Weekly digest (reads the Input Tracker sheets) |
-| QA status | Stage 12 parent tasks per project; weekly digest |
+| Active redesign projects, current stage, owner, target launch | Pipeline board; saved report over deals (stage × owner) |
+| Blocked projects | Deals with Health = Blocked; stage tasks in the Blocked column |
+| Upcoming approvals | Approval Records with Status = Pending; deal field `Next approval due` |
+| Missing inputs | Weekly digest: Tracker *Content Inputs* rows not Verified/N/A (the Tracker's own "Open Inputs" KPI) |
+| QA status | Stage 12 gate tasks; weekly digest: Tracker *QA* rows with Status = Fix (the Tracker's "QA Fixes Open" KPI) |
 | Overdue items | **Weekly digest**, because Chirply's report builder has no task dataset |
 
-The **weekly digest** is a single email/Chirply note every Monday at 08:00. It is built by Apps Script
-(or by Claude via the Chirply connector) from deals, project tasks and the tracker sheets. It answers
-the Quickstart's five Monday-morning questions for every project.
+The **weekly digest** is a single email every Monday at 07:30. It is built by Apps Script from
+Chirply (deals, stage tasks, approvals) and each project's Tracker Sheet. It reproduces the Tracker
+*Dashboard* KPIs (stages complete, open inputs, QA fixes open) across all projects, and answers the
+Quickstart's five Monday-morning questions.
 
 ## 5. Repeatable set-up for a new client
 
 1. Create the deal from the **deal template** "Website Redesign" (prefills pipeline, stage 00 and fields).
 2. Run provisioning ([automation map](automation-map.md), A1). It creates the project, 15 task lists,
-   stage tasks with descriptions, DoD subtasks and reviewer subtasks from the current release's
-   `stage-config.json`, and copies the Drive folder template.
+   stage tasks with descriptions, DoD and reviewer subtasks from the current release's
+   `stage-config.json`, and copies the Drive folder template, Tracker Sheet and MPC Doc.
 3. Until provisioning is automated (Phase 5), build one **reference project by hand** in Phase 3 and
    use it as the pattern.

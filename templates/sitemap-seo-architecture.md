@@ -1,48 +1,65 @@
-# Template 06 — Sitemap + SEO Architecture
+# 06. Sitemap + SEO Architecture
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 06 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** SEO Lead / Strategist
+**Approval:** Client approval where service structure materially changes
 
-| | |
+## Purpose
+Protect existing search equity while creating an information architecture that matches how patients search and decide.
+
+## Page inventory
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 04 — IA + SEO](../workflows/stage-04-ia-seo/README.md) |
-| Filled by prompt(s) | 4A, 4B, 4C, 4D ([prompts](../workflows/stage-04-ia-seo/prompts.md)) |
-| Validated by | 4E |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Existing URL | [[...]] |
+| Current role | [[...]] |
+| Decision | [Retain / Improve / Merge / Remove / Redirect] |
+| Proposed URL | [[...]] |
+| Primary intent | [[...]] |
+| Parent | [[...]] |
+| Notes | [[...]] |
 
-## URL preservation audit
+## Required page types
 
-| URL | Page type | Search value | Commercial value | Uniqueness | Proposed destination | Decision | Reason | Risk | Confidence |
-|---|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | | |
+| Field | Entry |
+|---|---|
+| Treatment / service pages | [[list]] |
+| Concern pages | [[list]] |
+| Location pages | [[list / N/A]] |
+| Practitioner pages | [[list]] |
+| Results / case pages | [[structure]] |
+| Supporting content | [[topics / hubs]] |
 
-## Proposed sitemap
+## Navigation model
 
-| Proposed URL | Page purpose | Primary intent | Commercial role | Parent | Primary CTA | Related page types | Existing URL mapping |
-|---|---|---|---|---|---|---|---|
-| | | | | | | | |
+| Field | Entry |
+|---|---|
+| Primary nav | [[...]] |
+| Browse by treatment | [[...]] |
+| Browse by concern | [[...]] |
+| Guided route | [[...]] |
 
-## Primary navigation
+## Internal linking
 
+| Field | Entry |
+|---|---|
+| Treatment → concern | [[rule]] |
+| Concern → treatment | [[rule]] |
+| Treatment → practitioner | [[rule]] |
+| Practitioner → treatment | [[rule]] |
+| Results → treatment / practitioner | [[rule]] |
 
+## Migration requirements
 
-## Internal-linking rules
+| Field | Entry |
+|---|---|
+| Redirects required | [[...]] |
+| Canonical changes | [[...]] |
+| High-value URLs to protect | [[...]] |
 
-| Source type | Destination type | Why the link exists | Anchor guidance | When not to link |
-|---|---|---|---|---|
-| | | | | |
+## Definition of Done
 
-## Migration / redirect map
-
-| Old URL | Current role | New URL | Action | Reason | Content merge? | Internal links to update? | Risk | QA check |
-|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | |
-
-## Launch-critical SEO risks
-
-
-
-## Definition of Done check
-
-Paste the 4E validator result.
+- [ ] Every primary proposed page has a purpose and intent.
+- [ ] Existing high-value URLs have a retain/merge/redirect decision.
+- [ ] Navigation and internal-linking model are defined.
+- [ ] Location and practitioner architecture are explicit.
+- [ ] Redirect requirements are known before build.

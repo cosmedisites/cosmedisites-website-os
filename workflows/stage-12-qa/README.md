@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Project Lead *(default role)* | Compliance Reviewer *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Named QA owners (see gates) | Independent reviewers | No | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -44,32 +46,40 @@ Route: **12A + 12B + 12C → 12D → 12E**
 
 ## Output
 
-**Compliance / Strategy / Technical QA**
+**Compliance + Strategy + Technical QA sign-off**
 
 - Template 15 — [Compliance + Launch QA](../../templates/compliance-launch-qa.md)
-- QA gate — [Compliance QA](../../qa/compliance.md) *(owner: Compliance Reviewer)*
-- QA gate — [Strategy / UX QA](../../qa/strategy-ux.md) *(owner: Strategist)*
-- QA gate — [Technical / SEO QA](../../qa/technical-seo.md) *(owner: SEO Lead)*
+- QA gate — [Compliance Review](../../qa/compliance.md) *(owner: Compliance Reviewer)*
+- QA gate — [Strategy / UX QA](../../qa/strategy-ux.md) *(owner: Independent QA Reviewer)*
+- QA gate — [Technical / SEO QA](../../qa/technical-seo.md) *(owner: Developer + SEO Lead)*
+- Project Tracker tab(s): QA ([structure](../../templates/operational-tracker.md))
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 12 — Compliance + Strategy + Technical QA*
 
-- [ ] Compliance gate signed off (qa/compliance.md)
-- [ ] Strategy / UX gate signed off (qa/strategy-ux.md)
-- [ ] Technical / SEO gate signed off (qa/technical-seo.md)
-- [ ] Consolidated triage (12D) complete
-- [ ] Zero P0 items, or a 12E GO / CONDITIONAL GO decision recorded with owner and rollback trigger
-- [ ] Recommended launch status recorded
+- [ ] Compliance gate signed off.
+- [ ] Strategy/UX gate signed off.
+- [ ] Technical/SEO gate signed off.
+- [ ] Blocking issues resolved or explicitly accepted.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] 12D consolidated triage complete; any open P0 has a 12E GO / CONDITIONAL GO decision recorded with owner and rollback trigger *(Workflow Index step 7 / prompts 12D–12E)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Internal sign-off**
-- Internal sign-off only
+- Approval required: **Internal sign-off**
+- Gate: Internal sign-off
+
+## Method
+
+- SOP: [Stage 12 — Compliance + Strategy + Technical QA](../../sop/website-redesign-sop.md#stage-12--compliance--strategy--technical-qa)
+- Playbook: [20. Compliance as a Dedicated Gate](../../playbook/website-strategy-playbook.md#20-compliance-as-a-dedicated-gate)
+- Playbook: [23. Internal Quality Test](../../playbook/website-strategy-playbook.md#23-internal-quality-test)
 
 ## Handoffs and client communication
 

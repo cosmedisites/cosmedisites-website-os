@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Strategist *(default role)* | Project Lead *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Strategist | Project Lead | No | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -40,24 +42,29 @@ Route: **2A → 2B → 2C**
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 2 — Strategic Diagnosis*
 
-- [ ] Current and desired perception stated
-- [ ] Every weakness has evidence, consequence, priority and confidence
-- [ ] Issues prioritised P0–P3 (2B)
-- [ ] Diagnosis stated in one sentence
-- [ ] Diagnosis could not be pasted unchanged onto another clinic
-- [ ] No visual prescriptions (colour, type, UI styling)
-- [ ] Red team (2C) returns PASS
+- [ ] Diagnosis can be understood without discussing colours/fonts.
+- [ ] Commercial, trust, UX and scalability issues are separated.
+- [ ] Top three opportunities are prioritised.
+- [ ] Every major conclusion traces back to evidence.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] 2C red team returns PASS *(Workflow Index step 7)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Internal**
-- Internal sign-off only
+- Approval required: **No**
+- Gate: Internal
+
+## Method
+
+- SOP: [Stage 2 — Strategic Diagnosis](../../sop/website-redesign-sop.md#stage-2--strategic-diagnosis)
+- Playbook: [2. Rule Zero: Diagnose Before Designing](../../playbook/website-strategy-playbook.md#2-rule-zero-diagnose-before-designing)
 
 ## Next
 

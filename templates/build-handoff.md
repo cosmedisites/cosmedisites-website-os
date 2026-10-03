@@ -1,40 +1,73 @@
-# Template 14 — Build Handoff
+# 14. Build Handoff
 
-> **Status: interim skeleton.** Its structure is taken from the AI Workflow Pack prompt(s) that fill it.
-> Reconcile it with Template 14 in the CosmediSites Redesign Template Pack v1.0 when that pack is imported.
-> Copy this into the client's Drive folder to use it. Never fill it in inside this repository.
+**Owner:** Designer / SEO Lead
+**Approval:** Internal unless stated
 
-| | |
+## Purpose
+Give development a complete implementation package so the developer implements decisions rather than inventing unresolved UX.
+
+## Approved design
+
+| Field | Entry |
 |---|---|
-| Stage | [Stage 11 — Build](../workflows/stage-11-build/README.md) |
-| Filled by prompt(s) | 11A, 11B, 11C ([prompts](../workflows/stage-11-build/prompts.md)) |
-| Validated by | 11D |
-| File naming | `CLIENT_Artefact_v0.X_WORKING_YYYY-MM-DD` → `CLIENT_Artefact_v1.0_APPROVED_YYYY-MM-DD` |
+| Design file | [[link]] |
+| Approved version | [[version/date]] |
+| Desktop screens | [[...]] |
+| Mobile screens | [[...]] |
 
-## Designer → Developer (11A / H05)
+## System
 
-LOCKED · REQUIRED · FLEXIBLE · OPEN · DO NOT CHANGE
+| Field | Entry |
+|---|---|
+| Component library | [[link]] |
+| Typography | [[tokens / files / usage]] |
+| Colour tokens | [[...]] |
+| Spacing | [[...]] |
+| Button states | [[...]] |
+| Image ratios | [[...]] |
 
-Approved screen/version links · component list · responsive behaviour · typography and colour tokens · spacing · button states · navigation · forms · image ratios/crops · empty, loading and error states · accessibility · animation rules
+## Behaviour
 
-## SEO → Developer (11B)
+| Field | Entry |
+|---|---|
+| Navigation | [[desktop/mobile behaviour]] |
+| Forms | [[...]] |
+| Accordions | [[...]] |
+| Sticky CTAs | [[...]] |
+| Empty states | [[...]] |
+| Error states | [[...]] |
 
-URLs · redirects · canonicals · indexation · on-page structure · structured data · tracking · launch tests. Mark each item MUST / SHOULD / N/A / OPEN.
+## SEO / content
 
-## Content → Build mapping (11C)
+| Field | Entry |
+|---|---|
+| Approved sitemap | [[link]] |
+| URL map | [[link]] |
+| Redirect map | [[link]] |
+| Metadata / schema notes | [[...]] |
+| Internal-link rules | [[...]] |
+| Approved copy | [[link]] |
 
-| URL | Template | H1 / hero | Primary CTA | Section order | Content source | Proof components | Practitioner / reviewer | FAQ | Related links | SEO notes | Open items |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | | | | |
+## Tracking
 
-## Open items
+| Field | Entry |
+|---|---|
+| Analytics | [[...]] |
+| Conversions | [[...]] |
+| Call / booking tracking | [[...]] |
 
-| Item | Owner | Deadline | Can build proceed without it? |
-|---|---|---|---|
-| | | | |
+## Open issues
 
-## Implementation variance (11D)
+| Field | Entry |
+|---|---|
+| Issue | [[...]] |
+| Owner | [[...]] |
+| Must resolve before build? | [Yes / No] |
 
-| Page / component | Variance | Class (Critical/Major/Minor/Acceptable) | Approved reference | Required fix | Owner |
-|---|---|---|---|---|---|
-| | | | | | |
+## Definition of Done
+
+- [ ] Developer has approved desktop and mobile states.
+- [ ] Core component behaviour is documented.
+- [ ] URL/redirect requirements are included.
+- [ ] Tracking requirements are known.
+- [ ] No material UX decision is left for development to invent.

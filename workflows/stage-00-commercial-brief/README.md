@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Strategist *(default role)* | Project Lead *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Project Lead / Strategist | Project Lead | Yes | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -44,33 +46,35 @@ Route: **0A → 0B → 0C; use 0D if blocked**
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 0 — Project Strategy Brief*
 
-- [ ] Primary commercial objective stated
-- [ ] Measurable success metric recorded (or marked OPEN)
-- [ ] Priority revenue services identified
-- [ ] Services / categories to grow identified
-- [ ] Target audience and main anxieties defined
-- [ ] Current and planned locations recorded
-- [ ] Current and planned team recorded
-- [ ] Current lead sources and booking method recorded
-- [ ] Website's role in acquisition stated
-- [ ] Known SEO priorities recorded
-- [ ] Compliance / operational constraints recorded
-- [ ] Actual business reason for the redesign stated
-- [ ] “This redesign succeeds if…” and “fails even if it looks good if…” completed
-- [ ] No inference presented as fact (0C)
-- [ ] Client has confirmed the facts
-- [ ] Master Project Context created
+- [ ] Business objective is explicit.
+- [ ] Growth model and priority services are understood.
+- [ ] Audience and buying anxieties are documented.
+- [ ] Website role in acquisition is clear.
+- [ ] Known SEO/compliance constraints are captured.
+- [ ] Client confirms the factual brief.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] The team can answer: What does this business need the new website to achieve? What would make the redesign commercially unsuccessful even if it looked excellent? *(SOP Stage 0)*
+- [ ] 0C validator returns PASS *(Workflow Index step 7)*
+- [ ] Master Project Context created in the project Drive folder *(AI Workflow Pack README (Recommended workspace))*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Client factual confirmation**
-- Required: client approval
+- Approval required: **Client factual confirmation**
+- Gate: Client factual confirmation
+
+## Method
+
+- SOP: [Stage 0 — Project Strategy Brief](../../sop/website-redesign-sop.md#stage-0--project-strategy-brief)
+- Playbook: [1. The CosmediSites Redesign Framework](../../playbook/website-strategy-playbook.md#1-the-cosmedisites-redesign-framework)
+- Playbook: [2. Rule Zero: Diagnose Before Designing](../../playbook/website-strategy-playbook.md#2-rule-zero-diagnose-before-designing)
+- Playbook: [15. Business Outcomes](../../playbook/website-strategy-playbook.md#15-business-outcomes)
 
 ## Handoffs and client communication
 

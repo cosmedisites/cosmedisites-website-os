@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | SEO Lead *(default role)* | Strategist *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Strategist + SEO Lead | Project Lead | Yes if structure changes | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -44,36 +46,39 @@ Route: **4A → 4B + 4C → 4D → 4E**
 
 ## Output
 
-**Sitemap / SEO Architecture**
+**Approved Sitemap + SEO Architecture Map**
 
 - Template 06 — [Sitemap + SEO Architecture](../../templates/sitemap-seo-architecture.md)
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 4 — Information Architecture + SEO*
 
-- [ ] Every primary page has a distinct purpose
-- [ ] Priority commercial services have landing pages
-- [ ] Concern pages are useful, not thin duplicates
-- [ ] Practitioner pages fit the brand architecture
-- [ ] Locations structured consistently
-- [ ] Valuable existing URLs protected
-- [ ] Removed URLs have sensible decisions
-- [ ] Internal links support patient journeys
-- [ ] Navigation understandable without industry knowledge
-- [ ] Future practitioners / treatments / locations can be added
-- [ ] Cannibalisation risks identified
-- [ ] Redirects known before build
-- [ ] Launch-critical SEO risks listed
+- [ ] Every primary page has a purpose.
+- [ ] Every primary page has a user/search intent.
+- [ ] Existing high-value URLs have a retain/merge/redirect decision.
+- [ ] Navigation model is defined.
+- [ ] Internal linking is defined.
+- [ ] Location/practitioner architecture is explicit.
+- [ ] Redirect requirements are known before build.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] 4E validator returns PASS *(Workflow Index step 7)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Conditional client approval**
-- Conditional: client approval where the sitemap/URL changes are material
+- Approval required: **Conditional (required where service presentation materially changes)**
+- Gate: Conditional client approval
+
+## Method
+
+- SOP: [Stage 4 — Information Architecture + SEO](../../sop/website-redesign-sop.md#stage-4--information-architecture--seo)
+- Playbook: [21. SEO Architecture Before Final Design](../../playbook/website-strategy-playbook.md#21-seo-architecture-before-final-design)
+- Playbook: [8. User Journey](../../playbook/website-strategy-playbook.md#8-user-journey)
 
 ## Handoffs and client communication
 

@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Content Lead *(default role)* | Compliance Reviewer *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Content Lead | Strategist / Compliance Reviewer | Client supplies inputs | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -45,29 +47,40 @@ Route: **7A + 7B + 7C → 7D + 7E**
 
 ## Output
 
-**Proof Inventory + Photography Brief + content gaps**
+**Proof Inventory + Content/Input Tracker + Photography Brief**
 
 - Template 09 — [Proof Inventory](../../templates/proof-inventory.md)
+- Template 13 — [Content / Input Tracker](../../templates/content-input-tracker.md)
 - Template 10 — [Photography Brief](../../templates/photography-brief.md)
+- Project Tracker tab(s): Proof Inventory, Content Inputs ([structure](../../templates/operational-tracker.md))
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: SOP v1.0, Stage 7 — Proof + Content + Photography*
 
-- [ ] Proof Inventory built, with verification and consent status on every item
-- [ ] Content gap plan prioritised P0–P3
-- [ ] Photography brief and shot list complete
-- [ ] Claims validated (7D); no UNSUPPORTED claim remains in client copy
-- [ ] Client input request sent (7E)
+- [ ] Proof gaps are known.
+- [ ] Each missing input has an owner.
+- [ ] Photography requirements are defined.
+- [ ] Patient/model consent requirements are identified.
+- [ ] Design does not depend on evidence nobody can supply.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] 7D claims validator shows no UNSUPPORTED claim left in client copy *(Workflow Index step 7 / prompt 7D)*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Client supplies inputs**
-- Client must supply inputs; no strategic sign-off at this stage
+- Approval required: **No**
+- Gate: Client supplies inputs
+
+## Method
+
+- SOP: [Stage 7 — Proof + Content + Photography](../../sop/website-redesign-sop.md#stage-7--proof--content--photography)
+- Playbook: [12. Trust & Proof System](../../playbook/website-strategy-playbook.md#12-trust--proof-system)
+- Playbook: [13. Photography System](../../playbook/website-strategy-playbook.md#13-photography-system)
 
 ## Handoffs and client communication
 

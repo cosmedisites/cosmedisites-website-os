@@ -3,11 +3,13 @@
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
 > This is the stage card: what you need to work this stage. Day-to-day status lives in the
-> operational tool (Chirply); this card and the files it links to are the source.
+> operational tool (Chirply). This card and the files it links to are the source.
 
-| Status | Owner | Reviewer | Deadline |
-|---|---|---|---|
-| *set per project* | Developer *(default role)* | Project Lead *(default role)* | *set per project* |
+| Status | Owner | Reviewer | Client involved | Deadline |
+|---|---|---|---|---|
+| *set per project* | Project Lead (technical owner: Developer) | Developer / SEO | Client informed | *set per project* |
+
+Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
 ## Objective
 
@@ -44,28 +46,37 @@ The AI Workflow Pack has no Stage 13 validator. The 13B runbook's PASS/FAIL fiel
 
 ## Output
 
-**Launch runbook + baseline**
+**Launch Record + Measurement Baseline**
 
 - Template 16 — [Post-Launch Measurement Baseline](../../templates/measurement-baseline.md)
+- Project Tracker tab(s): Measurement ([structure](../../templates/operational-tracker.md))
 
 ## Definition of Done
 
-> **Interim.** This list is compiled from this stage's validator prompt(s) in the AI Workflow
-> Pack v1.0. The Website Redesign SOP v1.0 Definition of Done is authoritative. Reconcile
-> it when the SOP is imported ([sop/](../../sop/website-redesign-sop.md)).
+*Source: Template 16 (the SOP has no checklist for Stage 13)*
 
-- [ ] Launch plan approved
-- [ ] Runbook executed, with a PASS / FAIL recorded for every step
-- [ ] Measurement baseline captured, with gaps recorded as gaps
-- [ ] Client launch notification sent
-- [ ] 30 / 60 / 90-day reviews scheduled
+- [ ] Launch date and comparison period are recorded.
+- [ ] Commercial conversion baseline exists where tracking permits.
+- [ ] Priority search and landing-page baseline exists.
+- [ ] Known tracking limitations are documented.
 
-Do not move stage until every item passes, or an authorised exception is recorded.
+**Also required before moving stage:**
+
+- [ ] Launch only after QA sign-off. *(SOP Stage 13)*
+- [ ] Launch completed; tracking verified; baseline captured. *(Tracker (Stage Tracker))*
+
+> Never move to the next stage because the previous one feels approximately finished.
+> Move when its Definition of Done has been met, or an authorised exception is recorded.
 
 ## Approval
 
-- Gate: **Launch sign-off**
-- Internal sign-off only
+- Approval required: **Launch sign-off**
+- Gate: Launch sign-off
+
+## Method
+
+- SOP: [Stage 13 — Launch](../../sop/website-redesign-sop.md#stage-13--launch)
+- Playbook: [15. Business Outcomes](../../playbook/website-strategy-playbook.md#15-business-outcomes)
 
 ## Handoffs and client communication
 
