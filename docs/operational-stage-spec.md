@@ -186,5 +186,5 @@ Quickstart's five Monday-morning questions.
 2. Run provisioning ([automation map](automation-map.md), A1). It creates the project, 15 task lists,
    stage tasks with descriptions, DoD and reviewer subtasks from the current release's
    `stage-config.json`, and copies the Drive folder template, Tracker Sheet and MPC Doc.
-3. Until provisioning is automated (Phase 5), build one **reference project by hand** in Phase 3 and
-   use it as the pattern.
+3. Until provisioning is automated, build the pilot project **by hand** and use it as the pattern
+   (implementation plan, step F).

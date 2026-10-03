@@ -2,8 +2,8 @@
 
 **Automate the administration around strategy, never strategic judgement.**
 
-Nothing here runs on day one. Each automation is built in **Phase 5**, only after the manual
-version has run cleanly on a real project (Phase 3/6). Glue code runs in **Google Apps Script**
+Nothing here runs on day one. Each automation is built only after the manual version has run
+cleanly on the pilot project (implementation plan, step F). Glue code runs in **Google Apps Script**
 (part of the existing Google Workspace), so no Zapier/Make/n8n subscription is needed.
 
 Evidence tags refer to the [Chirply audit](chirply-audit.md).

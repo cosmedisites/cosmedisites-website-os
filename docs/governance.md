@@ -21,38 +21,49 @@ branch → change → pull request → review → merge → changelog (if materi
 
 Merge method: **squash merge** (one commit per change on `main`, titled after the PR).
 
-## Branch protection for `main` (to configure)
+## Review model: two phases
 
-These are set in GitHub: **Settings → Rules → Rulesets → New branch ruleset** (or Settings →
-Branches → Add rule), target `main`:
+The aim is to **preserve history and prevent casual edits**, not to recreate enterprise governance
+before the team has more than one maintainer.
 
+### Phase 1: single maintainer (now, v1.0 → first pilot)
+
+- `main` is production. Nobody edits `main` directly.
+- **Material changes** (methodology, SOP, Playbook, master prompts, core templates, AI operating
+  rules, `ops/stages.yaml`) go on a branch and through a **pull request**, even though you review it
+  yourself. The PR is the audit trail: what changed, why, and which issue prompted it.
+- **Your own approval is the release gate.** Merge when the `checks` CI is green and you're
+  satisfied. No second approval required.
+- Editorial fixes (typos, links) may also go via PR; a quick self-merged PR is fine.
+- Never force-push or delete `main`.
+
+GitHub settings for this phase (**Settings → Rules → Rulesets → New branch ruleset**, target `main`),
+only if your plan enforces rulesets on private repositories (GitHub Team or above):
 - ✅ Restrict deletions
 - ✅ Block force pushes
-- ✅ Require a pull request before merging
-  - Required approvals: **1**
-  - ✅ Dismiss stale approvals when new commits are pushed
-  - ✅ Require review from Code Owners
-  - ✅ Require conversation resolution before merging
+- ✅ Require a pull request before merging, with **required approvals: 0**. This stops direct
+  pushes but lets you merge your own PR.
 - ✅ Require status checks to pass: `checks`
-- ✅ Require linear history (works with squash merge)
-- Bypass list: **repository admin only, for emergencies**
 
-Also in Settings:
+On GitHub Free these rules aren't enforced on a private repository, so follow them by convention.
+CI still runs on every PR, and the history is still preserved.
+
+### Phase 2: two or more maintainers (when a second reviewer joins)
+
+Raise the ruleset to:
+- required approvals: **1**, with ✅ *Require review from Code Owners*;
+- ✅ *Dismiss stale approvals when new commits are pushed*;
+- bypass list: repository admin only, for emergencies.
+
+Then create the CODEOWNERS teams (below) and replace the single owner in `CODEOWNERS`.
+
+### Always
+
 - General → Pull Requests: allow **squash merging** only; ✅ automatically delete head branches.
-- General → disable forking (already off).
-- Code security: enable **secret scanning** and **push protection** if your plan includes them for
-  private repositories.
-- Issues → create the labels: `bug`, `improvement`, `test`, `documentation`, `triage`,
-  `methodology`, `accepted`, `needs-evidence`, `wontfix`.
-
-> **Two practical constraints, checked at set-up:**
-> 1. **Plan.** On GitHub Free, branch protection and rulesets are not enforced on *private*
->    repositories. Enforcing them needs **GitHub Team** (or Enterprise). Until then, follow the
->    rules by convention.
-> 2. **Reviewers.** The `cosmedisites` organisation currently has **one member** and no teams. A
->    required approval can't be met by the PR author, so add at least one more reviewer (for
->    example the Head of Strategy) before enabling "Require approvals". Until then, the admin can
->    merge via the bypass, and should still open PRs so the history is reviewable.
+- Forking disabled (already off).
+- Secret scanning / push protection if your plan provides them for private repositories.
+- Labels: `bug`, `improvement`, `test`, `documentation`, `triage`, `methodology`, `accepted`,
+  `needs-evidence`, `wontfix`, `v1.1-candidate`.
 
 ## Who reviews what
 
@@ -65,7 +76,7 @@ CODEOWNERS ([`CODEOWNERS`](../CODEOWNERS)) requests reviewers automatically. Rec
 | `strategy` | Stages 00–04, 07–09 prompts and templates |
 | `delivery` | Stages 05–06, 10–14 prompts, templates, `qa/` |
 
-**Required review:** at least one approval for any change. For **methodology-class** changes (see
+**Required review (Phase 2):** at least one approval for any material change. For **methodology-class** changes (see
 [CONTRIBUTING](../CONTRIBUTING.md#change-classes)), approval from the methodology owner plus one other
 senior reviewer, and the PR must cite cross-project evidence.
 

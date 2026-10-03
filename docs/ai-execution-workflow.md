@@ -82,7 +82,7 @@ STAGE PROMPT:
 - If an output fails the **anti-generic test** ("could this be pasted onto another clinic
   unchanged?"), re-run with more project evidence rather than editing the wording.
 
-## Later (Phase 5+): connected execution
+## Later (after the pilot): connected execution
 
 Once the manual pattern is proven, the same four inputs can be assembled automatically:
 - Claude with the **Google Drive** and **Chirply** connectors reads the MPC from Drive, the stage

@@ -9,7 +9,7 @@ For each important artefact the OS aims to provide three things:
 | **Example** | What good actually looks like | here |
 
 Examples are added over time from real projects, **only after anonymisation**. There are none
-yet. The first ones should come from the Phase 6 pilot project.
+yet. The first ones should come from the pilot project (step F of the implementation plan).
 
 The Integra project was deliberately left out of the Source Pack because it is a real client
 example (Source Pack upload checklist). If it is used, create an **anonymised derivative first**

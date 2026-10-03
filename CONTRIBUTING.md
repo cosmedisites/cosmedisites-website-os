@@ -51,18 +51,21 @@ Issue types and when to use them: [docs/governance.md#issues](docs/governance.md
 3. If you changed `ops/stages.yaml`, a stage `prompts.md` or `prompts/prompt-catalog.csv`, run
    `python3 scripts/build.py` and commit the regenerated stage cards. CI fails if you forget.
 4. **Open a pull request** using the template. Link the issue. State the change class (below).
-5. **Review.** CODEOWNERS are requested automatically.
+5. **Review.** While there is one maintainer, the maintainer's own approval is the gate. With two or
+   more, CODEOWNERS are requested automatically.
 6. **Merge** (squash merge) once approved and checks pass.
 7. **CHANGELOG.** Add a line under `## [Unreleased]` for any material change.
 
 ## Change classes
 
-| Class | Examples | Review | Version impact |
-|---|---|---|---|
-| **Editorial** | Typos, broken links, clarifying wording without changing meaning | 1 reviewer | none, or next release |
-| **Workflow / process** | Prompt improvements, DoD wording, handoff changes, new validator checks | 1 reviewer + methodology owner | minor (v1.**1**) |
-| **Tooling / additions** | New template, new prompt, new QA check, automation spec | 1 reviewer | minor (v1.**2**) |
-| **Methodology** | Stage added/removed/reordered, decision hierarchy, evidence states, operating rules, Playbook principles | Methodology owner + one other senior reviewer; must cite cross-project evidence | major (v**2**.0) |
+| Class | Examples | Review: single maintainer (now) | Review: 2+ maintainers | Version impact |
+|---|---|---|---|---|
+| **Editorial** | Typos, broken links, clarifying wording without changing meaning | Self-merge | Self-merge | none, or next release |
+| **Workflow / process** | Prompt improvements, DoD wording, handoff changes, new validator checks | PR, self-approved | 1 reviewer + methodology owner | minor (v1.**1**) |
+| **Tooling / additions** | New template, new prompt, new QA check, automation spec | PR, self-approved | 1 reviewer | minor (v1.**2**) |
+| **Methodology** | Stage added/removed/reordered, decision hierarchy, evidence states, operating rules, Playbook principles | PR, self-approved; cite cross-project evidence | Methodology owner + one senior reviewer; cite cross-project evidence | major (v**2**.0) |
+
+See [governance › Review model](docs/governance.md#review-model-two-phases).
 
 When unsure, treat the change as the higher class.
 
