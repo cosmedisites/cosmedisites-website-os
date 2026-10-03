@@ -1,6 +1,7 @@
 # Role Handoff Prompts
 
 Every handoff must separate LOCKED / REQUIRED / FLEXIBLE / OPEN / DO NOT CHANGE.
+Designer-facing handoffs (H03, and prompt 5C) use LOCKED / FLEXIBLE / REQUIRED / AVOID / OPEN (AI Operating Rules §10).
 
 ## H01 — Project Lead → Strategist
 
@@ -76,14 +77,17 @@ distinctive brand ideas;
 trust/proof that must appear;
 CTA hierarchy;
 photography direction;
-search/architecture constraints that affect design.
+search/architecture constraints that affect design;
+content gaps (from the 7B Content Gap Plan where available).
 
 Separate:
-LOCKED
-REQUIRED
-FLEXIBLE
-OPEN
-DO NOT CHANGE
+LOCKED — approved decisions; changing them needs explicit re-approval
+FLEXIBLE — where design judgement is encouraged
+REQUIRED — what the design must include or solve
+AVOID — patterns, signals and treatments the design must not use: the wrong perception,
+  what the design must not signal (3B), wrong-category cues, fabricated or placeholder
+  proof presented as real
+OPEN — unresolved items, each with owner and next action
 
 Do not prescribe visual details that are genuinely the designer’s job.
 ```

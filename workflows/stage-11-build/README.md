@@ -52,7 +52,7 @@ Route: **11A + 11B + 11C → 11D**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 11 — Build*
+*Source: SOP, Stage 11 — Build*
 
 - [ ] Developer is implementing approved decisions.
 - [ ] Material UX decisions are not being invented during development.

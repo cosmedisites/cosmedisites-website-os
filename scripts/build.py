@@ -118,6 +118,27 @@ def sop_dods(path: Path) -> dict[str, list[str]]:
     return out
 
 
+TRACKER_SPEC = ROOT / "templates" / "operational-tracker.md"
+
+
+def check_tracker(cfg: dict) -> None:
+    """The Tracker mirrors the SOP: Stage Tracker owner/reviewer must equal the registry."""
+    text = TRACKER_SPEC.read_text(encoding="utf-8")
+    m = re.search(r"^## Stage Tracker\n\n(.*?)(?=^## )", text, re.M | re.S)
+    if not m:
+        errors.append("operational-tracker.md: Stage Tracker section not found")
+        return
+    rows = [r.strip("|").split(" | ") for r in m.group(1).splitlines() if re.match(r"^\| \d+ \|", r)]
+    reg = {int(s["id"]): s for s in cfg["stages"]}
+    for r in rows:
+        stage = reg.get(int(r[0].strip()))
+        if not stage:
+            continue
+        for col, key in ((2, "owner"), (3, "reviewer")):
+            if r[col].strip() != stage[key]:
+                errors.append(f"Tracker Stage {r[0].strip()} {key} '{r[col].strip()}' != SOP '{stage[key]}'")
+
+
 def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors: dict,
                sop: dict, playbook: dict) -> str:
     sid = stage["id"]
@@ -184,9 +205,7 @@ def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors:
     if stage.get("tracker_tabs"):
         tabs = ", ".join(stage["tracker_tabs"])
         lines.append(f"- Project Tracker tab(s): {tabs} ([structure](../../templates/operational-tracker.md))")
-    src = stage["dod_source"]
-    src_label = f"SOP v1.0, {sop_text}" if src == "SOP" else src
-    lines += ["", "## Definition of Done", "", f"*Source: {src_label}*", ""]
+    lines += ["", "## Definition of Done", "", f"*Source: SOP, {sop_text}*", ""]
     lines += [f"- [ ] {item}" for item in stage["dod"]]
     if stage.get("gate_checks"):
         lines += ["", "**Also required before moving stage:**", ""]
@@ -260,7 +279,6 @@ def stage_config(cfg: dict, catalog: dict, anchors: dict, sop: dict, playbook: d
             "next_stage": nxt,
             "output": s["output"],
             "definition_of_done": s["dod"],
-            "definition_of_done_source": s["dod_source"],
             "gate_checks": s.get("gate_checks", []),
             "tracker_tabs": s.get("tracker_tabs", []),
             "links": {
@@ -364,14 +382,11 @@ def main() -> int:
             if g not in cfg["qa_gates"]:
                 errors.append(f"stage {s['id']}: unknown QA gate {g}")
         sop_dod = dods.get(str(s.get("sop_stage")))
-        if s.get("dod_source") == "SOP":
-            if sop_dod is None:
-                errors.append(f"stage {s['id']}: dod_source is SOP but the SOP stage has no Definition of Done")
-            elif s.get("dod") != sop_dod:
-                errors.append(f"stage {s['id']}: dod does not match the SOP Definition of Done verbatim")
-        elif sop_dod is not None:
-            errors.append(f"stage {s['id']}: the SOP now has a Definition of Done; set dod_source: SOP and copy it")
-        for field in ("owner", "reviewer", "client_involved", "approval", "approval_type", "dod", "dod_source"):
+        if sop_dod is None:
+            errors.append(f"stage {s['id']}: the SOP stage has no Definition of Done checklist")
+        elif s.get("dod") != sop_dod:
+            errors.append(f"stage {s['id']}: dod does not match the SOP Definition of Done verbatim")
+        for field in ("owner", "reviewer", "client_involved", "approval", "approval_type", "dod"):
             if not s.get(field):
                 errors.append(f"stage {s['id']}: missing {field}")
         for ref in s.get("handoffs", []) + s.get("client_comms", []):
@@ -404,6 +419,7 @@ def main() -> int:
     else:
         README.write_text(readme, encoding="utf-8")
 
+    check_tracker(cfg)
     check_links()
     if stale:
         errors.append("stage cards out of date (run python3 scripts/build.py): " + ", ".join(stale))

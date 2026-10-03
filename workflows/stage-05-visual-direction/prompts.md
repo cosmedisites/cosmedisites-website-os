@@ -79,17 +79,18 @@ First separate the brief into:
 LOCKED
 - business / positioning / architecture decisions that cannot be changed through styling.
 
-REQUIRED
-- content, proof, UX or conversion elements that must appear.
-
 FLEXIBLE
 - areas where design judgement is encouraged.
 
+REQUIRED
+- content, proof, UX or conversion elements that must appear.
+
+AVOID
+- patterns, signals and treatments that would contradict the approved strategy, including
+  wrong-category cues and placeholder proof presented as real.
+
 OPEN
 - unresolved content/assets that require labelled placeholders.
-
-DO NOT DO
-- patterns that would contradict the approved strategy.
 
 Then design the requested page/system.
 

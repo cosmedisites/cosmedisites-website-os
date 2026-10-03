@@ -48,7 +48,7 @@ Route: **8A → 8B → 8C → 8D**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 8 — Client Strategy Review*
+*Source: SOP, Stage 8 — Client Strategy Review*
 
 - [ ] Deck tells a strategic story.
 - [ ] Commercial outcome is explicit.

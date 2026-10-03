@@ -7,7 +7,7 @@
 
 | Status | Owner | Reviewer | Client involved | Deadline |
 |---|---|---|---|---|
-| *set per project* | Strategist | Creative / Project Lead | Strategic approval | *set per project* |
+| *set per project* | Strategist | Creative Lead / Project Lead | Strategic approval | *set per project* |
 
 Status values: Not Started · In Progress · Blocked · Ready for Review · Complete · N/A.
 
@@ -49,7 +49,7 @@ Route: **3A → 3B + 3C → 3D → 3E**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 3 — Positioning*
+*Source: SOP, Stage 3 — Positioning*
 
 - [ ] Desired perception written.
 - [ ] Wrong perception written.

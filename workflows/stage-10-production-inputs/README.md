@@ -48,7 +48,7 @@ Route: **10A → 10B/10C → 10D**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 10 — Production Inputs*
+*Source: SOP, Stage 10 — Production Inputs*
 
 - [ ] Every required input has an owner.
 - [ ] Every input has a status.

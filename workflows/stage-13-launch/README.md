@@ -53,7 +53,7 @@ The AI Workflow Pack has no Stage 13 validator. The 13B runbook's PASS/FAIL fiel
 
 ## Definition of Done
 
-*Source: Template 16 (the SOP has no checklist for Stage 13)*
+*Source: SOP, Stage 13 — Launch*
 
 - [ ] Launch date and comparison period are recorded.
 - [ ] Commercial conversion baseline exists where tracking permits.

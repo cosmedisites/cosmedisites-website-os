@@ -50,7 +50,7 @@ Route: **9A + 9B → 9C + 9D; use 9E for reopened decisions**
 
 ## Definition of Done
 
-*Source: Template 12 (the SOP has no checklist for Stage 9)*
+*Source: SOP, Stage 9 — Approval Gate*
 
 - [ ] Every strategic decision has a status.
 - [ ] Feedback is classified before action.

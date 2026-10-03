@@ -1,6 +1,6 @@
-# Operational Tracker v1.0: structure
+# Operational Tracker: structure
 
-> Markdown specification of `CosmediSites_Redesign_Operational_Tracker_v1.0.xlsx`, generated from the
+> Markdown specification of the current `CosmediSites_Redesign_Operational_Tracker` workbook (v1.1 candidate; v1.0 is the Source Pack original), generated from the
 > workbook so its structure can be reviewed and versioned in Git. The workbook itself is a
 > **GitHub Release asset**, not committed. To change the tracker: change the workbook, run
 > `python3 scripts/tracker_spec.py <workbook.xlsx>` to regenerate
@@ -52,17 +52,17 @@ If the Option B fallback is used, or for a small project run without Chirply, th
 | 0 | Project Strategy Brief | Project Lead / Strategist | Project Lead | Yes | Commercial objective, growth model, priorities, audience, constraints captured. | Not Started | Client factual confirmation | 01 Project Strategy Brief |  |
 | 1 | Evidence Pack | Strategist | Project Lead | No | Site/mobile/competitors reviewed; KEEP/CHANGE/MISSING/UNCERTAIN complete; diagnosis written. | Not Started | No | 02 Evidence Pack |  |
 | 2 | Strategic Diagnosis | Strategist | Project Lead | No | Commercial, trust, UX and scalability issues diagnosed without visual prescription. | Not Started | No | 03 Strategic Diagnosis |  |
-| 3 | Positioning | Strategist | Creative / Project Lead | Yes | Three-second perception, wrong perception, thesis, priority services and brand architecture agreed. | Not Started | Yes | 04 Positioning Thesis |  |
-| 4 | IA + SEO | SEO Lead / Strategist | Project Lead | Yes if structure changes | URLs, page purposes, hierarchy, internal linking and redirect requirements defined. | Not Started | Conditional | 06 Sitemap + SEO Architecture |  |
+| 3 | Positioning | Strategist | Creative Lead / Project Lead | Yes | Three-second perception, wrong perception, thesis, priority services and brand architecture agreed. | Not Started | Yes | 04 Positioning Thesis |  |
+| 4 | IA + SEO | Strategist + SEO Lead | Project Lead | Yes if structure changes | URLs, page purposes, hierarchy, internal linking and redirect requirements defined. | Not Started | Conditional | 06 Sitemap + SEO Architecture |  |
 | 5 | Visual Direction | Designer | Strategist / Creative Lead | Yes | Visual system tied to positioning; desktop/mobile direction clear. | Not Started | Yes | 07 Visual Direction |  |
-| 6 | Page + Component System | Designer / UX | Strategist | No | Core page templates and reusable components defined; responsive behaviour documented. | Not Started | Internal | 08 Page + Component System |  |
-| 7 | Proof + Content + Photography | Content Lead | Strategist / Compliance | Client supplies inputs | Proof inventory, input tracker and shoot brief complete; gaps owned. | Not Started | No | 09 Proof + 10 Photography |  |
+| 6 | Page + Component System | Designer / UX Lead | Strategist | No | Core page templates and reusable components defined; responsive behaviour documented. | Not Started | Internal | 08 Page + Component System |  |
+| 7 | Proof + Content + Photography | Content Lead | Strategist / Compliance Reviewer | Client supplies inputs | Proof inventory, input tracker and shoot brief complete; gaps owned. | Not Started | No | 09 Proof + 10 Photography |  |
 | 8 | Client Strategy Review | Project Lead | Strategist / Designer | Yes | Client deck presents one coherent direction and explicit decisions. | Not Started | Review meeting | 11 Client Strategy Deck |  |
 | 9 | Approval Gate | Project Lead | — | Yes | Strategic decisions explicitly approved / changes logged / locks recorded. | Not Started | Yes | 12 Approval Record |  |
-| 10 | Production Inputs | Content / Project Lead | Project Lead | Yes | Every required input has owner, status and deadline. | Not Started | No | 13 Content / Input Tracker |  |
+| 10 | Production Inputs | Project Lead / Content Lead | Project Lead | Yes | Every required input has owner, status and deadline. | Not Started | No | 13 Content / Input Tracker |  |
 | 11 | Build | Developer | Designer | No | Approved design, content, SEO and tracking requirements implemented. | Not Started | No | 14 Build Handoff |  |
-| 12 | Compliance + Strategy + Technical QA | Named QA owners | Independent reviewers | No | All three QA gates signed off and blocking issues resolved. | Not Started | Internal sign-off | 15 Compliance + Launch QA |  |
-| 13 | Launch | Project Lead | Developer / SEO | Client informed | Launch completed; tracking verified; baseline captured. | Not Started | Launch sign-off | 16 Measurement Baseline |  |
+| 12 | Compliance + Strategy + Technical QA | Named QA owners (see gates) | Independent reviewers | No | All three QA gates signed off and blocking issues resolved. | Not Started | Internal sign-off | 15 Compliance + Launch QA |  |
+| 13 | Launch | Project Lead (technical owner: Developer) | Developer / SEO | Client informed | Launch completed; tracking verified; baseline captured. | Not Started | Launch sign-off | 16 Measurement Baseline |  |
 | 14 | 30 / 60 / 90 Measurement | Strategist / Project Lead | Project Lead | Review as needed | Post-launch reviews completed; KEEP/IMPROVE/TEST/SCALE decisions recorded. | Not Started | No | 17 30-60-90 Review |  |
 
 Data validation:

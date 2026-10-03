@@ -56,7 +56,7 @@ Route: **12A + 12B + 12C → 12D → 12E**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 12 — Compliance + Strategy + Technical QA*
+*Source: SOP, Stage 12 — Compliance + Strategy + Technical QA*
 
 - [ ] Compliance gate signed off.
 - [ ] Strategy/UX gate signed off.

@@ -4,6 +4,23 @@ All material changes to the CosmediSites Website OS. Versioning: [docs/governanc
 
 ## [Unreleased]
 
+### v1.1 candidates (decided 2026-10-03; ship with pilot fixes after the first full project)
+
+When released: bump `VERSION` to 1.1, retitle the SOP "v1.1", publish the Tracker v1.1 workbook.
+
+- **D1. Official DoD for Stages 9, 13 and 14.** The SOP gains Definition of Done checklists for the
+  Approval Gate (from Template 12), Launch (Template 16) and 30/60/90 Review (Template 17). The
+  registry no longer has a fallback: `build.py` requires every stage's DoD to match the SOP verbatim.
+- **D2. Creative Lead role** added to the SOP role table: "accountable for visual/brand quality; may
+  be fulfilled by the senior designer or Project Lead on smaller projects". The Stage 3 reviewer is
+  normalised from "Creative / Project Lead" to "Creative Lead / Project Lead".
+- **D3. The Tracker mirrors the SOP.** Stage Tracker owner/reviewer wording aligned to the SOP for
+  Stages 3, 4, 6, 7, 10, 12 and 13 (workbook v1.1 candidate; spec regenerated). `build.py` now fails
+  if the Tracker spec's owners or reviewers diverge from the SOP.
+- **D4. AVOID bucket.** Designer-facing handoffs (H03, prompt 5C) use LOCKED / FLEXIBLE / REQUIRED /
+  AVOID / OPEN. Updated: SOP Stage 5 (*Designer handoff format*), AI Operating Rules §10, H03 (also
+  adds content gaps), 5C (DO NOT DO → AVOID), Quickstart, handoffs doc.
+
 ## [1.0] — proposed, not yet tagged
 
 Initial production repository, built from **CosmediSites Website OS Source Pack v1.0**.

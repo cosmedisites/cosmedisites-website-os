@@ -11,9 +11,7 @@
 #   gate                               -> AI Workflow Pack v1.0, Workflow Index "Gate" column
 #   objective / route / prompts        -> AI Workflow Pack v1.0
 #   output                             -> SOP v1.0
-#   dod                                -> SOP v1.0 Definition of Done, verbatim. Where the SOP has no
-#                                         checklist (Stages 9, 13, 14), the stage's template DoD, verbatim.
-#                                         `dod_source` records which.
+#   dod                                -> SOP Definition of Done, verbatim (CI-enforced by build.py).
 #   gate_checks                        -> additional gate conditions stated elsewhere in the source
 #                                         material; each one cites its source.
 #   playbook                           -> related Playbook sections (editorial cross-reference only)
@@ -47,7 +45,6 @@ stages:
     playbook: [1, 2, 15]
     handoffs: [H01]
     client_comms: [C01, C02]
-    dod_source: SOP
     dod:
       - Business objective is explicit.
       - Growth model and priority services are understood.
@@ -80,7 +77,6 @@ stages:
     output: Evidence Pack
     templates: [evidence-pack]
     playbook: [3]
-    dod_source: SOP
     dod:
       - Website reviewed.
       - Mobile reviewed.
@@ -114,7 +110,6 @@ stages:
     output: Strategic Diagnosis
     templates: [strategic-diagnosis]
     playbook: [2]
-    dod_source: SOP
     dod:
       - Diagnosis can be understood without discussing colours/fonts.
       - Commercial, trust, UX and scalability issues are separated.
@@ -129,7 +124,7 @@ stages:
     sop_stage: 3
     objective: Define the market perception, brand architecture and strategic ideas the new website must make obvious.
     owner: Strategist
-    reviewer: Creative / Project Lead
+    reviewer: Creative Lead / Project Lead
     client_involved: Strategic approval
     approval: "Yes"
     approval_type: client
@@ -146,7 +141,6 @@ stages:
     templates: [positioning-thesis]
     playbook: [4, 11]
     handoffs: [H02, H03]
-    dod_source: SOP
     dod:
       - Desired perception written.
       - Wrong perception written.
@@ -182,7 +176,6 @@ stages:
     templates: [sitemap-seo-architecture]
     playbook: [21, 8]
     handoffs: [H04]
-    dod_source: SOP
     dod:
       - Every primary page has a purpose.
       - Every primary page has a user/search intent.
@@ -214,7 +207,6 @@ stages:
     output: Visual Direction / Style System
     templates: [visual-direction, current-proposed-summary]
     playbook: [5, 7]
-    dod_source: SOP
     dod:
       - Every major visual choice has a strategic rationale.
       - System supports desktop and mobile.
@@ -246,7 +238,6 @@ stages:
     output: Page System + Component Library
     templates: [page-component-system]
     playbook: [10, 9, 14]
-    dod_source: SOP
     dod:
       - Required page types have a template.
       - Core components are reusable.
@@ -279,7 +270,6 @@ stages:
     playbook: [12, 13]
     handoffs: [H06]
     client_comms: [C05]
-    dod_source: SOP
     dod:
       - Proof gaps are known.
       - Each missing input has an owner.
@@ -310,7 +300,6 @@ stages:
     templates: [client-strategy-deck]
     playbook: [16, 23]
     client_comms: [C03]
-    dod_source: SOP
     dod:
       - Deck tells a strategic story.
       - Commercial outcome is explicit.
@@ -345,7 +334,6 @@ stages:
     playbook: [17, 18, 19]
     handoffs: [H08]
     client_comms: [C04, C06]
-    dod_source: Template 12 (the SOP has no checklist for Stage 9)
     dod:
       - Every strategic decision has a status.
       - Feedback is classified before action.
@@ -376,7 +364,6 @@ stages:
     output: Content & Input Tracker
     templates: [content-input-tracker]
     tracker_tabs: [Content Inputs]
-    dod_source: SOP
     dod:
       - Every required input has an owner.
       - Every input has a status.
@@ -406,7 +393,6 @@ stages:
     templates: [build-handoff]
     playbook: [22]
     handoffs: [H05]
-    dod_source: SOP
     dod:
       - Developer is implementing approved decisions.
       - Material UX decisions are not being invented during development.
@@ -441,7 +427,6 @@ stages:
     playbook: [20, 23]
     handoffs: [H07]
     client_comms: [C07]
-    dod_source: SOP
     dod:
       - Compliance gate signed off.
       - Strategy/UX gate signed off.
@@ -474,7 +459,6 @@ stages:
     tracker_tabs: [Measurement]
     playbook: [15]
     client_comms: [C08]
-    dod_source: Template 16 (the SOP has no checklist for Stage 13)
     dod:
       - Launch date and comparison period are recorded.
       - Commercial conversion baseline exists where tracking permits.
@@ -508,7 +492,6 @@ stages:
     tracker_tabs: [Measurement]
     playbook: [24, 15]
     client_comms: [C09]
-    dod_source: Template 17 (the SOP has no checklist for Stage 14)
     dod:
       - 30/60/90 reviews use the launch baseline.
       - Actions are prioritised by commercial impact.
@@ -555,6 +538,7 @@ roles:
   - Project Lead
   - Strategist
   - SEO Lead
+  - Creative Lead
   - Designer
   - Developer
   - Content Lead

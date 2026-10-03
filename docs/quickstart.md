@@ -129,6 +129,9 @@ Every handoff contains:
 | OPEN | Known unknowns with an owner or next action. |
 | DO NOT CHANGE | Constraints that require explicit re-approval before changing. |
 
+Designer-facing handoffs (H03 and prompt 5C) use **LOCKED / FLEXIBLE / REQUIRED / AVOID / OPEN**.
+AVOID lists the patterns, signals and treatments the design must not use. *(Added in v1.1.)*
+
 Prompts: [role-handoff-prompts.md](../prompts/team-handoffs/role-handoff-prompts.md)
 
 ## 8. Quality and control rules

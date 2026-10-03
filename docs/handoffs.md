@@ -30,19 +30,23 @@ The pack's standard buckets (AI Operating Rules §10) are used in every handoff:
 | OPEN | Known unknowns, each with owner and next action |
 | DO NOT CHANGE | Constraints that need explicit re-approval before changing |
 
-> **Note on "AVOID".** The setup brief lists LOCKED / FLEXIBLE / REQUIRED / **AVOID** / OPEN for
-> the strategist → designer handoff. The source methodology (Playbook, SOP, Templates, AI pack)
-> doesn't define an AVOID bucket. It covers "avoid" through **DO NOT CHANGE** (H03), the
-> **DO NOT DO** bucket in prompt 5C, "What the design must not signal" (3B) and the *Avoid* rows in
-> Template 07. The methodology hasn't been changed silently. If the team wants a separate AVOID
-> bucket, raise it as an IMPROVEMENT issue (open question Q7 in the
-> [implementation plan](implementation-plan.md)).
+**Designer-facing handoffs** (H03 Strategist → Designer and prompt 5C) use a variant (decision D4, v1.1):
+
+| Bucket | Meaning |
+|---|---|
+| LOCKED | Approved decisions; changing them needs explicit re-approval (covers DO NOT CHANGE) |
+| FLEXIBLE | Where design judgement is encouraged |
+| REQUIRED | What the design must include or solve |
+| AVOID | Patterns, signals and treatments the design must not use: the wrong perception, what the design must not signal (3B), wrong-category cues, fabricated or placeholder proof presented as real |
+| OPEN | Unresolved items, each with owner and next action |
+
+Source: SOP Stage 5 *Designer handoff format*; AI Operating Rules §10.
 
 ## Strategist → Designer: required contents
 
 | Must communicate | Source in the methodology |
 |---|---|
-| LOCKED / REQUIRED / FLEXIBLE / OPEN / DO NOT CHANGE (+ DO NOT DO) | H03, 5C |
+| LOCKED / FLEXIBLE / REQUIRED / AVOID / OPEN | H03, 5C; SOP Stage 5 |
 | Positioning thesis | 3B / Template 04 |
 | Desired (three-second) perception | 3B |
 | Wrong perception | 3B |

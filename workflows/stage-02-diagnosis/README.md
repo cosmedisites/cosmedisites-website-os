@@ -42,7 +42,7 @@ Route: **2A → 2B → 2C**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 2 — Strategic Diagnosis*
+*Source: SOP, Stage 2 — Strategic Diagnosis*
 
 - [ ] Diagnosis can be understood without discussing colours/fonts.
 - [ ] Commercial, trust, UX and scalability issues are separated.

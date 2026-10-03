@@ -113,4 +113,12 @@ Every role handoff separates:
 - OPEN
 - DO NOT CHANGE
 
+**Designer-facing handoffs** (H03 Strategist → Designer and 5C Designer Execution Prompt) separate:
+- LOCKED — approved decisions; changing them needs explicit re-approval (this covers DO NOT CHANGE)
+- FLEXIBLE
+- REQUIRED
+- AVOID — patterns, signals and treatments the design must not use (wrong-category cues,
+  fabricated or placeholder proof presented as real, styling that contradicts the positioning)
+- OPEN
+
 A handoff should let the next person work without re-reading the whole project.

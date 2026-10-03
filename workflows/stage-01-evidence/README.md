@@ -46,7 +46,7 @@ Route: **1A + 1B → 1C → 1D**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 1 — Evidence Pack*
+*Source: SOP, Stage 1 — Evidence Pack*
 
 - [ ] Website reviewed.
 - [ ] Mobile reviewed.

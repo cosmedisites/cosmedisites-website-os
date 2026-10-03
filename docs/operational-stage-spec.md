@@ -32,7 +32,7 @@ everything they need, with links.
 | Company / contact | built-in link | Client and main client contact (approver) |
 | Owner | built-in user | **Project Lead** |
 | Domain | url | |
-| Strategist · SEO Lead · Designer · Developer · Content Lead · Compliance Reviewer · Independent QA Reviewer | select (team list), one field each | SOP roles. Chirply has no user-type custom field. One person may hold several roles, but every stage still has one named owner (SOP) |
+| Strategist · SEO Lead · Creative Lead · Designer · Developer · Content Lead · Compliance Reviewer · Independent QA Reviewer | select (team list), one field each | SOP roles (Creative Lead may be the senior designer or Project Lead on smaller projects). Chirply has no user-type custom field. One person may hold several roles, but every stage still has one named owner (SOP) |
 | Target launch | date | |
 | Commercial objective | textarea | One sentence, from the approved Strategy Brief |
 | Priority services | multiselect or textarea | |
@@ -110,7 +110,7 @@ Example for Stage 03:
 
 ```
 STAGE 03 — POSITIONING
-Status: In Progress     Owner: Sarah (Strategist)     Reviewer: Creative / Project Lead     Due: 14 Oct
+Status: In Progress     Owner: Sarah (Strategist)     Reviewer: Creative Lead / Project Lead     Due: 14 Oct
 Client involved: Strategic approval
 
 OBJECTIVE

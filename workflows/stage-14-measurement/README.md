@@ -54,7 +54,7 @@ The AI Workflow Pack has no Stage 14 validator. The 14D decisions are reviewed b
 
 ## Definition of Done
 
-*Source: Template 17 (the SOP has no checklist for Stage 14)*
+*Source: SOP, Stage 14 — 30 / 60 / 90 Day Review*
 
 - [ ] 30/60/90 reviews use the launch baseline.
 - [ ] Actions are prioritised by commercial impact.

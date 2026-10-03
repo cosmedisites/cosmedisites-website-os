@@ -46,7 +46,7 @@ Route: **0A → 0B → 0C; use 0D if blocked**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 0 — Project Strategy Brief*
+*Source: SOP, Stage 0 — Project Strategy Brief*
 
 - [ ] Business objective is explicit.
 - [ ] Growth model and priority services are understood.

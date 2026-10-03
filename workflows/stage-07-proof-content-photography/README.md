@@ -56,7 +56,7 @@ Route: **7A + 7B + 7C → 7D + 7E**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 7 — Proof + Content + Photography*
+*Source: SOP, Stage 7 — Proof + Content + Photography*
 
 - [ ] Proof gaps are known.
 - [ ] Each missing input has an owner.

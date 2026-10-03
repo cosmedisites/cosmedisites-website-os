@@ -50,7 +50,7 @@ Route: **5A → 5B + 5C → 5D**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 5 — Visual Direction*
+*Source: SOP, Stage 5 — Visual Direction*
 
 - [ ] Every major visual choice has a strategic rationale.
 - [ ] System supports desktop and mobile.

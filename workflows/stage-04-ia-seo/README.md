@@ -52,7 +52,7 @@ Route: **4A → 4B + 4C → 4D → 4E**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 4 — Information Architecture + SEO*
+*Source: SOP, Stage 4 — Information Architecture + SEO*
 
 - [ ] Every primary page has a purpose.
 - [ ] Every primary page has a user/search intent.

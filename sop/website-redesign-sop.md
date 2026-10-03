@@ -25,6 +25,7 @@ Do not begin visual design until the business direction, positioning and site ar
 | Project Lead | Delivery, timeline, client communication and gates |
 | Strategist | Commercial brief, evidence, positioning, UX and architecture |
 | SEO Lead | Search architecture, migrations, internal linking and search preservation |
+| Creative Lead | Accountable for visual/brand quality; may be fulfilled by the senior designer or Project Lead on smaller projects |
 | Designer | Visual system, UX execution, components and responsive design |
 | Developer | Build and technical implementation |
 | Content Lead | Copy, content production and input management |
@@ -167,7 +168,7 @@ Do not prescribe visual styling yet.
 # Stage 3 — Positioning
 
 **Owner:** Strategist  
-**Reviewer:** Creative / Project Lead  
+**Reviewer:** Creative Lead / Project Lead  
 **Client involved:** Strategic approval  
 **Output:** Positioning Thesis
 
@@ -264,6 +265,15 @@ No visual design begins until this is internally approved.
 - [ ] Photography direction is defined.
 - [ ] CTA hierarchy is unambiguous.
 - [ ] Client-facing explanation avoids internal design jargon.
+
+## Designer handoff format
+
+The strategist → designer handoff separates:
+
+**LOCKED / FLEXIBLE / REQUIRED / AVOID / OPEN**
+
+AVOID lists the patterns, signals and treatments the design must not use: wrong-category cues,
+fabricated or placeholder proof presented as real, and styling that contradicts the positioning.
 
 ---
 
@@ -405,6 +415,13 @@ Record explicit decisions for:
 - Photography direction
 
 Nothing enters full build until required strategic decisions are approved.
+
+## Definition of Done
+
+- [ ] Every strategic decision has a status.
+- [ ] Feedback is classified before action.
+- [ ] Locked decisions are identified.
+- [ ] Client has a clear record of what happens next.
 
 ---
 
@@ -594,6 +611,13 @@ Capture baseline data before/at launch where available:
 
 Launch only after QA sign-off.
 
+## Definition of Done
+
+- [ ] Launch date and comparison period are recorded.
+- [ ] Commercial conversion baseline exists where tracking permits.
+- [ ] Priority search and landing-page baseline exists.
+- [ ] Known tracking limitations are documented.
+
 ---
 
 # Stage 14 — 30 / 60 / 90 Day Review
@@ -640,6 +664,13 @@ Decide:
 **KEEP → IMPROVE → TEST → SCALE**
 
 Feed reusable learning back into the operating system.
+
+## Definition of Done
+
+- [ ] 30/60/90 reviews use the launch baseline.
+- [ ] Actions are prioritised by commercial impact.
+- [ ] At least one KEEP / IMPROVE / TEST / SCALE decision is recorded.
+- [ ] Reusable learning is fed back into the playbook.
 
 ---
 

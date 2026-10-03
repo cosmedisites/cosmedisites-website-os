@@ -52,7 +52,7 @@ Route: **6A + 6B + 6C + 6D → 6E**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 6 — Page + Component System*
+*Source: SOP, Stage 6 — Page + Component System*
 
 - [ ] Required page types have a template.
 - [ ] Core components are reusable.
