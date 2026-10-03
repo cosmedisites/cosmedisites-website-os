@@ -103,6 +103,21 @@ def doc_anchors(path: Path, pattern: str) -> dict[str, tuple[str, str]]:
     return out
 
 
+def sop_dods(path: Path) -> dict[str, list[str]]:
+    """Return {stage number: [DoD checklist items]} for every SOP stage section that has one."""
+    text = path.read_text(encoding="utf-8")
+    sections = re.split(r"^# ", text, flags=re.M)
+    out: dict[str, list[str]] = {}
+    for sec in sections:
+        m = re.match(r"Stage (\d+) — ", sec)
+        if not m:
+            continue
+        dod = re.search(r"^## Definition of Done\s*\n(.*?)(?=^#|\Z)", sec, re.M | re.S)
+        if dod:
+            out[m.group(1)] = re.findall(r"^- \[ \] (.+)$", dod.group(1), re.M)
+    return out
+
+
 def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors: dict,
                sop: dict, playbook: dict) -> str:
     sid = stage["id"]
@@ -321,6 +336,7 @@ def main() -> int:
     catalog = load_catalog()
     anchors = index_prompt_files(catalog)
     sop = doc_anchors(SOP, r"^# (?P<text>Stage (?P<key>\d+) — .+)$")
+    dods = sop_dods(SOP)
     playbook = doc_anchors(PLAYBOOK, r"^# (?P<text>(?P<key>\d+)\. .+)$")
 
     ids = [s["id"] for s in cfg["stages"]]
@@ -347,6 +363,14 @@ def main() -> int:
         for g in s.get("qa_gates", []):
             if g not in cfg["qa_gates"]:
                 errors.append(f"stage {s['id']}: unknown QA gate {g}")
+        sop_dod = dods.get(str(s.get("sop_stage")))
+        if s.get("dod_source") == "SOP":
+            if sop_dod is None:
+                errors.append(f"stage {s['id']}: dod_source is SOP but the SOP stage has no Definition of Done")
+            elif s.get("dod") != sop_dod:
+                errors.append(f"stage {s['id']}: dod does not match the SOP Definition of Done verbatim")
+        elif sop_dod is not None:
+            errors.append(f"stage {s['id']}: the SOP now has a Definition of Done; set dod_source: SOP and copy it")
         for field in ("owner", "reviewer", "client_involved", "approval", "approval_type", "dod", "dod_source"):
             if not s.get(field):
                 errors.append(f"stage {s['id']}: missing {field}")
