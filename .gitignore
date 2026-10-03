@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------
+# CosmediSites Website OS — .gitignore
+# This repository holds company IP only. Client data never belongs here.
+# See SECURITY.md.
+# ------------------------------------------------------------------
+
+# Build output (attached to GitHub Releases, never committed)
+dist/
+
+# Packaged binaries: attach to GitHub Releases instead of committing
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.xlsm
+*.pptx
+*.key
+*.pdf
+*.zip
+
+# Images: patient or client imagery must never enter this repo.
+# Diagrams for the OS itself may live in docs/assets/ only.
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.heic
+*.tif
+*.tiff
+*.mp4
+*.mov
+!docs/assets/**
+
+# Credentials and secrets
+.env
+.env.*
+*.pem
+*.p12
+*.pfx
+*credentials*.json
+*service-account*.json
+*client_secret*.json
+*token*.json
+
+# Exports that commonly contain client or patient data
+*export*.csv
+*analytics*.csv
+*gsc*.csv
+*search-console*.csv
+*-clients.csv
+client-data/
+clients/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+__pycache__/

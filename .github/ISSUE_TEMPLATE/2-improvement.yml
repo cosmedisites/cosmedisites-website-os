@@ -1,0 +1,40 @@
+name: "IMPROVEMENT — repeated friction"
+description: A repeated project friction could be solved by improving the system.
+title: "[IMPROVEMENT] "
+labels: ["improvement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **No client or patient data.** Remember: repeated cross-project friction carries more weight than a one-off preference.
+        If you have only seen this on one project, consider a TEST issue instead.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this solves
+      description: Describe the friction, not the solution.
+    validations: {required: true}
+  - type: input
+    id: frequency
+    attributes:
+      label: How many projects has this affected?
+      placeholder: "e.g. 3 of the last 4 redesigns"
+    validations: {required: true}
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: What would change?
+      options:
+        - label: Prompt(s)
+        - label: Template(s)
+        - label: Definition of Done
+        - label: Stage order / gates (methodology-class change)
+        - label: Operational tool (Chirply) setup / automation
+  - type: textarea
+    id: risk
+    attributes:
+      label: What could this break or make more complex?

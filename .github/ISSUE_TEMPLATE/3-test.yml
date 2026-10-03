@@ -1,0 +1,30 @@
+name: "TEST — trial before going global"
+description: A proposed workflow or prompt change should be tested on live projects before becoming global.
+title: "[TEST] "
+labels: ["test", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "**No client or patient data.** Name projects by an internal code only (e.g. P-014)."
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      placeholder: "If we change X, then Y will improve, measured by Z."
+    validations: {required: true}
+  - type: textarea
+    id: change
+    attributes:
+      label: Exact change to trial
+      description: Link a branch or paste the trial prompt/template text.
+    validations: {required: true}
+  - type: input
+    id: projects
+    attributes:
+      label: Trial projects (internal codes) and duration
+    validations: {required: true}
+  - type: textarea
+    id: success
+    attributes:
+      label: Success metric and kill condition
+    validations: {required: true}

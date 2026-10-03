@@ -1,0 +1,16 @@
+name: "DOCUMENTATION — unclear or missing"
+description: Something is unclear, missing or out of date.
+title: "[DOCS] "
+labels: ["documentation"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where?
+      description: File path, stage card or prompt ID
+    validations: {required: true}
+  - type: textarea
+    id: what
+    attributes:
+      label: What is unclear or missing?
+    validations: {required: true}

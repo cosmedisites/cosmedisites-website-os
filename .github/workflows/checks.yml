@@ -1,0 +1,23 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Safety scan (secrets, personal data, binaries)
+        run: python3 scripts/safety_scan.py
+      - name: Consistency (catalogue ↔ prompts ↔ stages, generated stage cards, links)
+        run: python3 scripts/build.py --check

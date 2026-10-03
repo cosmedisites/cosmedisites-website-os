@@ -1,0 +1,470 @@
+# CosmediSites Website OS — stage registry
+#
+# This file is the single source of stage metadata. `scripts/build.py` uses it to:
+#   - generate every workflows/stage-*/README.md (the human-facing "stage card");
+#   - generate dist/stage-config.json (the payload the operational tool —
+#     Chirply — uses to build stage records, checklists and knowledge links).
+#
+# Provenance of each field (important — see CONTRIBUTING.md):
+#   objective, route, output, gate, prompts  -> AI Workflow Pack v1.0 (verbatim or near-verbatim)
+#   dod                                      -> INTERIM: compiled from the stage's validator prompt(s)
+#                                               in the AI Workflow Pack. Website Redesign SOP v1.0 is
+#                                               authoritative and must be reconciled on import.
+#   owner_role / reviewer_role               -> INFERRED from prompt wording + handoff prompts.
+#                                               Confirm against SOP v1.0.
+#   approval                                 -> derived from the pack's "Gate" column.
+#
+# Edit this file (via pull request), then run: python3 scripts/build.py
+
+repo_url: https://github.com/cosmedisites/cosmedisites-website-os
+default_branch: main
+
+stages:
+  - id: "00"
+    name: Commercial Brief
+    slug: stage-00-commercial-brief
+    objective: Convert discovery information into a commercial brief that governs every downstream decision.
+    owner_role: Strategist
+    reviewer_role: Project Lead
+    route: "0A → 0B → 0C; use 0D if blocked"
+    prompts:
+      - {id: 0A, kind: run}
+      - {id: 0B, kind: run}
+      - {id: 0C, kind: validate}
+      - {id: 0D, kind: client, note: only if OPEN items block strategy}
+    output: Project Strategy Brief
+    templates: [project-strategy-brief]
+    gate: Client factual confirmation
+    approval: client
+    handoffs: [H01]
+    client_comms: [C01, C02]
+    dod:
+      - Primary commercial objective stated
+      - Measurable success metric recorded (or marked OPEN)
+      - Priority revenue services identified
+      - Services / categories to grow identified
+      - Target audience and main anxieties defined
+      - Current and planned locations recorded
+      - Current and planned team recorded
+      - Current lead sources and booking method recorded
+      - Website's role in acquisition stated
+      - Known SEO priorities recorded
+      - Compliance / operational constraints recorded
+      - Actual business reason for the redesign stated
+      - "“This redesign succeeds if…” and “fails even if it looks good if…” completed"
+      - No inference presented as fact (0C)
+      - Client has confirmed the facts
+      - Master Project Context created
+
+  - id: "01"
+    name: Evidence
+    slug: stage-01-evidence
+    objective: Build a factual picture of the current site, competitors and available performance evidence before prescribing solutions.
+    owner_role: Strategist
+    reviewer_role: Project Lead
+    route: "1A + 1B → 1C → 1D"
+    prompts:
+      - {id: 1A, kind: run}
+      - {id: 1B, kind: run}
+      - {id: 1C, kind: run}
+      - {id: 1D, kind: validate}
+    output: Evidence Pack
+    templates: [evidence-pack]
+    gate: Internal
+    approval: internal
+    dod:
+      - Current desktop site reviewed
+      - Mobile reviewed
+      - Key page types reviewed
+      - Competitor set reviewed
+      - KEEP / CHANGE / MISSING / UNCERTAIN all used appropriately
+      - Main revenue services and growth priorities considered
+      - Proof inventory started
+      - Booking journey considered
+      - Brand architecture / future growth considered
+      - Evidence separated from inference
+      - Summary diagnosis supported by the evidence
+      - 1D validator returns PASS
+
+  - id: "02"
+    name: Strategic Diagnosis
+    slug: stage-02-diagnosis
+    objective: Turn evidence into a prioritised explanation of what is suppressing the business outcome, without jumping prematurely to visual solutions.
+    owner_role: Strategist
+    reviewer_role: Project Lead
+    route: "2A → 2B → 2C"
+    prompts:
+      - {id: 2A, kind: run}
+      - {id: 2B, kind: run}
+      - {id: 2C, kind: validate}
+    output: Strategic Diagnosis
+    templates: [strategic-diagnosis]
+    gate: Internal
+    approval: internal
+    dod:
+      - Current and desired perception stated
+      - Every weakness has evidence, consequence, priority and confidence
+      - Issues prioritised P0–P3 (2B)
+      - Diagnosis stated in one sentence
+      - Diagnosis could not be pasted unchanged onto another clinic
+      - No visual prescriptions (colour, type, UI styling)
+      - Red team (2C) returns PASS
+
+  - id: "03"
+    name: Positioning
+    slug: stage-03-positioning
+    objective: Define the market perception, brand architecture and strategic ideas the new website must make obvious.
+    owner_role: Strategist
+    reviewer_role: Project Lead
+    route: "3A → 3B + 3C → 3D → 3E"
+    prompts:
+      - {id: 3A, kind: run}
+      - {id: 3B, kind: run}
+      - {id: 3C, kind: run}
+      - {id: 3D, kind: validate}
+      - {id: 3E, kind: client}
+    output: Positioning Thesis + Brand Architecture
+    templates: [positioning-thesis]
+    gate: Client strategic approval
+    approval: client
+    locks: Positioning
+    handoffs: [H02, H03]
+    dod:
+      - Three-second perception
+      - Wrong perception
+      - Positioning thesis (25 words or fewer)
+      - Priority services
+      - Brand architecture
+      - 3D validator returns PASS on every test
+      - Client strategic approval recorded
+      - Positioning added to LOCKED DECISIONS in the Master Project Context
+
+  - id: "04"
+    name: IA + SEO
+    slug: stage-04-ia-seo
+    objective: Protect valuable search equity while structuring the site around patient intent, commercial priorities and future growth.
+    owner_role: SEO Lead
+    reviewer_role: Strategist
+    route: "4A → 4B + 4C → 4D → 4E"
+    prompts:
+      - {id: 4A, kind: run}
+      - {id: 4B, kind: run}
+      - {id: 4C, kind: run}
+      - {id: 4D, kind: run}
+      - {id: 4E, kind: validate}
+    output: Sitemap / SEO Architecture
+    templates: [sitemap-seo-architecture]
+    gate: Conditional client approval
+    approval: conditional
+    handoffs: [H04]
+    dod:
+      - Every primary page has a distinct purpose
+      - Priority commercial services have landing pages
+      - Concern pages are useful, not thin duplicates
+      - Practitioner pages fit the brand architecture
+      - Locations structured consistently
+      - Valuable existing URLs protected
+      - Removed URLs have sensible decisions
+      - Internal links support patient journeys
+      - Navigation understandable without industry knowledge
+      - Future practitioners / treatments / locations can be added
+      - Cannibalisation risks identified
+      - Redirects known before build
+      - Launch-critical SEO risks listed
+
+  - id: "05"
+    name: Visual Direction
+    slug: stage-05-visual-direction
+    objective: Translate approved positioning into a coherent, defensible visual system without allowing aesthetic preference to rewrite strategy.
+    owner_role: Designer
+    reviewer_role: Strategist
+    route: "5A → 5B + 5C → 5D"
+    prompts:
+      - {id: 5A, kind: run}
+      - {id: 5B, kind: run}
+      - {id: 5C, kind: run}
+      - {id: 5D, kind: validate}
+    output: Visual Direction
+    templates: [visual-direction, current-proposed-summary]
+    gate: Client approval
+    approval: client
+    dod:
+      - Every visual principle traces back to positioning or user behaviour
+      - Current → Proposed comparison complete
+      - Desired category perception achieved; wrong category avoided
+      - No Level 5 visual choice undermines a Level 1–4 decision
+      - No placeholder mistaken for proof
+      - 5D validator returns PASS
+      - Client approval recorded
+
+  - id: "06"
+    name: Page + Component System
+    slug: stage-06-page-system
+    objective: Create reusable page and component patterns that scale across treatments, concerns, practitioners, locations and future growth.
+    owner_role: Designer
+    reviewer_role: Strategist
+    route: "6A + 6B + 6C + 6D → 6E"
+    prompts:
+      - {id: 6A, kind: run}
+      - {id: 6B, kind: run}
+      - {id: 6C, kind: run}
+      - {id: 6D, kind: run}
+      - {id: 6E, kind: validate}
+    output: Page / Component System
+    templates: [page-component-system]
+    gate: Internal / included in review
+    approval: internal
+    dod:
+      - Homepage architecture defined section by section
+      - Each page template has a distinct job
+      - Component library specified, including empty / missing-data behaviour
+      - Mobile behaviour defined deliberately (not just "stack vertically")
+      - 6E scalability scenarios pass with no routine growth needing an architecture change
+
+  - id: "07"
+    name: Proof + Content + Photography
+    slug: stage-07-proof-content-photography
+    objective: Build the evidence, content and image inputs needed to make the strategy believable without fabricating authority.
+    owner_role: Content Lead
+    reviewer_role: Compliance Reviewer
+    route: "7A + 7B + 7C → 7D + 7E"
+    prompts:
+      - {id: 7A, kind: run}
+      - {id: 7B, kind: run}
+      - {id: 7C, kind: run}
+      - {id: 7D, kind: validate}
+      - {id: 7E, kind: client}
+    output: Proof Inventory + Photography Brief + content gaps
+    templates: [proof-inventory, photography-brief]
+    gate: Client supplies inputs
+    approval: client-inputs
+    handoffs: [H06]
+    client_comms: [C05]
+    dod:
+      - Proof Inventory built, with verification and consent status on every item
+      - Content gap plan prioritised P0–P3
+      - Photography brief and shot list complete
+      - Claims validated (7D); no UNSUPPORTED claim remains in client copy
+      - Client input request sent (7E)
+
+  - id: "08"
+    name: Client Strategy Review
+    slug: stage-08-client-review
+    objective: Turn the approved internal strategy into a concise client presentation that earns decisions rather than vague feedback.
+    owner_role: Project Lead
+    reviewer_role: Strategist
+    route: "8A → 8B → 8C → 8D"
+    prompts:
+      - {id: 8A, kind: run}
+      - {id: 8B, kind: run}
+      - {id: 8C, kind: run}
+      - {id: 8D, kind: validate}
+    output: Client Strategy Deck
+    templates: [client-strategy-deck]
+    gate: Review meeting
+    approval: client-meeting
+    client_comms: [C03]
+    dod:
+      - All ten 8D red-team questions answered CLEAR
+      - The decisions the client must approve are explicit
+      - No new strategy introduced in the deck
+      - Presenter notes ready
+      - Review meeting held
+
+  - id: "09"
+    name: Approval Gate
+    slug: stage-09-approval
+    objective: Convert client feedback into explicit decisions, controlled revisions and locked strategic choices.
+    owner_role: Project Lead
+    reviewer_role: Strategist
+    route: "9A + 9B → 9C + 9D; use 9E for reopened decisions"
+    prompts:
+      - {id: 9A, kind: run}
+      - {id: 9B, kind: run}
+      - {id: 9C, kind: run}
+      - {id: 9D, kind: client}
+      - {id: 9E, kind: validate, note: only when an approved decision is challenged}
+    output: Approval Record + revision plan
+    templates: [approval-record]
+    gate: Client sign-off
+    approval: client
+    locks: Approved strategic decisions
+    handoffs: [H08]
+    client_comms: [C04, C06]
+    dod:
+      - Every decision classified (Approved / Changes Requested / Pending / Locked / Not discussed)
+      - No approval inferred from silence
+      - Every change request has an owner and a deadline
+      - Revision plan protects LOCKED decisions
+      - Follow-up sent to the client asking for specific outstanding decisions
+      - Client sign-off recorded
+      - Approved decisions added to LOCKED DECISIONS in the Master Project Context
+
+  - id: "10"
+    name: Production Inputs
+    slug: stage-10-production-inputs
+    objective: Get every approved content, evidence and technical input into a verified state before full production/build depends on it.
+    owner_role: Project Lead
+    reviewer_role: Strategist
+    route: "10A → 10B/10C → 10D"
+    prompts:
+      - {id: 10A, kind: run}
+      - {id: 10B, kind: client}
+      - {id: 10C, kind: run}
+      - {id: 10D, kind: validate}
+    output: Content / Input Tracker + build readiness
+    templates: [content-input-tracker]
+    gate: Internal gate
+    approval: internal
+    dod:
+      - Strategic approvals recorded
+      - Required screens approved
+      - Mobile states defined
+      - Sitemap / URL map approved
+      - Redirect requirements known
+      - Primary copy approved or clearly owned
+      - Practitioner facts verified
+      - Proof required by the design is available
+      - Photography final, or placeholders explicitly controlled
+      - Booking / contact details known
+      - Tracking requirements known
+      - Compliance-critical unknowns resolved
+      - Open items have owners and do not block build
+      - 10D Build Readiness Gate returns PASS
+
+  - id: "11"
+    name: Build
+    slug: stage-11-build
+    objective: Translate approved strategy, design, content and SEO requirements into an implementation package with minimal ambiguity.
+    owner_role: Developer
+    reviewer_role: Designer
+    route: "11A + 11B + 11C → 11D"
+    prompts:
+      - {id: 11A, kind: run}
+      - {id: 11B, kind: run}
+      - {id: 11C, kind: run}
+      - {id: 11D, kind: validate}
+    output: Build Handoff + implementation variance
+    templates: [build-handoff]
+    gate: Internal
+    approval: internal
+    handoffs: [H05]
+    dod:
+      - Designer → Developer handoff complete, with no material UX decision left to the developer
+      - SEO → Developer handoff complete, with every MUST item addressed
+      - Content mapped to templates without factual changes
+      - 11D shows no outstanding CRITICAL variance
+
+  - id: "12"
+    name: QA
+    slug: stage-12-qa
+    objective: Run separate regulated-content, strategy/UX and technical/SEO sign-offs so one type of QA cannot hide another.
+    owner_role: Project Lead
+    reviewer_role: Compliance Reviewer
+    route: "12A + 12B + 12C → 12D → 12E"
+    prompts:
+      - {id: 12A, kind: run, note: Compliance gate}
+      - {id: 12B, kind: run, note: Strategy / UX gate}
+      - {id: 12C, kind: run, note: Technical / SEO gate}
+      - {id: 12D, kind: validate}
+      - {id: 12E, kind: validate, note: only if launching with open P0/P1 items}
+    output: Compliance / Strategy / Technical QA
+    templates: [compliance-launch-qa]
+    qa_gates: [compliance, strategy-ux, technical-seo]
+    gate: Internal sign-off
+    approval: internal
+    handoffs: [H07]
+    client_comms: [C07]
+    dod:
+      - Compliance gate signed off (qa/compliance.md)
+      - Strategy / UX gate signed off (qa/strategy-ux.md)
+      - Technical / SEO gate signed off (qa/technical-seo.md)
+      - Consolidated triage (12D) complete
+      - Zero P0 items, or a 12E GO / CONDITIONAL GO decision recorded with owner and rollback trigger
+      - Recommended launch status recorded
+
+  - id: "13"
+    name: Launch
+    slug: stage-13-launch
+    objective: Launch in a controlled way, verify acquisition/measurement systems and capture the baseline required for post-launch learning.
+    owner_role: Developer
+    reviewer_role: Project Lead
+    route: "13A → 13B → 13C + 13D; 13E as needed"
+    prompts:
+      - {id: 13A, kind: run}
+      - {id: 13B, kind: run}
+      - {id: 13C, kind: client}
+      - {id: 13D, kind: run}
+      - {id: 13E, kind: run, note: first 7 days}
+    output: Launch runbook + baseline
+    no_validator_reason: The AI Workflow Pack has no Stage 13 validator. The 13B runbook's PASS/FAIL fields are the check.
+    templates: [measurement-baseline]
+    gate: Launch sign-off
+    approval: internal
+    client_comms: [C08]
+    dod:
+      - Launch plan approved
+      - Runbook executed, with a PASS / FAIL recorded for every step
+      - Measurement baseline captured, with gaps recorded as gaps
+      - Client launch notification sent
+      - 30 / 60 / 90-day reviews scheduled
+
+  - id: "14"
+    name: 30 / 60 / 90 Measurement
+    slug: stage-14-measurement
+    objective: Use live behaviour and commercial/search data to decide what to keep, improve, test or scale after launch.
+    owner_role: Strategist
+    reviewer_role: Project Lead
+    route: "14A → 14B → 14C → 14D → 14E"
+    prompts:
+      - {id: 14A, kind: run, note: day 30}
+      - {id: 14B, kind: run, note: day 60}
+      - {id: 14C, kind: run, note: day 90}
+      - {id: 14D, kind: run}
+      - {id: 14E, kind: run}
+    output: Post-launch review + learning
+    no_validator_reason: The AI Workflow Pack has no Stage 14 validator. The 14D decisions are reviewed by the Project Lead.
+    templates: [30-60-90-review]
+    gate: Internal / client review
+    approval: internal
+    client_comms: [C09]
+    dod:
+      - 30-day review complete
+      - 60-day review complete
+      - 90-day review complete
+      - KEEP / IMPROVE / TEST / SCALE plan agreed
+      - Learning captured (14E); OS improvement issues logged in GitHub
+
+# Template registry: number from the Template Pack v1.0 mapping.
+templates:
+  project-strategy-brief:   {number: "01", title: Project Strategy Brief}
+  evidence-pack:            {number: "02", title: Evidence Pack}
+  strategic-diagnosis:      {number: "03", title: Strategic Diagnosis}
+  positioning-thesis:       {number: "04", title: Positioning Thesis}
+  current-proposed-summary: {number: "05", title: Current → Proposed Summary}
+  sitemap-seo-architecture: {number: "06", title: Sitemap + SEO Architecture}
+  visual-direction:         {number: "07", title: Visual Direction}
+  page-component-system:    {number: "08", title: Page + Component System}
+  proof-inventory:          {number: "09", title: Proof Inventory}
+  photography-brief:        {number: "10", title: Photography Brief}
+  client-strategy-deck:     {number: "11", title: Client Strategy Deck}
+  approval-record:          {number: "12", title: Approval Record}
+  content-input-tracker:    {number: "13", title: Content / Input Tracker}
+  build-handoff:            {number: "14", title: Build Handoff}
+  compliance-launch-qa:     {number: "15", title: Compliance + Launch QA}
+  measurement-baseline:     {number: "16", title: Post-Launch Measurement Baseline}
+  30-60-90-review:          {number: "17", title: 30/60/90 Day Review}
+
+qa_gates:
+  compliance:    {title: Compliance QA, file: qa/compliance.md, prompt: 12A, owner_role: Compliance Reviewer}
+  strategy-ux:   {title: Strategy / UX QA, file: qa/strategy-ux.md, prompt: 12B, owner_role: Strategist}
+  technical-seo: {title: Technical / SEO QA, file: qa/technical-seo.md, prompt: 12C, owner_role: SEO Lead}
+
+roles:
+  - Project Lead
+  - Strategist
+  - SEO Lead
+  - Designer
+  - Developer
+  - Content Lead
+  - Compliance Reviewer

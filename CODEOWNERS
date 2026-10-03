@@ -1,0 +1,36 @@
+# CosmediSites Website OS — CODEOWNERS
+#
+# Owners are requested automatically as reviewers on PRs touching these paths.
+# With branch protection's "Require review from Code Owners" enabled, their
+# approval is required before merge.
+#
+# The cosmedisites organisation currently has no teams and one member.
+# Create these teams, then replace @Quinn798 below:
+#   @cosmedisites/os-maintainers   — overall ownership (Project Lead / Head of Delivery)
+#   @cosmedisites/methodology      — Playbook, SOP, operating rules, stage DoD
+#   @cosmedisites/strategy         — strategy-stage prompts and templates
+#   @cosmedisites/delivery         — design/build/QA/launch prompts and templates
+# Later rules override earlier ones for the same path.
+
+# Default: everything
+*                                   @Quinn798
+
+# Core methodology — material changes need methodology review
+/playbook/                          @Quinn798
+/sop/                               @Quinn798
+/workflows/00-ai-operating-rules.md @Quinn798
+/workflows/00-master-project-context.md @Quinn798
+/ops/stages.yaml                    @Quinn798
+
+# Prompts and templates
+/workflows/                         @Quinn798
+/prompts/                           @Quinn798
+/templates/                         @Quinn798
+/qa/                                @Quinn798
+
+# Governance, security and automation
+/SECURITY.md                        @Quinn798
+/CONTRIBUTING.md                    @Quinn798
+/CODEOWNERS                         @Quinn798
+/.github/                           @Quinn798
+/scripts/                           @Quinn798
