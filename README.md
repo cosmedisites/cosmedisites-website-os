@@ -119,7 +119,7 @@ qa/            the three Stage 12 QA gates
 examples/      anonymised "what good looks like"
 docs/          quickstart, architecture, Chirply audit, governance, automation map
 ops/           stages.yaml: the stage registry that drives stage cards and the Chirply payload
-scripts/       build.py (generate + check), safety_scan.py (blocks secrets/PII)
+scripts/       build.py (generate + check), safety_scan.py (blocks secrets/PII), tracker_spec.py
 ```
 
 ## Maintainers' quick reference
@@ -129,4 +129,5 @@ pip install pyyaml
 python3 scripts/build.py           # regenerate stage cards + dist/
 python3 scripts/build.py --check   # what CI runs
 python3 scripts/safety_scan.py     # what CI runs
+python3 scripts/tracker_spec.py X.xlsx  # regenerate the Tracker spec after a workbook change (needs openpyxl)
 ```

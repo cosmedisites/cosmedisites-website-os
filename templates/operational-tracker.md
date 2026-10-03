@@ -2,7 +2,8 @@
 
 > Markdown specification of `CosmediSites_Redesign_Operational_Tracker_v1.0.xlsx`, generated from the
 > workbook so its structure can be reviewed and versioned in Git. The workbook itself is a
-> **GitHub Release asset**, not committed. To change the tracker, change the workbook, regenerate
+> **GitHub Release asset**, not committed. To change the tracker: change the workbook, run
+> `python3 scripts/tracker_spec.py <workbook.xlsx>` to regenerate
 > this page and open a PR.
 
 ## How the tracker is used with Chirply
