@@ -49,11 +49,23 @@ everything they need, with links.
 - **Task lists:** one per stage (`S00 Brief` … `S14 Measurement`).
 - **In each list:** one **stage task**, named per the AI pack convention, e.g.
   `S03 — Positioning — 3A → 3B + 3C → 3D → 3E`.
-  - Assignees: the stage **owner** (SOP) and the **reviewer**.
+  - Assignees: the stage **owner** (SOP) and the **reviewer**. They must be **project members**
+    (V2), so add the project team as members at set-up.
   - Due date: stage deadline.
-  - Status: the Tracker's stage statuses **Not Started / In Progress / Blocked / Ready for Review /
-    Complete / N/A**, as board columns. ⚑ V10; fallback: title prefix plus the deal Health field.
-  - Description: the stage card (format below).
+  - Status: project boards are fixed at To do / In progress / Done, and project tasks have no tags
+    (V10). The Tracker's stage statuses are expressed like this:
+
+    | Tracker status | In Chirply |
+    |---|---|
+    | Not Started | Stage task open; deal not yet at this stage |
+    | In Progress | Deal is at this pipeline stage; task in *In progress* |
+    | Blocked | Deal field **Health = Blocked** + Blocker text |
+    | Ready for Review | All DoD subtasks done; `✔ Reviewer sign-off` still open |
+    | Complete | Stage task completed (reviewer signed off); deal moved on |
+    | N/A | Stage task completed with `N/A —` prefixed to its title, plus a deal note giving the reason |
+
+  - Description: **plain text** (V4). A short version of the stage card, with **bare URLs, one per
+    line**. The full stage card with formatted links goes in a **project notebook** (HTML), one per stage.
 - **Subtasks of the stage task:**
   - one per **SOP Definition of Done** item;
   - one per **"also required"** gate check (validator PASS, approval recorded, lock recorded);
@@ -147,16 +159,18 @@ NEXT
 Stage 04 — IA + SEO                      Stage card → [open]   OS version: v1.0
 ```
 
-Every `[open]` is a deep link (GitHub URL with heading anchor, or Drive URL). ⚑ V4 confirms
-links are clickable; if not, the same block goes in the project notebook, which accepts HTML.
+In the stage task description each `[open]` becomes a **bare URL** on its own line, because
+descriptions are plain text (V4). Whether bare URLs are auto-linked is a UI check. The same card with
+proper links lives in the stage's **project notebook** (HTML), which keeps `<a href>` links.
 
 ## 3. Moving stage: the human gate
 
-1. The owner works through the DoD subtasks and runs the validator. **The PASS/FAIL/BLOCKED result is
-   pasted into the stage task as a comment** (or linked as a file if comments aren't available, ⚑ V3).
+1. The owner works through the DoD subtasks and runs the validator. Project tasks can't take comments
+   (V3), so **the PASS/FAIL/BLOCKED result is logged as a note on the deal timeline**, e.g.
+   `S03 — 3D validator: PASS — <link to the report in Drive>`.
 2. For client-gated stages, the Approval Record is set to **Approved**, with an evidence link.
-3. The stage task moves to **Ready for Review**; the reviewer ticks `✔ Reviewer sign-off`; the task
-   moves to **Complete**.
+3. When all DoD subtasks are done, the stage is **Ready for Review**. The reviewer ticks
+   `✔ Reviewer sign-off` and completes the stage task (**Complete**).
 4. **The Project Lead moves the deal to the next pipeline stage.** This is the "stage complete" event.
 5. Automation ([automation map](automation-map.md)) flags any DoD item still open and opens the next
    stage task.
@@ -169,7 +183,7 @@ task saying who authorised it, why, and which items remain (Workflow Index step 
 | Need | Where |
 |---|---|
 | Active redesign projects, current stage, owner, target launch | Pipeline board; saved report over deals (stage × owner) |
-| Blocked projects | Deals with Health = Blocked; stage tasks in the Blocked column |
+| Blocked projects | Deals with Health = Blocked |
 | Upcoming approvals | Approval Records with Status = Pending; deal field `Next approval due` |
 | Missing inputs | Weekly digest: Tracker *Content Inputs* rows not Verified/N/A (the Tracker's own "Open Inputs" KPI) |
 | QA status | Stage 12 gate tasks; weekly digest: Tracker *QA* rows with Status = Fix (the Tracker's "QA Fixes Open" KPI) |

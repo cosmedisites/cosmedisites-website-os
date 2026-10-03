@@ -21,9 +21,15 @@ Evidence tags refer to the [Chirply audit](chirply-audit.md).
 | Time-driven triggers, Drive/Sheets/Gmail APIs | Apps Script | Standard Google Workspace |
 | Release payload `stage-config.json` (DoD, links, roles per stage) | GitHub Release | This repo |
 
-**Known Chirply limits that shape the design:** no triggers on project tasks; no "date field
-reached" or "deal field changed" trigger; no native internal notification (use email); no native
-Drive or Slack integration.
+**Known Chirply limits that shape the design** (confirmed in the CosmediSites workspace, V1–V10):
+no triggers on project tasks; the workflow `create_task` action creates **CRM tasks**, not project
+tasks; no "date field reached" or "deal field changed" trigger; no native internal notification (use
+`send_email` to an internal address); no native Drive or Slack integration; `appDev` is off.
+
+So **native workflows** handle anything that can be a CRM task linked to the deal (A3, A6, the A2
+flag). Anything that reads or changes **project tasks** (A1, A2's DoD check, A5, A7) needs the REST
+API through Apps Script, which in turn needs an API key (V7, to be created by an admin).
+Custom-object triggers are proven: V6 fired in about 12 seconds.
 
 **The deal stage move is the single "stage complete" event.** A human makes it after the DoD gate.
 Everything else reacts to it.

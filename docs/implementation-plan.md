@@ -21,7 +21,7 @@ The pilot project tells us what actually needs changing next.
 
 | Step | What | Owner | Status |
 |---|---|---|---|
-| **A** | Connect the real CosmediSites Chirply workspace and run verification tests V1–V10 ([audit](chirply-audit.md#verification-tests-for-the-cosmedisites-workspace)) | Claude + Admin | See audit |
+| **A** | Connect the real CosmediSites Chirply workspace and run verification tests V1–V10 ([results](chirply-audit.md#verification-results-cosmedisites-workspace)) | Claude + Admin | ✅ run 2026-10-03: Option A confirmed. V5 firing and V7 are confirmed during pilot set-up; delete 2 leftover test objects in the UI |
 | **B** | Resolve Q3/Q4/Q5/Q7 and bake them into **v1.1 candidates** (see [decisions](#decisions-log)) | Claude | Prepared on the branch as a separate commit, not in v1.0 |
 | **C** | Review the GitHub branch once for structure and content correctness | MD | ☐ |
 | **D** | Create `main` from the v1.0 commit and tag `v1.0` | MD | ☐ |
@@ -62,7 +62,7 @@ and the weekly digest arrives.
 
 | # | Question | Needed for | Who |
 |---|---|---|---|
-| Q1 | Chirply follow-ups from the V1–V10 results (see [audit](chirply-audit.md)) | Pilot set-up | Admin |
+| Q1 | Chirply follow-ups: delete the 2 leftover test objects; UI checks (bare-URL links, board columns, project chats); V5 firing on the pilot deal; V7 API key when automating ([audit](chirply-audit.md#still-to-confirm-no-extra-risk-do-during-pilot-set-up)) | Pilot set-up | Admin |
 | Q6 | GitHub plan: Free or Team? Who will be the second reviewer, and when? | Phase 2 governance | MD |
 | Q8 | Team names for the role select fields, and who holds the Independent QA Reviewer and Creative Lead roles on the pilot | Chirply config | Project Lead |
 | Q11 | Slack in use? Chirply has no native Slack, so notifications are email by default | Automations A2/A7 | MD |

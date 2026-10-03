@@ -9,24 +9,24 @@ read-only data calls, and Chirply's in-app knowledge base. Nothing was created, 
 
 ---
 
-## ⚠️ Evidence caveat: read this first
+## Evidence: two rounds
 
-The Chirply connection available during the audit is authenticated to a workspace called
-**"FM Recruitment & Provision"**. It is **not the CosmediSites workspace**, and CosmediSites is not
-a client account under it (`list_accounts` returned none).
+1. **Desk audit (catalogue level).** Run first through a connection to an unrelated workspace
+   ("FM Recruitment & Provision"). It established what the Chirply **product** can do: the full action
+   catalogue, plus the automation trigger and action registries read live. The requirement findings
+   A–L below come from this round, corrected where round 2 disagreed.
+2. **Live verification in the CosmediSites workspace** (2026-10-03). Tests V1–V10 were run against
+   the real workspace with clearly labelled `ZZ-TEST Website OS` objects. Nothing was sent to anyone,
+   no keys were created and no existing record was changed. Results:
+   [Verification results](#verification-results-cosmedisites-workspace). **These results override round 1.**
 
-What this means:
-
-- Findings describe **what the Chirply product can do**: its full action catalogue and the
-  automation trigger/action registries, read live. They do **not** describe how the CosmediSites
-  workspace is configured, or which features its plan enables.
-- That workspace is on plan `scale`. It has `customObjects`, `customFields`, `pipelines`,
-  `workflows`, `webhooks`, `restApi`, `forms`, `reportBuilder` and `inbox` **on**, and `appDev`
-  (build your own apps) **off**: "the App Marketplace is switched off for this account by the
-  agency that manages it". **The CosmediSites plan may differ.**
-- Phase 2 of the [implementation plan](implementation-plan.md) therefore includes a short
-  hands-on verification in the real CosmediSites workspace (tests V1–V10 below). The
-  recommendation is conditional on those tests.
+CosmediSites workspace facts (OBSERVED-live):
+- It is a **client sub-account managed by a parent agency**, on plan `scale` ("main clients").
+- Custom fields, custom objects, pipelines, workflows, webhooks, REST API, API keys, forms, report
+  builder and the MCP server are **on**. `appDev` (build your own apps) and the App Marketplace are
+  **off**, set by the agency.
+- Current state: 2 team members, 2 pipelines, 1 project, 7 deal templates, and 8 workflows (1 active).
+  Stripe and Resend are connected.
 
 ### Evidence labels
 
@@ -236,60 +236,93 @@ generated through the API (see [automation map](automation-map.md), A8).
 |---|---|---|---|---|---|---|---|---|
 | Project record | Must | Partly (deal) | ✅ custom fields | – | – | Role fields aren't user links | **AMBER** | OBSERVED-live fields |
 | 15 stages | Must | ✅ pipeline | – | – | – | – | **GREEN** | DOCUMENTED |
-| Progress display | Must | ✅ board | ✅ task lists | – | – | – | **GREEN** | |
-| Stage owner + due date | Must | – | ✅ stage tasks | – | – | – | **AMBER** | Project tasks |
+| Progress display | Must | ✅ pipeline board | ✅ project dashboard counts | – | – | % per stage task | **GREEN** | V2: open/completed counts per project and assignee |
+| Stage owner + due date | Must | – | ✅ project stage tasks | – | – | Assignees must be project members | **GREEN** | V2 verified |
 | Reviewer | Must | ❌ | ✅ reviewer subtask | – | – | No reviewer field | **AMBER** | Convention |
 | Dependencies | Nice | ❌ | – | – | – | ✅ | **RED** | Sequence is implicit in the stage order; acceptable |
 | Gate enforcement | Must (flag) | ❌ | – | ✅ flag via automation | – | Hard prevention | **AMBER** | Human gate + automated flag |
-| Repeatable template / duplication | Must | Partly | – | ✅ provisioning script | – | – | **AMBER** | Script from `stage-config.json` |
-| DoD checklists | Must | ❌ | ✅ subtasks | – | – | – | **AMBER** | Verify UX (V2) |
-| Task owner/due/status/attachments | Must | ✅ | – | – | – | – | **GREEN** | |
-| Task comments | Should | CRM ✅ / project ❓ | – | – | – | – | **AMBER** | V3 |
-| Approvals with statuses | Must | ❌ | ✅ custom object (Tracker *Approvals* columns) | ✅ triggers | – | – | **AMBER** | Same status list as Tracker |
+| Repeatable template / duplication | Must | Deal templates only | Manual from stage cards | ✅ REST API (key needed, V7) | – | No project template/duplicate | **AMBER** | Manual set-up for the pilot; script later |
+| DoD checklists | Must | ❌ | ✅ subtasks | – | – | Checklist object | **AMBER** | V2 verified: subtasks tick off and are counted |
+| Task owner/due/status | Must | ✅ open/completed | – | – | – | Custom statuses / tags on project tasks (V10) | **AMBER** | Status = deal stage + task + reviewer subtask + Health |
+| Task attachments | Should | Project-level files only | ✅ Drive links | – | Drive (existing) | Per-task files (V3) | **AMBER** | Files live in Drive anyway |
+| Task comments | Should | CRM tasks only | ✅ deal timeline notes | – | – | Comments on project tasks (V3 FAIL) | **AMBER** | Validator results logged as deal notes |
+| Approvals with statuses | Must | ❌ | ✅ custom object (Tracker *Approvals* columns) | ✅ triggers | – | – | **GREEN** | V6 verified: status change → automation in about 12 seconds |
 | Client e-sign approval | Nice | ✅ documents | – | – | – | – | **GREEN** | |
 | Content / input tracker | Must | – | Possible | ✅ Sheets triggers | **Tracker *Content Inputs* tab (Google Sheets)** | – | **AMBER** | Already part of the methodology |
 | Proof inventory | Must | – | Weak | – | **Tracker *Proof Inventory* tab** | – | **AMBER** | Already part of the methodology |
 | Three QA gates | Must | – | ✅ gate tasks + sign-off | – | **Tracker *QA* tab** (check level) | – | **AMBER** | One home per check |
-| Stage-transition automations | Should | ✅ deal-stage triggers | – | ✅ webhook → API | Apps Script glue (existing Workspace) | Project-task triggers | **AMBER** | |
+| Stage-transition automations | Should | ✅ deal-stage triggers → CRM tasks | – | ✅ webhook → REST API (V7) | Apps Script glue (existing Workspace) | Project-task triggers/actions | **AMBER** | V5 built + activated; firing to confirm on the pilot deal |
 | Date-relative 30/60/90 | Should | ✅ `due_in_days` | – | – | – | Date-field trigger | **AMBER** | Fire on stage move |
 | Internal notifications / Slack | Should | Partly (email) | – | ✅ webhook | – | Native Slack | **AMBER** | |
-| Knowledge links | Must | ✅ url fields | ✅ task descriptions | – | – | – | **AMBER→GREEN** | V4 |
+| Knowledge links | Must | ✅ url fields | ✅ bare URLs in task descriptions; HTML notebook | – | – | Rich links in task descriptions | **AMBER** | V4: descriptions are plain text |
 | Client comms, reminders, meeting notes | Must | ✅ | – | – | – | – | **GREEN** | Core strength |
-| Cross-project ops dashboard | Must | Deals only | ✅ health field | ✅ weekly digest | – | Native task reporting | **RED→AMBER** | Digest closes the gap |
-| Custom in-platform app | Optional | – | – | `appDev` off on audited plan | – | Unknown for CosmediSites | **unknown** | V8 |
+| Cross-project ops dashboard | Must | Deals only, one dimension per report | ✅ health field | ✅ weekly digest | – | Native task reporting (V9) | **AMBER** | Digest closes the gap |
+| Custom in-platform app | Optional | – | – | – | – | `appDev` off by agency override | **RED** | V8. Not needed for Option A |
 
 ---
 
-## Verification tests for the CosmediSites workspace (Phase 2)
+## Verification results (CosmediSites workspace)
 
-Run these by hand in the real CosmediSites Chirply workspace (about 60 minutes). Each one either
-confirms the design or triggers the fallback.
+Run 2026-10-03 in the live CosmediSites workspace. All evidence is OBSERVED-live unless stated otherwise.
 
-| # | Test | Pass condition | If it fails |
+| # | Test | Result | What we learned |
 |---|---|---|---|
-| V1 | Plan check: custom fields, custom objects, pipelines, workflows, webhooks, REST API, forms, report builder | All enabled | Ask the managing agency / upgrade, or fallback |
-| V2 | Create a project with a task, 5 subtasks, 2 assignees and a due date | Subtasks tick off cleanly; progress visible on the project view | **Fallback trigger** |
-| V3 | Comment on a project task, and attach a link and a file | Both possible | Comments go on the deal timeline instead (acceptable) |
-| V4 | Paste GitHub/Drive links into a project task description | Links clickable | Put links in deal URL fields and a project notebook |
-| V5 | Pipeline with 15 stages + a `deal_stage_changed` workflow that creates a task and sends an internal email | Fires reliably | **Fallback trigger** for automation |
-| V6 | Custom object "Approval Record" + `custom_record_updated` trigger on Status | Fires on change | Approvals stay in the Tracker *Approvals* tab, as designed in the methodology; no approval automations |
-| V7 | Workflow `webhook` action calling Chirply's own REST API (`projects_save_task`) | Task created | Provisioning runs from Apps Script instead (fine) |
-| V8 | Is `appDev` / App Marketplace enabled, and who is the managing agency? | Known | Informational only |
-| V9 | Report builder: projects by stage and owner over the redesign pipeline | Works | Digest only |
-| V10 | Can project board columns be renamed to the Tracker's stage statuses (Not Started / In Progress / Blocked / Ready for Review / Complete / N/A)? | Yes | Use the deal *Health* field plus task completion; Blocked and Ready for Review go in the task title prefix |
+| V1 | Plan features | **PASS** | All required features are on |
+| V2 | Project task with 5 subtasks, assignees, due date | **PASS (with caveats)** | Subtasks tick off and keep `completed_at`. `projects_dashboard` reports open/completed counts per project and per assignee. There is no % per parent task (it can be computed). **Only project members can be assigned.** Adding a member gives them Projects access, which the team needs anyway |
+| V3 | Comment + attachment on a project task | **FAIL (comments) / PARTIAL (files)** | **Project tasks can't be commented on.** `tasks_comment` works only for CRM tasks. File upload accepts images, PDF, audio and video only, and attaches to the **project**, not the task |
+| V4 | Links in task description / notebook | **PARTIAL** | Task descriptions are stored as **plain text**: markdown/HTML links won't render. Whether a bare URL is auto-linked is to be checked in the UI. Project notebooks store HTML with `<a href>` intact, so links are INFERRED clickable |
+| V5 | 15-stage pipeline + stage-change workflow | **PARTIAL** | Pipeline with stages `00 Brief`…`14 Measurement` and value tracking off: **built fine**. The `deal_stage_changed` workflow scoped to that pipeline: **saved and activated fine**. **Firing not yet observed**, because creating a test deal was declined at the permission prompt. Confirm it with the pilot's first real deal |
+| V6 | Approval Record custom object + status-change workflow | **PASS** | Object with all 7 fields created. `custom_record_updated` (Status → Approved) **fired within about 12 seconds** and created the task. No contact was needed |
+| V7 | Workflow webhook → Chirply REST API | **NOT TESTABLE** | The webhook action supports POST + bearer auth + JSON body with merge fields, and the REST pattern is `POST /api/v1/actions/<name>`. Feasible on paper, but **it needs an API key created by a human**. Not attempted |
+| V8 | appDev / managing agency | **OFF / agency-managed** | `appDev` is off by agency override. Custom in-platform apps are not available unless the agency enables them |
+| V9 | Report builder | **PARTIAL** | `reports_run` works on deals, but with **one dimension per report** (stage *or* owner, not both). **No tasks/projects dataset** |
+| V10 | Rename project board columns to Tracker statuses | **FAIL (API)** | Projects are fixed at To do / In progress / Done. No API to add or rename columns (UI to be checked). **Project tasks have no tags** |
 
-**Fallback rule:** if **V2 or V5 fails**, Chirply can't run delivery, and we move to Option B
-(see [operating architecture](operating-architecture.md#fallback-option-b)).
+Other confirmed facts:
+- **No user/team-member field type**, on deals or custom objects.
+- **Workflows can't create or act on project tasks.** The `create_task` action creates **CRM tasks**,
+  and there are **no project-task triggers**. Project-task automation needs the REST API (V7).
+- **No project template or duplicate action**, and no API delete for projects or custom object types.
+- Project **chats** exist and could stand in for task comments (untested).
 
----
+### What this changes in the design
+
+| Gap | Design response |
+|---|---|
+| No comments on project tasks (V3) | Validator results, review notes and decisions are logged as **notes on the deal timeline** (`S03 — 3D validator: PASS — …`). Each stage's notebook holds longer notes |
+| Plain-text task descriptions (V4) | Stage task descriptions use **bare URLs**, one per line. The full linked stage card goes in a **project notebook** (HTML) |
+| Fixed board columns, no tags (V10) | Stage status = **deal pipeline stage** (current stage) + project task open/complete + the `✔ Reviewer sign-off` subtask (= Ready for Review → Complete) + deal **Health** field (Blocked). The board's To do / In progress / Done columns are used as-is |
+| Files attach to the project, not the task (V3) | Files live in **Drive** (as designed). Tasks link to them |
+| Only project members can be assigned (V2) | Add the project team as members when the project is set up |
+| No project template/duplicate | Phase-1 set-up is **by hand** from the stage cards. The reference project is the pattern. Automated provisioning needs the REST API (V7) |
+| Workflows create CRM tasks, not project tasks | Automations create **CRM tasks linked to the deal** for admin actions (check DoD, add a lock to the MPC, 30/60/90 reviews). Stage work stays in project tasks |
+| One-dimension reports, no task dataset (V9) | Pipeline board for stage × project; the **weekly digest** for owner, overdue and inputs |
+
+### Still to confirm (no extra risk; do during pilot set-up)
+
+1. **V5 firing:** when the pilot deal is moved from `00` to `01`, check that the create-task workflow ran.
+2. **V7:** create an API key in the UI (admin) and try one `projects.save_task` call. This is only
+   needed when automating provisioning.
+3. **UI checks:** whether bare URLs in task descriptions are clickable; whether the project board
+   columns can be renamed in the UI; whether project chats work as task discussion.
+4. **Clean-up:** delete the leftover test project **"ZZ-TEST Website OS Project"** and the custom
+   object type **"ZZ-TEST Approval Records"** in the UI (the API has no delete for these).
 
 ## Recommendation
 
-**Option A: Chirply is the main operational front end, configured as specified in the
+**Option A is confirmed in the live workspace, with the design adjustments above.** Chirply is the
+main operational front end, configured as specified in the
 [operational stage spec](operational-stage-spec.md). The methodology's own Operational Tracker
 v1.0, as a Google Sheet per project, holds the tabular registers (Content Inputs, Proof Inventory,
-QA checks, Measurement).** No new platform. This is conditional on V2 and V5 passing in the
-CosmediSites workspace.
+QA checks, Measurement).** No new platform.
+
+The fallback trigger (V2 or V5 failing) **did not fire**. V2 passed, and V5's pipeline and workflow
+built and activated, with only the firing left to observe on the pilot's first real deal. If that firing
+fails, revisit before Stage 01. Per decision D5, **Notion is not added**.
+
+The compromises are real but bounded: no comments or statuses on project tasks, and no native project
+automation. Each one has a workaround that uses Chirply features shown to work (deal notes, deal
+stages, custom-object automations) or systems already in the stack (Drive, the Tracker Sheet).
 
 Why not add ClickUp or Notion now:
 
