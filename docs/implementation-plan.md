@@ -21,7 +21,7 @@ The pilot project tells us what actually needs changing next.
 
 | Step | What | Owner | Status |
 |---|---|---|---|
-| **A** | Connect the real CosmediSites Chirply workspace and run verification tests V1–V10 ([results](chirply-audit.md#verification-results-cosmedisites-workspace)) | Claude + Admin | ✅ run 2026-10-03: Option A confirmed. V5 firing and V7 are confirmed during pilot set-up; delete 2 leftover test objects in the UI |
+| **A** | Connect the real CosmediSites Chirply workspace and run verification tests V1–V10 ([results](chirply-audit.md#verification-results-cosmedisites-workspace)) | Claude + Admin | ✅ run 2026-10-03: Option A confirmed. Re-checked 2026-10-04 after the Chirply platform update ([update](chirply-audit.md#platform-update-2026-10-04)). V5 firing is confirmed on the pilot deal; V7 (API key) is no longer needed for the pilot |
 | **B** | Resolve Q3/Q4/Q5/Q7 and bake them into **v1.1 candidates** (see [decisions](#decisions-log)) | Claude | Prepared on the branch as a separate commit, not in v1.0 |
 | **C** | Review the GitHub branch once for structure and content correctness | MD | ☐ |
 | **D** | Create `main` from the v1.0 commit and tag `v1.0` | MD | ☐ |
@@ -32,19 +32,31 @@ The pilot project tells us what actually needs changing next.
 
 ### Supporting work inside F (pilot)
 
-**Manual operating system first.** Before the pilot's Stage 00:
+Chirply shipped project templates, reviewers, comments, custom columns, tags, team-member fields
+and project-task workflows on 2026-10-04 ([audit update](chirply-audit.md#platform-update-2026-10-04)).
+The pilot set-up uses them. These are **configuration quick wins, not SOP changes**, so they are
+allowed under the pilot rule (#1).
 
-| Step | Owner |
-|---|---|
-| Configure the Website Redesign pipeline, deal fields, Approval Record custom object and deal template ([spec](operational-stage-spec.md)) | Project Lead |
-| Build the pilot's Chirply project **by hand**: 15 task lists, stage tasks with descriptions from the stage cards, DoD subtasks, reviewer subtasks | Project Lead |
-| Create the Drive folder: Project Tracker Sheet (copy of the Tracker master) and Master Project Context Doc | Project Lead |
-| One Claude Project for the pilot client, per the [AI execution workflow](ai-execution-workflow.md) | Strategist |
+**Before the pilot's Stage 00** (about half a day, once):
 
-**Automation only after the manual version works** on the pilot. Build in this order:
-A6 (native, trivial) → A2 → A3 → A5 → A8 → A4 → A7 → A1 (provisioning) → A9.
-See the [automation map](automation-map.md). Exit: a new project is provisioned in under 10 minutes
-and the weekly digest arrives.
+| # | Quick win | Replaces | Owner |
+|---|---|---|---|
+| 1 | Pipeline "Website Redesign" (15 stages), deal fields with **team-member** role fields, Approval Record custom object ([spec §1](operational-stage-spec.md#1-data-model)) | Select-list role fields | Project Lead |
+| 2 | Build **one** project "Website Redesign": columns Not Started / In Progress / Blocked / Ready for Review / Complete; tags N/A, Client-gated, Locks decision, Exception authorised; 15 lists; stage tasks with **task links** to the stage card, SOP, template and prompts; DoD subtasks; **native reviewers**; 3 QA gate tasks. Save it as a **project template** | Building every project by hand; fixed columns; reviewer subtask; bare URLs | Project Lead |
+| 3 | Deal template "Website Redesign" with `project_template_id` set, so **every new deal auto-creates its linked project** | Provisioning script (most of A1) | Project Lead (admin) |
+| 4 | Create the pilot deal from the deal template; confirm the project appeared and check what the template kept (columns, tags, subtasks, links, reviewers) | Manual check | Project Lead |
+| 5 | Workflows **A2** (stage approved → open next), **A6** (launch → 30/60/90 tasks) and the V5 check (deal 00 → 01 creates a task) | Apps Script / API key | Project Lead |
+| 6 | Drive folder: Project Tracker Sheet + Master Project Context Doc | Unchanged | Project Lead |
+| 7 | One Claude Project for the pilot client ([AI execution workflow](ai-execution-workflow.md)) | Unchanged | Strategist |
+| 8 | Delete the two `ZZ-TEST` leftovers (UI only) | Housekeeping | Admin |
+
+**Ways of working that change for the team:** post validator results as **comments** on the stage
+task; finish a stage with **Request review**, and the reviewer **approves** or **returns** it;
+mark Blocked by moving the task to the **Blocked** column (and setting deal Health).
+
+**Add during the pilot, once the above works:** A3 (approval → lock task), A5 (build approved → QA
+gates). A8 (weekly digest) and A4 (overdue inputs) stay Apps Script, because Chirply reports still
+have no task dataset.
 
 ## Decisions log
 

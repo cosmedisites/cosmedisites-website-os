@@ -4,6 +4,12 @@ All material changes to the CosmediSites Website OS. Versioning: [docs/governanc
 
 ## [Unreleased]
 
+### Operational design (Chirply; no SOP change)
+- 2026-10-04: Chirply shipped project templates (auto-created from a deal template), native task
+  reviewers with request/approve review, task comments and links, custom board columns, tags,
+  team-member fields and project-task workflow triggers/actions. Updated the Chirply audit,
+  operational stage spec, automation map and pilot set-up to use them.
+
 ### v1.1 candidates (decided 2026-10-03; ship with pilot fixes after the first full project)
 
 When released: bump `VERSION` to 1.1, retitle the SOP "v1.1", publish the Tracker v1.1 workbook.
