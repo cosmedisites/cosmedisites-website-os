@@ -12,27 +12,39 @@ Evidence tags refer to the [Chirply audit](chirply-audit.md).
 
 | Block | System | Evidence |
 |---|---|---|
+| Deal template → **project from template** (`project_template_id`) | Chirply (native, no workflow) | OBSERVED-catalogue 2026-10-04 |
 | `deal_stage_changed` trigger (filter: pipeline, stage) | Chirply workflow | OBSERVED-live |
-| `custom_record_updated` trigger (filter: field, value) | Chirply workflow | OBSERVED-live |
-| `create_task` (with `due_in_days`, assignee) | Chirply workflow | OBSERVED-live |
+| `custom_record_updated` trigger (filter: field, value) | Chirply workflow | OBSERVED-live (V6 fired) |
+| **`project_task_completed`, `project_subtask_completed`, `project_task_moved`** triggers (filters: project, column, task list; run without a contact) | Chirply workflow | OBSERVED-catalogue 2026-10-04 |
+| **`create_project_task`** (list, column, assignees, `due_in_days`, parent) and **`update_project_task`** (target by trigger task or title; status; column; assignees) | Chirply workflow | OBSERVED-catalogue 2026-10-04 |
+| `create_task` (CRM task, `due_in_days`, assignee, reviewer) | Chirply workflow | OBSERVED-live |
 | `move_pipeline_stage`, `update_custom_record`, `send_email` | Chirply workflow | OBSERVED-live |
-| `webhook` action (any HTTPS call with auth) | Chirply workflow → Apps Script / Chirply REST API | OBSERVED-live; end-to-end INFERRED (V7) |
-| Chirply REST API (`projects_create`, `projects_save_task`, …) | Apps Script | OBSERVED-catalogue |
+| `webhook` action → Apps Script / Chirply REST API | Chirply workflow | Feasible; needs an API key (V7) |
 | Time-driven triggers, Drive/Sheets/Gmail APIs | Apps Script | Standard Google Workspace |
 | Release payload `stage-config.json` (DoD, links, roles per stage) | GitHub Release | This repo |
 
-**Known Chirply limits that shape the design** (confirmed in the CosmediSites workspace, V1–V10):
-no triggers on project tasks; the workflow `create_task` action creates **CRM tasks**, not project
-tasks; no "date field reached" or "deal field changed" trigger; no native internal notification (use
-`send_email` to an internal address); no native Drive or Slack integration; `appDev` is off.
+**Chirply limits that still shape the design** (re-checked 2026-10-04):
+- no "project task created" trigger;
+- workflow actions can't set a task's reviewer, tags or comments;
+- no "date field reached" or "deal field changed" trigger;
+- no tasks/projects dataset in reports;
+- no native internal notification (use `send_email`);
+- no native Drive or Slack integration;
+- `appDev` is off.
 
-So **native workflows** handle anything that can be a CRM task linked to the deal (A3, A6, the A2
-flag). Anything that reads or changes **project tasks** (A1, A2's DoD check, A5, A7) needs the REST
-API through Apps Script, which in turn needs an API key (V7, to be created by an admin).
-Custom-object triggers are proven: V6 fired in about 12 seconds.
+Project-task triggers filter by a **specific** project, column or list. A workflow that serves every
+redesign project therefore runs unfiltered and branches on the trigger task's title prefix
+(`S03 — …`) with a `switch`. This is INFERRED; confirm it on the pilot.
 
-**The deal stage move is the single "stage complete" event.** A human makes it after the DoD gate.
-Everything else reacts to it.
+**Loop risk:** `update_project_task` can start other project-task workflows. Every workflow below
+targets a *different* task than the one that triggered it, and none re-triggers its own trigger.
+
+Since 2026-10-04, **native workflows cover A2, A3, A5 and A6 without Apps Script or an API key.**
+Apps Script is still needed for Drive (part of A1), for the Tracker Sheet (A4) and for anything that
+needs reporting (A7, A8).
+
+**The deal stage move is still the business-level "stage complete" event.** A human makes it after
+the reviewer approves the stage task.
 
 ## Automations
 
@@ -40,37 +52,37 @@ Everything else reacts to it.
 
 | | |
 |---|---|
-| **Trigger** | Deal created in the "Website Redesign" pipeline (from the deal template) |
-| **Action** | Chirply `webhook` → Apps Script: (1) create the Chirply project with 15 task lists, stage tasks (description = stage card + links), DoD subtasks and reviewer subtasks from the **current release's** `stage-config.json`; (2) assign owners from the deal's role fields, per the SOP owner of each stage; (3) copy the Drive folder template (`00_Admin` … `14_Measurement`, plus the Project Tracker Sheet from Operational Tracker v1.0 and the MPC Doc); (4) write the Drive URLs back to the deal fields; (5) set `OS version` |
-| **System** | Chirply → Apps Script → Chirply REST API + Drive API |
+| **Trigger** | Deal created from the deal template "Website Redesign" |
+| **Action** | **Native:** Chirply creates the project from the "Website Redesign" project template, linked to the deal, starting today. It brings the status columns, tags, 15 lists, stage tasks with links, DoD subtasks, QA gate tasks and reviewers (verify which of these the template keeps on first use). **Remaining Apps Script (or manual):** copy the Drive folder template (`00_Admin` … `14_Measurement`, Project Tracker Sheet, MPC Doc) and write the Drive URLs to the deal fields |
+| **System** | Chirply (native) + Apps Script for Drive |
 | **Owner** | Operations / OS maintainer |
-| **Failure condition** | Webhook fails or the script errors part-way. The script is idempotent (it checks for an existing project linked to the deal) and emails the Project Lead the error |
-| **Human override** | Project Lead can re-run from the deal ("manual" workflow trigger), or create the project by hand from the reference project |
+| **Failure condition** | Deal created without the deal template, so there's no project. `projects_for_deal` returns nothing; create the project from the template by hand (`projects_create_from_template` with `deal_id`) |
+| **Human override** | The Project Lead adjusts assignees and reviewers to the actual team |
 
-### A2 — Stage complete → flag gate and open next stage
+### A2 — Stage approved → open next stage
 
 | | |
 |---|---|
-| **Trigger** | `deal_stage_changed` (pipeline = Website Redesign) |
-| **Action** | Apps Script reads the previous stage's DoD subtasks. **If any are open**, it creates a task "Confirm DoD — Stage NN moved with N open items" for the Project Lead, due today, and emails them. It then sets the new stage task to *In progress*, emails its owner (stage card link, due date), and updates `Current stage` in the MPC (marked "auto"; this is the only automated MPC write, and it's a status, not strategy) |
-| **System** | Chirply → Apps Script |
+| **Trigger** | `project_task_completed` where the task title starts `S` + stage number (i.e. the reviewer approved the stage task) |
+| **Action** | `switch` on the stage number → `update_project_task` targeting the **next** stage task by title: column **In Progress**. Then `create_task` (CRM, linked to the deal) for the Project Lead: "Stage NN approved: move the deal to NN+1". If `project_subtask_completed` shows DoD subtasks still open, the Project Lead sees them on the task; a formal open-items check is an optional Apps Script extra |
+| **System** | Chirply workflow (native) |
 | **Owner** | Project Lead |
-| **Failure condition** | Deal moved by mistake / backwards |
-| **Human override** | Move the deal back. The check task stays as an audit trail. An authorised exception is a comment on the stage task |
+| **Failure condition** | Title convention broken, so the switch finds no match; the workflow ends and the Project Lead opens the next stage by hand |
+| **Human override** | Return the review (`projects_return_review`) or move the task back. Moving the deal stays human |
 
 ### A3 — Client approval recorded → lock and open next workstream
 
 | | |
 |---|---|
-| **Trigger** | `custom_record_updated` on Approval Record where Status → Approved (and Locked = true) |
-| **Action** | Create a task for the Strategist: "Add <Decision> to LOCKED DECISIONS in the MPC" (due 1 day), linking the Approval Record. Tick the "approval recorded" DoD subtask. For Stage 9 sign-off: create the Stage 10 standard input tasks (one per category from Template 13). The Project Lead prunes them to what the project needs (10A) |
-| **System** | Chirply workflow (+ Apps Script for subtask updates) |
+| **Trigger** | `custom_record_updated` on Approval Record where Status → Approved |
+| **Action** | `create_project_task` in the current stage list for the Strategist: "Add <Decision> to LOCKED DECISIONS in the MPC" (due 1 day). `update_project_task` ticks the "approval recorded" DoD subtask (target by title). For Stage 9 sign-off: `update_project_task` moves the S10 stage task to **In Progress** (the standard input items live in the Tracker *Content Inputs* tab) |
+| **System** | Chirply workflow (native) |
 | **Owner** | Project Lead |
-| **Failure condition** | Approval recorded without an evidence link (the workflow branches on an empty `Evidence link` and creates a "missing approval evidence" task instead) |
+| **Failure condition** | Approval recorded without an evidence link (branch on empty `Evidence link` → create a "missing approval evidence" task instead) |
 | **Human override** | Set Status back to Pending. The lock wording in the MPC is always written by a human |
 
-> **Not automated:** writing the LOCKED wording into the MPC, and moving to the next stage. Both
-> are human acts.
+> **Not automated:** writing the LOCKED wording into the MPC, and moving the deal to the next stage.
+> Both are human acts.
 
 ### A4 — Missing input overdue → reminder
 
@@ -83,27 +95,27 @@ Everything else reacts to it.
 | **Failure condition** | Sheet structure changed (missing columns). The script reports the bad sheet instead of skipping it silently |
 | **Human override** | Client-facing chasers are **drafted (10B) and sent by a human** from the Chirply inbox. Automatic client reminders are optional later, per project, using Chirply sequences |
 
-### A5 — Build complete → create QA gates
+### A5 — Build approved → open QA gates
 
 | | |
 |---|---|
-| **Trigger** | `deal_stage_changed` → `12 QA` |
-| **Action** | Create the three QA gate tasks: Compliance (Compliance Reviewer), Strategy / UX (Independent QA Reviewer), Technical / SEO (Developer + SEO Lead). Owners come from the deal role fields. Each has a `Gate sign-off` subtask and a link to the Tracker *QA* tab, which already lists the 29 checks as Not Checked. Check-level status is not duplicated in Chirply |
-| **System** | Chirply → Apps Script → Chirply API |
+| **Trigger** | `project_task_completed` on the S11 Build stage task |
+| **Action** | The three QA gate tasks already exist (from the template). `update_project_task` × 3 moves Compliance, Strategy / UX and Technical / SEO to **In Progress**, so their owners and reviewers see them. The 29 checks are in the Tracker *QA* tab |
+| **System** | Chirply workflow (native) |
 | **Owner** | Project Lead |
-| **Failure condition** | Gate owner field empty → task assigned to the Project Lead, flagged |
-| **Human override** | Gates can be marked N/A only with a comment from the Project Lead |
+| **Failure condition** | Gate owners not set on the tasks → the Project Lead assigns them |
+| **Human override** | A gate can be tagged N/A only with a Project Lead comment |
 
 ### A6 — Launch → baseline and 30/60/90 reviews
 
 | | |
 |---|---|
-| **Trigger** | `deal_stage_changed` → `13 Launch` (moved on launch day) |
-| **Action** | `create_task` × 4: "13D Capture measurement baseline" (due 0 days), "14A 30-day review" (`due_in_days` 30), "14B 60-day review" (60), "14C 90-day review" (90), each with the stage card link |
+| **Trigger** | `project_task_completed` on the S13 Launch stage task (or `deal_stage_changed` → `13 Launch` on launch day) |
+| **Action** | `create_project_task` × 4 in the S14 list: "13D Capture measurement baseline" (due 0 days), "14A 30-day review" (`due_in_days` 30), "14B 60-day review" (60), "14C 90-day review" (90), each assigned to the Strategist |
 | **System** | Chirply workflow (native) |
 | **Owner** | Strategist |
-| **Failure condition** | Deal moved to 13 before the actual launch date, so the dates drift |
-| **Human override** | Edit the due dates. If the launch slips, the Project Lead re-dates the three review tasks |
+| **Failure condition** | Triggered before the actual launch date, so the dates drift |
+| **Human override** | Edit the due dates. If launch slips, the Project Lead re-dates the three review tasks |
 
 ### A7 — Stage due date approaching
 
