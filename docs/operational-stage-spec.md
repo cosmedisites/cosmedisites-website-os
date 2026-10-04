@@ -32,7 +32,7 @@ everything they need, with links.
 | Company / contact | built-in link | Client and main client contact (approver) |
 | Owner | built-in user | **Project Lead** |
 | Domain | url | |
-| Strategist · SEO Lead · Designer · Developer · Content Lead · Compliance Reviewer · Independent QA Reviewer | select (team list), one field each | SOP roles. Chirply has no user-type custom field. One person may hold several roles, but every stage still has one named owner (SOP) |
+| Strategist · SEO Lead · Designer · Developer · Content Lead · Compliance Reviewer · Independent QA Reviewer | **user (Team member)**, one field each | SOP roles. Team-member fields shipped 2026-10-04 (deals only), so deals can be filtered by `member_field` + `member` ("projects where I'm the designer"). One person may hold several roles, but every stage still has one named owner (SOP) |
 | Target launch | date | |
 | Commercial objective | textarea | One sentence, from the approved Strategy Brief |
 | Priority services | multiselect or textarea | |
@@ -46,34 +46,51 @@ everything they need, with links.
 
 ### 1.3 Project = delivery workspace (one per deal)
 
+Created **automatically from the project template "Website Redesign"** when a deal is made from the
+deal template (`deal_templates_create` → `project_template_id`). The project is named after the deal,
+starts on the day the deal is created, and is linked to it.
+
+- **Board columns** (renamed from To do / In progress / Done, saved in the template): the Tracker's
+  stage statuses **Not Started · In Progress · Blocked · Ready for Review · Complete**. N/A is a tag
+  (below), so there are five columns.
+- **Tags:** `N/A`, `Client-gated`, `Locks decision`, `Exception authorised`. Set with
+  `projects_set_task_tags`, which replaces the task's whole tag list.
 - **Task lists:** one per stage (`S00 Brief` … `S14 Measurement`).
 - **In each list:** one **stage task**, named per the AI pack convention, e.g.
   `S03 — Positioning — 3A → 3B + 3C → 3D → 3E`.
-  - Assignees: the stage **owner** (SOP) and the **reviewer**. They must be **project members**
-    (V2), so add the project team as members at set-up.
+  - Assignee: the stage **owner** (SOP). Assignees must be project members.
+  - **Reviewer:** the native task reviewer (`projects_set_task_reviewer`), i.e. the SOP reviewer for
+    that stage. This replaces the old `✔ Reviewer sign-off` subtask.
   - Due date: stage deadline.
-  - Status: project boards are fixed at To do / In progress / Done, and project tasks have no tags
-    (V10). The Tracker's stage statuses are expressed like this:
-
-    | Tracker status | In Chirply |
-    |---|---|
-    | Not Started | Stage task open; deal not yet at this stage |
-    | In Progress | Deal is at this pipeline stage; task in *In progress* |
-    | Blocked | Deal field **Health = Blocked** + Blocker text |
-    | Ready for Review | All DoD subtasks done; `✔ Reviewer sign-off` still open |
-    | Complete | Stage task completed (reviewer signed off); deal moved on |
-    | N/A | Stage task completed with `N/A —` prefixed to its title, plus a deal note giving the reason |
-
-  - Description: **plain text** (V4). A short version of the stage card, with **bare URLs, one per
-    line**. The full stage card with formatted links goes in a **project notebook** (HTML), one per stage.
+  - Description: **plain text** (still no formatting). A short version of the stage card.
+  - **Links:** the stage card, SOP section, template, each prompt and the Drive folder are added as
+    **task links** (`projects_add_task_link`), so they're clickable without relying on the description.
+  - **Comments:** validator results, review notes and decisions go in the task's comment thread
+    (`projects_add_comment`). Comments notify the assignee and reviewer.
 - **Subtasks of the stage task:**
   - one per **SOP Definition of Done** item;
-  - one per **"also required"** gate check (validator PASS, approval recorded, lock recorded);
-  - a final `✔ Reviewer sign-off — <reviewer>` subtask.
+  - one per **"also required"** gate check (validator PASS, approval recorded, lock recorded).
 - **Stage 12** has three gate tasks, `QA — Compliance` (Compliance Reviewer), `QA — Strategy / UX`
-  (Independent QA Reviewer) and `QA — Technical / SEO` (Developer + SEO Lead). Each has a single
-  `Gate sign-off` subtask. The 29 individual checks live in the Tracker **QA** tab and are not
-  duplicated as subtasks.
+  (Independent QA Reviewer) and `QA — Technical / SEO` (Developer + SEO Lead). Each has a native
+  reviewer and links to the Tracker **QA** tab, which holds the 29 individual checks (not duplicated
+  as subtasks).
+
+How the Tracker's stage statuses map:
+
+| Tracker status | In Chirply |
+|---|---|
+| Not Started | Stage task in **Not Started** |
+| In Progress | Stage task in **In Progress**; the deal is at this pipeline stage |
+| Blocked | Stage task in **Blocked**, plus deal **Health = Blocked** and Blocker text (for the pipeline view) |
+| Ready for Review | Owner runs **request review** (`projects_request_review`); task moves to **Ready for Review** |
+| Complete | Reviewer **approves** (`projects_approve_review`, which completes the task); task moves to **Complete** |
+| N/A | Tag **N/A** plus a comment giving the reason; task completed |
+
+> **Change log for this section.** On 2026-10-03, Chirply had no project comments, fixed columns, no
+> tags, no reviewer and no project templates, so this section used deal notes, the deal Health field
+> and a reviewer subtask. Chirply shipped all five by 2026-10-04 (see the
+> [audit update](chirply-audit.md#platform-update-2026-10-04)). These are configuration changes,
+> not SOP changes.
 
 ### 1.4 Custom object: "Approval Record" (mirrors the Tracker *Approvals* tab)
 
@@ -105,7 +122,7 @@ Stage status, approvals and the dashboard live in Chirply.**
 
 ## 2. What a team member sees: the stage task
 
-The description is generated from `dist/stage-config.json` (per release), so it always matches GitHub.
+The description and task links are generated from `dist/stage-config.json` (per release), so they always match GitHub.
 Example for Stage 03:
 
 ```
@@ -144,7 +161,7 @@ Also required:
 ☐ 3D validator returns PASS                                    (Workflow Index)
 ☐ Client strategic approval recorded in the Approval Record
 ☐ Approved positioning added to LOCKED DECISIONS in the MPC
-☐ Reviewer sign-off
+→ then: Request review (reviewer: Creative / Project Lead)
 
 APPROVAL
 Required: Yes (client strategic approval). On approval, lock: Positioning.
@@ -159,33 +176,37 @@ NEXT
 Stage 04 — IA + SEO                      Stage card → [open]   OS version: v1.0
 ```
 
-In the stage task description each `[open]` becomes a **bare URL** on its own line, because
-descriptions are plain text (V4). Whether bare URLs are auto-linked is a UI check. The same card with
-proper links lives in the stage's **project notebook** (HTML), which keeps `<a href>` links.
+Each `[open]` is a **task link** (`projects_add_task_link`), so it's clickable even though the
+description itself is plain text. The longer stage card can also live in the stage's **project notebook**
+(HTML, with version history), but task links remove the need for that on most stages.
 
 ## 3. Moving stage: the human gate
 
-1. The owner works through the DoD subtasks and runs the validator. Project tasks can't take comments
-   (V3), so **the PASS/FAIL/BLOCKED result is logged as a note on the deal timeline**, e.g.
-   `S03 — 3D validator: PASS — <link to the report in Drive>`.
+1. The owner works through the DoD subtasks and runs the validator. **The PASS/FAIL/BLOCKED result
+   is posted as a comment on the stage task**, e.g. `3D validator: PASS — <link to the report in Drive>`.
 2. For client-gated stages, the Approval Record is set to **Approved**, with an evidence link.
-3. When all DoD subtasks are done, the stage is **Ready for Review**. The reviewer ticks
-   `✔ Reviewer sign-off` and completes the stage task (**Complete**).
-4. **The Project Lead moves the deal to the next pipeline stage.** This is the "stage complete" event.
-5. Automation ([automation map](automation-map.md)) flags any DoD item still open and opens the next
+3. When every DoD subtask is done, the owner **requests review**. The task moves to
+   **Ready for Review** and the reviewer is notified.
+4. The reviewer either **approves** (task completed → **Complete**) or **returns** it with a comment
+   (`projects_return_review`; back to **In Progress**).
+5. **The Project Lead moves the deal to the next pipeline stage.** This remains the business-level
+   "stage complete" event.
+6. Automation ([automation map](automation-map.md)) flags any DoD item still open and opens the next
    stage task.
 
 Moving a deal while DoD items are open requires an **authorised exception**: a comment on the stage
-task saying who authorised it, why, and which items remain (Workflow Index step 7).
+task saying who authorised it, why, and which items remain, plus the tag `Exception authorised`
+(Workflow Index step 7).
 
 ## 4. Operational dashboard
 
 | Need | Where |
 |---|---|
 | Active redesign projects, current stage, owner, target launch | Pipeline board; saved report over deals (stage × owner) |
-| Blocked projects | Deals with Health = Blocked |
+| Blocked projects | Deals with Health = Blocked; stage tasks in the **Blocked** column |
 | Upcoming approvals | Approval Records with Status = Pending; deal field `Next approval due` |
 | Missing inputs | Weekly digest: Tracker *Content Inputs* rows not Verified/N/A (the Tracker's own "Open Inputs" KPI) |
+| Pending reviews | `projects_my_reviews` per reviewer |
 | QA status | Stage 12 gate tasks; weekly digest: Tracker *QA* rows with Status = Fix (the Tracker's "QA Fixes Open" KPI) |
 | Overdue items | **Weekly digest**, because Chirply's report builder has no task dataset |
 
@@ -196,9 +217,20 @@ Quickstart's five Monday-morning questions.
 
 ## 5. Repeatable set-up for a new client
 
-1. Create the deal from the **deal template** "Website Redesign" (prefills pipeline, stage 00 and fields).
-2. Run provisioning ([automation map](automation-map.md), A1). It creates the project, 15 task lists,
-   stage tasks with descriptions, DoD and reviewer subtasks from the current release's
-   `stage-config.json`, and copies the Drive folder template, Tracker Sheet and MPC Doc.
-3. Until provisioning is automated, build the pilot project **by hand** and use it as the pattern
-   (implementation plan, step F).
+**One-off (before the pilot):**
+1. Build the project **"Website Redesign"** once by hand from the stage cards: five status columns,
+   tags, 15 task lists, stage tasks with links, DoD subtasks and reviewers. Then
+   `projects_save_as_template` it.
+   Re-save the template after each OS release; existing projects keep their version.
+2. Create or update the **deal template** "Website Redesign" with `project_template_id` set to that
+   template.
+
+**Per client:**
+1. Create the deal from the deal template. **The project is created automatically and linked to the deal.**
+2. Set the deal's team-member role fields. Add the team as project members, and check each stage
+   task's assignee and reviewer.
+3. Copy the Drive folder template, Tracker Sheet and MPC Doc (manual, or Apps Script: [A1](automation-map.md)).
+
+> To verify on first use: whether the template keeps the renamed columns, tags, subtasks, task
+> links and reviewers. `include_people` covers people. Comments, files and completion state are
+> never copied, by design.

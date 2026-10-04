@@ -234,27 +234,27 @@ generated through the API (see [automation map](automation-map.md), A8).
 
 | Capability | Required? | Chirply native? | Via configuration? | Via API / integration? | Needs companion tool? | Unable to support? | Rating | Evidence / notes |
 |---|---|---|---|---|---|---|---|---|
-| Project record | Must | Partly (deal) | ✅ custom fields | – | – | Role fields aren't user links | **AMBER** | OBSERVED-live fields |
+| Project record | Must | Partly (deal) | ✅ custom fields incl. team-member type | – | – | – | **GREEN** | User fields shipped 2026-10-04 |
 | 15 stages | Must | ✅ pipeline | – | – | – | – | **GREEN** | DOCUMENTED |
 | Progress display | Must | ✅ pipeline board | ✅ project dashboard counts | – | – | % per stage task | **GREEN** | V2: open/completed counts per project and assignee |
-| Stage owner + due date | Must | – | ✅ project stage tasks | – | – | Assignees must be project members | **GREEN** | V2 verified |
-| Reviewer | Must | ❌ | ✅ reviewer subtask | – | – | No reviewer field | **AMBER** | Convention |
+| Stage owner + due date | Must | ✅ project stage tasks | – | – | – | Assignees must be project members | **GREEN** | V2 verified |
+| Reviewer | Must | ✅ native reviewer + request/approve review | – | – | – | One reviewer per task | **GREEN** | Shipped 2026-10-04 |
 | Dependencies | Nice | ❌ | – | – | – | ✅ | **RED** | Sequence is implicit in the stage order; acceptable |
 | Gate enforcement | Must (flag) | ❌ | – | ✅ flag via automation | – | Hard prevention | **AMBER** | Human gate + automated flag |
-| Repeatable template / duplication | Must | Deal templates only | Manual from stage cards | ✅ REST API (key needed, V7) | – | No project template/duplicate | **AMBER** | Manual set-up for the pilot; script later |
+| Repeatable template / duplication | Must | ✅ project templates; deal template auto-creates the project | – | – | – | – | **GREEN** | Shipped 2026-10-04; verify what the template copies |
 | DoD checklists | Must | ❌ | ✅ subtasks | – | – | Checklist object | **AMBER** | V2 verified: subtasks tick off and are counted |
-| Task owner/due/status | Must | ✅ open/completed | – | – | – | Custom statuses / tags on project tasks (V10) | **AMBER** | Status = deal stage + task + reviewer subtask + Health |
-| Task attachments | Should | Project-level files only | ✅ Drive links | – | Drive (existing) | Per-task files (V3) | **AMBER** | Files live in Drive anyway |
-| Task comments | Should | CRM tasks only | ✅ deal timeline notes | – | – | Comments on project tasks (V3 FAIL) | **AMBER** | Validator results logged as deal notes |
+| Task owner/due/status | Must | ✅ custom board columns + tags | – | – | – | – | **GREEN** | Columns = Tracker stage statuses (shipped 2026-10-04) |
+| Task attachments | Should | ✅ task files (images/PDF/AV) + task links | – | – | Drive (existing) | Docs/zips as task files | **GREEN** | Links to Drive are the norm |
+| Task comments | Should | ✅ project task comments | – | – | – | – | **GREEN** | Shipped 2026-10-04; validator results go here |
 | Approvals with statuses | Must | ❌ | ✅ custom object (Tracker *Approvals* columns) | ✅ triggers | – | – | **GREEN** | V6 verified: status change → automation in about 12 seconds |
 | Client e-sign approval | Nice | ✅ documents | – | – | – | – | **GREEN** | |
 | Content / input tracker | Must | – | Possible | ✅ Sheets triggers | **Tracker *Content Inputs* tab (Google Sheets)** | – | **AMBER** | Already part of the methodology |
 | Proof inventory | Must | – | Weak | – | **Tracker *Proof Inventory* tab** | – | **AMBER** | Already part of the methodology |
 | Three QA gates | Must | – | ✅ gate tasks + sign-off | – | **Tracker *QA* tab** (check level) | – | **AMBER** | One home per check |
-| Stage-transition automations | Should | ✅ deal-stage triggers → CRM tasks | – | ✅ webhook → REST API (V7) | Apps Script glue (existing Workspace) | Project-task triggers/actions | **AMBER** | V5 built + activated; firing to confirm on the pilot deal |
+| Stage-transition automations | Should | ✅ project-task triggers + create/update project task | – | – | Apps Script for Drive/Sheets only | Task-created trigger; reviewer/tags via workflow | **GREEN** | Shipped 2026-10-04; V5 firing still to confirm |
 | Date-relative 30/60/90 | Should | ✅ `due_in_days` | – | – | – | Date-field trigger | **AMBER** | Fire on stage move |
 | Internal notifications / Slack | Should | Partly (email) | – | ✅ webhook | – | Native Slack | **AMBER** | |
-| Knowledge links | Must | ✅ url fields | ✅ bare URLs in task descriptions; HTML notebook | – | – | Rich links in task descriptions | **AMBER** | V4: descriptions are plain text |
+| Knowledge links | Must | ✅ task links + url fields | – | – | – | Rich text in descriptions | **GREEN** | `projects_add_task_link` |
 | Client comms, reminders, meeting notes | Must | ✅ | – | – | – | – | **GREEN** | Core strength |
 | Cross-project ops dashboard | Must | Deals only, one dimension per report | ✅ health field | ✅ weekly digest | – | Native task reporting (V9) | **AMBER** | Digest closes the gap |
 | Custom in-platform app | Optional | – | – | – | – | `appDev` off by agency override | **RED** | V8. Not needed for Option A |
@@ -308,9 +308,32 @@ Other confirmed facts:
 4. **Clean-up:** delete the leftover test project **"ZZ-TEST Website OS Project"** and the custom
    object type **"ZZ-TEST Approval Records"** in the UI (the API has no delete for these).
 
+## Platform update (2026-10-04)
+
+After the feature requests went in, Chirply shipped most of the gaps. This was re-checked read-only
+in the CosmediSites workspace on 2026-10-04 (OBSERVED-catalogue: the actions exist with the schemas
+quoted; they have not been exercised yet).
+
+| Gap (2026-10-03) | Now | What shipped |
+|---|---|---|
+| No comments on project tasks (V3) | **Shipped** | `projects_add_comment` / `projects_list_task_comments` / edit / delete. Notifies assignees and reviewer (in-account only) |
+| Files attach to the project only (V3) | **Mostly** | `projects_attach_task_file` (task-level, 10 MB; still images/PDF/audio/video only) and `projects_add_task_link` for any URL |
+| Fixed board columns, no tags (V10) | **Shipped** | `projects_create_stage` / `update_stage` / `reorder_stages` / `remove_stage` (up to 30 per project). Tags: `projects_create_tag`, `projects_set_task_tags` (replaces the list); `projects_list_items` filters by tag |
+| No project template / duplicate | **Shipped** | `projects_save_as_template`, `projects_create_from_template` (optional `deal_id`), `projects_duplicate`, `projects_for_deal`. **`deal_templates_create.project_template_id`** auto-creates a linked project when a deal is made from the deal template (admin only) |
+| Workflows only create CRM tasks; no project triggers | **Mostly** | Actions `create_project_task`, `update_project_task`. Triggers `project_task_completed`, `project_subtask_completed`, `project_task_moved`. Still missing: a project-task-*created* trigger; workflow actions can't set reviewer, tags or comments |
+| No reviewer field | **Shipped** | Native reviewer on project tasks: `projects_set_task_reviewer`, `projects_request_review`, `projects_approve_review` (completes the task), `projects_return_review`, `projects_my_reviews`. CRM tasks also gained `reviewer_id` |
+| No team-member custom field | **Shipped** | Field type `user` on **deals** and custom objects; `deals_list` filters by `member_field` + `member` |
+| Reports: one dimension, no task dataset (V9) | **Unchanged** | `projects_dashboard` per project only |
+| Plain-text task descriptions (V4) | **Unchanged** | Task links make this a minor issue |
+| No date-reached / deal-field-changed trigger | **Unchanged** | |
+| No API delete for projects / object types | **Unchanged** | `projects_delete_notebook` added. The two `ZZ-TEST` leftovers still need deleting in the UI |
+
+Design impact: see the updated [operational stage spec](operational-stage-spec.md) and
+[automation map](automation-map.md). These are configuration changes only; no SOP change.
+
 ## Recommendation
 
-**Option A is confirmed in the live workspace, with the design adjustments above.** Chirply is the
+**Option A is confirmed in the live workspace.** Since the 2026-10-04 platform update, most workarounds are no longer needed. Chirply is the
 main operational front end, configured as specified in the
 [operational stage spec](operational-stage-spec.md). The methodology's own Operational Tracker
 v1.0, as a Google Sheet per project, holds the tabular registers (Content Inputs, Proof Inventory,
