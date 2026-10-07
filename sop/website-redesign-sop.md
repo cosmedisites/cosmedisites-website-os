@@ -13,8 +13,14 @@ The Website Strategy Playbook explains the methodology. This SOP controls execut
 ## Core rule
 
 > **Architecture follows business strategy.**
+>
+> **The design system follows the creative direction, not the other way around.**
+>
+> **SEO and CRO are constraints to design within, not excuses for generic design.**
 
 Do not begin visual design until the business direction, positioning and site architecture are understood.
+
+**Stage sequence (v1.1):** 00 Commercial Brief → 01 Evidence → 02 Diagnosis → 03 Positioning → 04 IA + SEO → 05 Brand + Visual Direction → 05T Creative Translation → 05V Creative Validation → 06 Page + Component System → 07 Proof + Content + Photography → 08 Client Strategy Review → 09 Approval Gate → 10 Production Inputs → 11 Build → 12 QA → 13 Launch → 14 Measurement. Stage numbers 06 to 14 are unchanged; the creative layer is 05T and 05V. See the [05T](../workflows/stage-05t-creative-translation/README.md) and [05V](../workflows/stage-05v-creative-validation/README.md) cards.
 
 ---
 
@@ -82,6 +88,10 @@ Lower-level preference should not casually overturn a higher-level decision.
 - [ ] Website role in acquisition is clear.
 - [ ] Known SEO/compliance constraints are captured.
 - [ ] Client confirms the factual brief.
+- [ ] **Creative Intensity rated** (Conservative / Elevated / High-expression), scored on: audience visual sophistication; competitive visual bar; brand asset strength; purchase psychology (emotion, identity, status); commercial value (LTV, premium pricing); compliance risk (may constrain individual elements, never an automatic reason for a dull site). Scores recorded in the brief.
+- [ ] **Strategic invariants captured as a short LOCKED list**: positioning, entities, service architecture, search intent, CRO paths, proof requirements, mobile CTA, compliance limits. Later creativity cannot damage these.
+
+A GP-style practice may be Conservative; a cosmetic clinic with Instagram/TikTok-led acquisition and a premium audience is usually High-expression. The rating tells the team whether "clean and credible" is enough or whether creative differentiation is a commercial requirement.
 
 The team can answer:
 
@@ -129,6 +139,7 @@ And:
 - [ ] Proof inventory started.
 - [ ] Key unknowns identified.
 - [ ] Strategic diagnosis drafted.
+- [ ] Brand evidence gathered beyond the website: the client's Instagram/TikTok, premises photos, team, uniforms, signage and existing photography/video inventoried for Stage 05.
 
 Required diagnostic sentence:
 
@@ -237,7 +248,7 @@ No visual design begins until this is internally approved.
 
 ---
 
-# Stage 5 — Visual Direction
+# Stage 5 — Brand + Visual Direction
 
 **Owner:** Designer  
 **Reviewer:** Strategist / Creative Lead  
@@ -264,10 +275,16 @@ No visual design begins until this is internally approved.
 - [ ] Photography direction is defined.
 - [ ] CTA hierarchy is unambiguous.
 - [ ] Client-facing explanation avoids internal design jargon.
+- [ ] **Category visual benchmark**: MATCH / BEAT / AVOID board from 5 to 10 direct competitors, strong adjacent brands and the client's own social and physical brand. Not "sites we like": record visual patterns, category clichés and the current creative ceiling. For visual categories, Instagram, TikTok, clinic interiors, practitioner personal brands and adjacent beauty/fashion/hospitality brands are mandatory sources.
+- [ ] **Brand reality audit**: "What does this brand look like when it isn't a website?" Brand DNA recorded: colours, contrast, image style, motion, typography, personality, distinctive physical assets.
+- [ ] **Asset reality check**: USE / SHOOT / SOURCE / DO NOT FAKE matrix, and the client shoot request sent.
+- [ ] **Creative thesis**: one line (HAUS: "fashion-forward aesthetics house with clinical credibility", not "premium editorial clinic"), with 3 to 5 principles and explicit anti-goals.
+
+Client approval of the direction now happens at Stage 05V, on the keyframes, not on mood boards. Next: Stage 05T (Creative Translation).
 
 ---
 
-# Stage 6 — Page + Component System
+# Stage 6 — Page + Component System (from approved keyframes)
 
 **Owner:** Designer / UX Lead  
 **Reviewer:** Strategist  
@@ -305,6 +322,10 @@ No visual design begins until this is internally approved.
 - [ ] Core components are reusable.
 - [ ] Responsive behaviour is defined.
 - [ ] New treatments/practitioners/locations can be added without redesigning the system.
+- [ ] **The component system reproduces the approved creative keyframes without materially flattening their visual character** (side-by-side check against 05T).
+- [ ] Do not start until Stage 05V, including the asset gate, has passed.
+
+Commodity pages may use disciplined templates; high-value pages keep bespoke visual moments.
 
 ---
 
@@ -360,6 +381,7 @@ Never fabricate:
 - [ ] Photography requirements are defined.
 - [ ] Patient/model consent requirements are identified.
 - [ ] Design does not depend on evidence nobody can supply.
+- [ ] The shoot brief derives from the Stage 05 asset matrix; every SHOOT item has a date and owner; nothing marked DO NOT FAKE is substituted.
 
 ---
 
@@ -508,12 +530,14 @@ Developer receives:
 - [ ] Desktop/mobile states are implemented.
 - [ ] SEO/migration requirements are implemented.
 - [ ] Tracking requirements are implemented.
+- [ ] **Native implementation pilot first**: hero plus 2 to 3 core sections built in Elementor and checked for motion, imagery, responsive behaviour, Core Web Vitals, editability and visual impact at desktop and mobile. Pilot approved before rolling through the remaining pages.
+- [ ] Roll-out scales without flattening: commodity pages templated, high-value pages keep bespoke moments.
 
 ---
 
 # Stage 12 — Compliance + Strategy + Technical QA
 
-Treat these as three separate checks.
+Treat these as separate checks. Since v1.1 there are four independent gates: compliance, strategy/UX, technical/SEO and creative (12F).
 
 ## A. Compliance Review
 
@@ -565,11 +589,28 @@ Check:
 - Broken links
 - Consent/cookie implementation where applicable
 
+## F. Creative QA (12F)
+
+**Owner:** Independent reviewer who did not design the site
+
+Check:
+
+- Brand Swap Test still passes on the built site
+- Built pages match the approved keyframes without flattening
+- Real assets in place; no placeholder dictating layout
+- Motion performant, pausable, respects reduced-motion
+- High-value pages kept their bespoke moments
+
+Route: 12A + 12B + 12C + 12F → 12D → 12E.
+
 ## Definition of Done
+
+All four gates (compliance, strategy/UX, technical/SEO, creative) signed off independently.
 
 - [ ] Compliance gate signed off.
 - [ ] Strategy/UX gate signed off.
 - [ ] Technical/SEO gate signed off.
+- [ ] Creative gate (12F) signed off.
 - [ ] Blocking issues resolved or explicitly accepted.
 
 ---

@@ -59,6 +59,8 @@ Route: **11A + 11B + 11C → 11D**
 - [ ] Desktop/mobile states are implemented.
 - [ ] SEO/migration requirements are implemented.
 - [ ] Tracking requirements are implemented.
+- [ ] **Native implementation pilot first**: hero plus 2 to 3 core sections built in Elementor and checked for motion, imagery, responsive behaviour, Core Web Vitals, editability and visual impact at desktop and mobile. Pilot approved before rolling through the remaining pages.
+- [ ] Roll-out scales without flattening: commodity pages templated, high-value pages keep bespoke moments.
 
 **Also required before moving stage:**
 

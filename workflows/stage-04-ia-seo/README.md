@@ -86,4 +86,4 @@ Route: **4A → 4B + 4C → 4D → 4E**
 
 ## Next
 
-[Stage 05 — Visual Direction](../stage-05-visual-direction/README.md)
+[Stage 05 — Brand + Visual Direction](../stage-05-visual-direction/README.md)

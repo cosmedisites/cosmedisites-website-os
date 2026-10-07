@@ -19,14 +19,16 @@
 | 2 | Strategic Diagnosis | 2A → 2B → 2C | Strategic Diagnosis | Template 03 | Internal |
 | 3 | Positioning | 3A → 3B + 3C → 3D → 3E | Positioning Thesis + Brand Architecture | Template 04 | Client strategic approval |
 | 4 | IA + SEO | 4A → 4B + 4C → 4D → 4E | Sitemap / SEO Architecture | Template 06 | Conditional client approval |
-| 5 | Visual Direction | 5A → 5B + 5C → 5D | Visual Direction | Template 07 | Client approval |
-| 6 | Page + Component System | 6A + 6B + 6C + 6D → 6E | Page / Component System | Template 08 | Internal / included in review |
+| 5 | Brand + Visual Direction | 5A → 5B + 5C → 5D | Visual Direction + creative thesis + asset matrix | Template 07 | Internal; client approves at 05V |
+| 5T | Creative Translation | [Stage card](stage-05t-creative-translation/README.md) | 3 to 4 high-fidelity keyframes | None | Internal |
+| 5V | Creative Validation | [Stage card](stage-05v-creative-validation/README.md) | Collision test + asset gate + approved keyframes | None | Client approval of keyframes |
+| 6 | Page + Component System (from approved keyframes) | 6A + 6B + 6C + 6D → 6E | Page / Component System | Template 08 | Internal / included in review |
 | 7 | Proof + Content + Photography | 7A + 7B + 7C → 7D + 7E | Proof Inventory + Photography Brief + content gaps | Templates 09–10 | Client supplies inputs |
 | 8 | Client Strategy Review | 8A → 8B → 8C → 8D | Client Strategy Deck | Template 11 | Review meeting |
 | 9 | Approval Gate | 9A + 9B → 9C + 9D; use 9E for reopened decisions | Approval Record + revision plan | Template 12 | Client sign-off |
 | 10 | Production Inputs | 10A → 10B/10C → 10D | Content / Input Tracker + build readiness | Template 13 | Internal gate |
 | 11 | Build | 11A + 11B + 11C → 11D | Build Handoff + implementation variance | Template 14 | Internal |
-| 12 | QA | 12A + 12B + 12C → 12D → 12E | Compliance / Strategy / Technical QA | Template 15 | Internal sign-off |
+| 12 | QA | 12A + 12B + 12C + 12F → 12D → 12E | Compliance / Strategy / Technical / Creative QA | Template 15 | Internal sign-off |
 | 13 | Launch | 13A → 13B → 13C + 13D; 13E as needed | Launch runbook + baseline | Template 16 | Launch sign-off |
 | 14 | 30/60/90 Measurement | 14A → 14B → 14C → 14D → 14E | Post-launch review + learning | Template 17 | Internal / client review |
 
@@ -71,13 +73,14 @@ Carry across:
 - “What should this clinic be known for?” → 3A–3E
 - “Build the sitemap without killing SEO” → 4A–4E
 - “Turn strategy into art direction” → 5A–5D
+- “Make the design memorable before systemising it” → Stage 05T, then 05V
 - “Design reusable pages/components” → 6A–6E
 - “Get proof/content/photos together” → 7A–7E
 - “Build the client presentation” → 8A–8D
 - “Handle client comments/approval” → 9A–9E
 - “Chase and verify production inputs” → 10A–10D
 - “Hand to dev/build correctly” → 11A–11D
-- “QA before launch” → 12A–12E
+- “QA before launch” → 12A–12F
 - “Launch safely” → 13A–13E
 - “Review 30/60/90 performance” → 14A–14E
 - “Write client comms” → C01–C09

@@ -1,4 +1,4 @@
-# STAGE 05 — VISUAL DIRECTION
+# STAGE 05 — BRAND + VISUAL DIRECTION
 
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
@@ -13,7 +13,7 @@ Status values: Not Started · In Progress · Blocked · Ready for Review · Comp
 
 ## Objective
 
-Translate approved positioning into a coherent, defensible visual system without allowing aesthetic preference to rewrite strategy.
+Establish the brand's real visual identity and a creative thesis tied to positioning: brand DNA, category benchmark, creative intensity and the assets the direction needs.
 
 ## Inputs
 
@@ -50,18 +50,22 @@ Route: **5A → 5B + 5C → 5D**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 5 — Visual Direction*
+*Source: SOP v1.0, Stage 5 — Brand + Visual Direction*
 
 - [ ] Every major visual choice has a strategic rationale.
 - [ ] System supports desktop and mobile.
 - [ ] Photography direction is defined.
 - [ ] CTA hierarchy is unambiguous.
 - [ ] Client-facing explanation avoids internal design jargon.
+- [ ] **Category visual benchmark**: MATCH / BEAT / AVOID board from 5 to 10 direct competitors, strong adjacent brands and the client's own social and physical brand. Not "sites we like": record visual patterns, category clichés and the current creative ceiling. For visual categories, Instagram, TikTok, clinic interiors, practitioner personal brands and adjacent beauty/fashion/hospitality brands are mandatory sources.
+- [ ] **Brand reality audit**: "What does this brand look like when it isn't a website?" Brand DNA recorded: colours, contrast, image style, motion, typography, personality, distinctive physical assets.
+- [ ] **Asset reality check**: USE / SHOOT / SOURCE / DO NOT FAKE matrix, and the client shoot request sent.
+- [ ] **Creative thesis**: one line (HAUS: "fashion-forward aesthetics house with clinical credibility", not "premium editorial clinic"), with 3 to 5 principles and explicit anti-goals.
 
 **Also required before moving stage:**
 
 - [ ] 5D validator returns PASS *(Workflow Index step 7)*
-- [ ] Client visual-direction approval recorded in the Approval Record *(SOP Stage 5 / Tracker)*
+- [ ] Client approval of the direction is recorded at Stage 05V, on the keyframes, not on mood boards *(Website OS v1.1)*
 
 > Never move to the next stage because the previous one feels approximately finished.
 > Move when its Definition of Done has been met, or an authorised exception is recorded.
@@ -69,14 +73,14 @@ Route: **5A → 5B + 5C → 5D**
 ## Approval
 
 - Approval required: **Yes**
-- Gate: Client approval
+- Gate: Client approval at Stage 05V
 
 ## Method
 
-- SOP: [Stage 5 — Visual Direction](../../sop/website-redesign-sop.md#stage-5--visual-direction)
+- SOP: [Stage 5 — Brand + Visual Direction](../../sop/website-redesign-sop.md#stage-5--brand--visual-direction)
 - Playbook: [5. Before / After Direction](../../playbook/website-strategy-playbook.md#5-before--after-direction)
 - Playbook: [7. Visual System](../../playbook/website-strategy-playbook.md#7-visual-system)
 
 ## Next
 
-[Stage 06 — Page + Component System](../stage-06-page-system/README.md)
+[Stage 05T — Creative Translation](../stage-05t-creative-translation/README.md)

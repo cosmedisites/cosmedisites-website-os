@@ -57,6 +57,7 @@ Route: **1A + 1B → 1C → 1D**
 - [ ] Proof inventory started.
 - [ ] Key unknowns identified.
 - [ ] Strategic diagnosis drafted.
+- [ ] Brand evidence gathered beyond the website: the client's Instagram/TikTok, premises photos, team, uniforms, signage and existing photography/video inventoried for Stage 05.
 
 **Also required before moving stage:**
 

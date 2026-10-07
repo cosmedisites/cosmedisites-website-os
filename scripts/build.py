@@ -215,7 +215,9 @@ def stage_card(cfg: dict, stage: dict, nxt: dict | None, catalog: dict, anchors:
     if extras:
         lines += ["", "## Handoffs and client communication", ""] + extras
     lines += ["", "## Next", ""]
-    if nxt:
+    if stage.get("next"):
+        lines.append(f"[{stage['next']['label']}]({stage['next']['path']})")
+    elif nxt:
         lines.append(f"[Stage {nxt['id']} — {nxt['name']}](../{nxt['slug']}/README.md)")
     else:
         lines.append("End of workflow. Log reusable learning from 14E as GitHub Issues.")
@@ -232,6 +234,10 @@ def readme_with_table(cfg: dict) -> str:
     for s in cfg["stages"]:
         rows.append(f"| {s['id']} | [{s['name']}](workflows/{s['slug']}/README.md) | {s['owner']} "
                     f"| {s['output']} | {s['approval']} |")
+        for x in cfg.get("interstitial_stages", []):
+            if x["after"] == s["id"]:
+                rows.append(f"| {x['id']} | [{x['name']}](workflows/{x['slug']}/README.md) | {x['owner']} "
+                            f"| {x['output']} | {x['approval']} |")
     text = README.read_text(encoding="utf-8")
     if not TABLE_RE.search(text):
         errors.append("README.md: stages-table markers missing")

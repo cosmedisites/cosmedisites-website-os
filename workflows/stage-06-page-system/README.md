@@ -1,4 +1,4 @@
-# STAGE 06 — PAGE + COMPONENT SYSTEM
+# STAGE 06 — PAGE + COMPONENT SYSTEM (FROM APPROVED KEYFRAMES)
 
 <!-- GENERATED from ops/stages.yaml by scripts/build.py. Do not edit by hand. -->
 
@@ -13,7 +13,7 @@ Status values: Not Started · In Progress · Blocked · Ready for Review · Comp
 
 ## Objective
 
-Create reusable page and component patterns that scale across treatments, concerns, practitioners, locations and future growth.
+Reverse-engineer the approved Stage 05T keyframes into reusable Elementor globals, Atomic components, page patterns, responsive behaviour and content rules. The component library is derived from the creative, not the creative from the component library.
 
 ## Inputs
 
@@ -52,12 +52,14 @@ Route: **6A + 6B + 6C + 6D → 6E**
 
 ## Definition of Done
 
-*Source: SOP v1.0, Stage 6 — Page + Component System*
+*Source: SOP v1.0, Stage 6 — Page + Component System (from approved keyframes)*
 
 - [ ] Required page types have a template.
 - [ ] Core components are reusable.
 - [ ] Responsive behaviour is defined.
 - [ ] New treatments/practitioners/locations can be added without redesigning the system.
+- [ ] **The component system reproduces the approved creative keyframes without materially flattening their visual character** (side-by-side check against 05T).
+- [ ] Do not start until Stage 05V, including the asset gate, has passed.
 
 **Also required before moving stage:**
 
@@ -73,7 +75,7 @@ Route: **6A + 6B + 6C + 6D → 6E**
 
 ## Method
 
-- SOP: [Stage 6 — Page + Component System](../../sop/website-redesign-sop.md#stage-6--page--component-system)
+- SOP: [Stage 6 — Page + Component System (from approved keyframes)](../../sop/website-redesign-sop.md#stage-6--page--component-system-from-approved-keyframes)
 - Playbook: [10. Page Systems, Not Isolated Pages](../../playbook/website-strategy-playbook.md#10-page-systems-not-isolated-pages)
 - Playbook: [9. Distinctive Brand Ideas](../../playbook/website-strategy-playbook.md#9-distinctive-brand-ideas)
 - Playbook: [14. Mobile](../../playbook/website-strategy-playbook.md#14-mobile)

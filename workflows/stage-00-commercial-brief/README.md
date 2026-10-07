@@ -54,6 +54,8 @@ Route: **0A → 0B → 0C; use 0D if blocked**
 - [ ] Website role in acquisition is clear.
 - [ ] Known SEO/compliance constraints are captured.
 - [ ] Client confirms the factual brief.
+- [ ] **Creative Intensity rated** (Conservative / Elevated / High-expression), scored on: audience visual sophistication; competitive visual bar; brand asset strength; purchase psychology (emotion, identity, status); commercial value (LTV, premium pricing); compliance risk (may constrain individual elements, never an automatic reason for a dull site). Scores recorded in the brief.
+- [ ] **Strategic invariants captured as a short LOCKED list**: positioning, entities, service architecture, search intent, CRO paths, proof requirements, mobile CTA, compliance limits. Later creativity cannot damage these.
 
 **Also required before moving stage:**
 

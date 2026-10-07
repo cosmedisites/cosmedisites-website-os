@@ -1,4 +1,4 @@
-# Master Project Context — Template
+# Master Project Context — Template (v1.1)
 
 Copy this block into the start of a project workspace. Update it only when facts or decisions genuinely change.
 
@@ -27,6 +27,7 @@ Do not delete OPEN items until they are resolved. Do not remove LOCKED decisions
 - Current lead sources: {{sources}}
 - Website role in acquisition: {{role}}
 - Booking / enquiry method: {{booking_method}}
+  - Creative Intensity: {{Conservative / Elevated / High-expression}} (scores: {{scores}})
 
 ## AUDIENCE
 - Primary patient / customer: {{audience}}
@@ -55,6 +56,7 @@ Do not delete OPEN items until they are resolved. Do not remove LOCKED decisions
 - Practitioners own: {{practitioner_owns}}
 - Locations own: {{location_owns}}
 - Results / case-study ownership: {{results_ownership}}
+  - Independent / partner businesses on site: {{who + relationship + how shown}}
 
 ## UX / INFORMATION ARCHITECTURE
 - Primary discovery routes: {{treatment / concern / guided / other}}
@@ -95,6 +97,17 @@ Do not delete OPEN items until they are resolved. Do not remove LOCKED decisions
 - CTA hierarchy: {{cta}}
 - Visual elements to avoid: {{avoid}}
 
+## CREATIVE TRANSLATION
+  - Creative thesis: {{one_line}}
+  - Principles: {{3_to_5}}
+  - Anti-goals: {{anti_goals}}
+  - MATCH / BEAT / AVOID board: {{link}}
+  - Brand DNA: {{colours, contrast, image style, motion, type, personality, physical assets}}
+  - Asset matrix (USE / SHOOT / SOURCE / DO NOT FAKE): {{link}}
+  - Keyframes (05T): {{link}}; Brand Swap Test: {{pass + what makes it specific}}
+  - Collision test (05V): {{link_or_status}}
+  - Asset gate: {{passed / production plan + shoot date}}
+
 ## LOCKED DECISIONS
 - [LOCKED] {{decision_1}} — approved {{date}}
 - [LOCKED] {{decision_2}} — approved {{date}}
@@ -111,6 +124,8 @@ Do not delete OPEN items until they are resolved. Do not remove LOCKED decisions
 - Positioning Thesis: {{link_or_status}}
 - Sitemap / SEO Architecture: {{link_or_status}}
 - Visual Direction: {{link_or_status}}
+  - Creative Keyframes (05T): {{link_or_status}}
+  - Creative Validation Record (05V): {{link_or_status}}
 - Page / Component System: {{link_or_status}}
 - Proof Inventory: {{link_or_status}}
 - Photography Brief: {{link_or_status}}

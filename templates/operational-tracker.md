@@ -39,7 +39,7 @@ If the Option B fallback is used, or for a small project run without Chirply, th
 
 - COSMEDISITES WEBSITE REDESIGN — PROJECT CONTROL
 - Client · [[Client]] · KPI · Value
-- Domain · [[Domain]] · Stages Complete · =COUNTIF('Stage Tracker'!G2:G16,"Complete")
+- Domain · [[Domain]] · Stages Complete · =COUNTIF('Stage Tracker'!G2:G18,"Complete")
 - Project Lead · [[Name]] · Open Inputs · =COUNTIFS('Content Inputs'!E2:E200,"<>Verified",'Content Inputs'!E2:E200,"<>N/A",'Content Inputs'!A2:A200,"<>")
 - Target Launch · [[Date]] · QA Fixes Open · =COUNTIF(QA!D2:D100,"Fix")
 - Current Phase · [[Phase]]
@@ -54,20 +54,22 @@ If the Option B fallback is used, or for a small project run without Chirply, th
 | 2 | Strategic Diagnosis | Strategist | Project Lead | No | Commercial, trust, UX and scalability issues diagnosed without visual prescription. | Not Started | No | 03 Strategic Diagnosis |  |
 | 3 | Positioning | Strategist | Creative / Project Lead | Yes | Three-second perception, wrong perception, thesis, priority services and brand architecture agreed. | Not Started | Yes | 04 Positioning Thesis |  |
 | 4 | IA + SEO | SEO Lead / Strategist | Project Lead | Yes if structure changes | URLs, page purposes, hierarchy, internal linking and redirect requirements defined. | Not Started | Conditional | 06 Sitemap + SEO Architecture |  |
-| 5 | Visual Direction | Designer | Strategist / Creative Lead | Yes | Visual system tied to positioning; desktop/mobile direction clear. | Not Started | Yes | 07 Visual Direction |  |
+| 5 | Brand + Visual Direction | Designer | Strategist / Creative Lead | Yes | Visual system tied to positioning; brand DNA, MATCH / BEAT / AVOID benchmark, asset matrix and creative thesis recorded; desktop/mobile direction clear. | Not Started | Yes (client approves at 5V) | 07 Visual Direction |  |
+| 5T | Creative Translation | Designer / Creative Lead | Strategist + Project Lead | No | 3 to 4 high-fidelity keyframes with real assets; Brand Swap Test and generic-design red team passed. | Not Started | Internal | Keyframes (S05T) |  |
+| 5V | Creative Validation | Strategist + SEO Lead | Project Lead | Yes | Collision test passed; asset gate passed; client keyframe approval recorded. | Not Started | Yes | Collision test + keyframes (S05V) |  |
 | 6 | Page + Component System | Designer / UX | Strategist | No | Core page templates and reusable components defined; responsive behaviour documented. | Not Started | Internal | 08 Page + Component System |  |
 | 7 | Proof + Content + Photography | Content Lead | Strategist / Compliance | Client supplies inputs | Proof inventory, input tracker and shoot brief complete; gaps owned. | Not Started | No | 09 Proof + 10 Photography |  |
 | 8 | Client Strategy Review | Project Lead | Strategist / Designer | Yes | Client deck presents one coherent direction and explicit decisions. | Not Started | Review meeting | 11 Client Strategy Deck |  |
 | 9 | Approval Gate | Project Lead | — | Yes | Strategic decisions explicitly approved / changes logged / locks recorded. | Not Started | Yes | 12 Approval Record |  |
 | 10 | Production Inputs | Content / Project Lead | Project Lead | Yes | Every required input has owner, status and deadline. | Not Started | No | 13 Content / Input Tracker |  |
 | 11 | Build | Developer | Designer | No | Approved design, content, SEO and tracking requirements implemented. | Not Started | No | 14 Build Handoff |  |
-| 12 | Compliance + Strategy + Technical QA | Named QA owners | Independent reviewers | No | All three QA gates signed off and blocking issues resolved. | Not Started | Internal sign-off | 15 Compliance + Launch QA |  |
+| 12 | Compliance + Strategy + Technical + Creative QA | Named QA owners | Independent reviewers | No | All four QA gates (compliance, strategy/UX, technical/SEO, creative) signed off and blocking issues resolved. | Not Started | Internal sign-off | 15 Compliance + Launch QA |  |
 | 13 | Launch | Project Lead | Developer / SEO | Client informed | Launch completed; tracking verified; baseline captured. | Not Started | Launch sign-off | 16 Measurement Baseline |  |
 | 14 | 30 / 60 / 90 Measurement | Strategist / Project Lead | Project Lead | Review as needed | Post-launch reviews completed; KEEP/IMPROVE/TEST/SCALE decisions recorded. | Not Started | No | 17 30-60-90 Review |  |
 
 Data validation:
 
-- `G2:G16`: "Not Started,In Progress,Blocked,Ready for Review,Complete,N/A"
+- `G2:G18`: "Not Started,In Progress,Blocked,Ready for Review,Complete,N/A"
 
 ## Approvals
 
@@ -152,10 +154,15 @@ Data validation:
 | Technical / SEO | Responsive behaviour |  | Not Checked |  |  |
 | Technical / SEO | Broken links |  | Not Checked |  |  |
 | Technical / SEO | Consent implementation |  | Not Checked |  |  |
+| Creative | Brand Swap Test passes on the built site |  | Not Checked |  |  |
+| Creative | Keyframe fidelity (no flattening) |  | Not Checked |  |  |
+| Creative | Real assets in place; no placeholder dictating layout |  | Not Checked |  |  |
+| Creative | Motion pausable and respects reduced-motion |  | Not Checked |  |  |
+| Creative | High-value pages keep bespoke moments |  | Not Checked |  |  |
 
 Data validation:
 
-- `D2:D30`: "Not Checked,Pass,Fix,N/A"
+- `D2:D35`: "Not Checked,Pass,Fix,N/A"
 
 ## Measurement
 

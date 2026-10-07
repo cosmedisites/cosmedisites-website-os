@@ -55,6 +55,8 @@ stages:
       - Website role in acquisition is clear.
       - Known SEO/compliance constraints are captured.
       - Client confirms the factual brief.
+      - "**Creative Intensity rated** (Conservative / Elevated / High-expression), scored on: audience visual sophistication; competitive visual bar; brand asset strength; purchase psychology (emotion, identity, status); commercial value (LTV, premium pricing); compliance risk (may constrain individual elements, never an automatic reason for a dull site). Scores recorded in the brief."
+      - "**Strategic invariants captured as a short LOCKED list**: positioning, entities, service architecture, search intent, CRO paths, proof requirements, mobile CTA, compliance limits. Later creativity cannot damage these."
     gate_checks:
       - {check: "The team can answer: What does this business need the new website to achieve? What would make the redesign commercially unsuccessful even if it looked excellent?", source: "SOP Stage 0"}
       - {check: "0C validator returns PASS", source: "Workflow Index step 7"}
@@ -91,6 +93,7 @@ stages:
       - Proof inventory started.
       - Key unknowns identified.
       - Strategic diagnosis drafted.
+      - "Brand evidence gathered beyond the website: the client's Instagram/TikTok, premises photos, team, uniforms, signage and existing photography/video inventoried for Stage 05."
     gate_checks:
       - {check: "Diagnostic sentence written: “The existing site currently communicates X. The business needs to become Y. The primary barriers are A, B and C.”", source: "SOP Stage 1"}
       - {check: "1D validator returns PASS", source: "Workflow Index step 7"}
@@ -195,16 +198,17 @@ stages:
       - {check: "4E validator returns PASS", source: "Workflow Index step 7"}
 
   - id: "05"
-    name: Visual Direction
+    name: Brand + Visual Direction
     slug: stage-05-visual-direction
     sop_stage: 5
-    objective: Translate approved positioning into a coherent, defensible visual system without allowing aesthetic preference to rewrite strategy.
+    objective: "Establish the brand's real visual identity and a creative thesis tied to positioning: brand DNA, category benchmark, creative intensity and the assets the direction needs."
+    next: {label: "Stage 05T — Creative Translation", path: "../stage-05t-creative-translation/README.md"}
     owner: Designer
     reviewer: Strategist / Creative Lead
     client_involved: Approval
     approval: "Yes"
     approval_type: client
-    gate: Client approval
+    gate: Client approval at Stage 05V
     route: "5A → 5B + 5C → 5D"
     prompts:
       - {id: 5A, kind: run}
@@ -221,15 +225,19 @@ stages:
       - Photography direction is defined.
       - CTA hierarchy is unambiguous.
       - Client-facing explanation avoids internal design jargon.
+      - "**Category visual benchmark**: MATCH / BEAT / AVOID board from 5 to 10 direct competitors, strong adjacent brands and the client's own social and physical brand. Not \"sites we like\": record visual patterns, category clichés and the current creative ceiling. For visual categories, Instagram, TikTok, clinic interiors, practitioner personal brands and adjacent beauty/fashion/hospitality brands are mandatory sources."
+      - "**Brand reality audit**: \"What does this brand look like when it isn't a website?\" Brand DNA recorded: colours, contrast, image style, motion, typography, personality, distinctive physical assets."
+      - "**Asset reality check**: USE / SHOOT / SOURCE / DO NOT FAKE matrix, and the client shoot request sent."
+      - "**Creative thesis**: one line (HAUS: \"fashion-forward aesthetics house with clinical credibility\", not \"premium editorial clinic\"), with 3 to 5 principles and explicit anti-goals."
     gate_checks:
       - {check: "5D validator returns PASS", source: "Workflow Index step 7"}
-      - {check: "Client visual-direction approval recorded in the Approval Record", source: "SOP Stage 5 / Tracker"}
+      - {check: "Client approval of the direction is recorded at Stage 05V, on the keyframes, not on mood boards", source: "Website OS v1.1"}
 
   - id: "06"
-    name: Page + Component System
+    name: Page + Component System (from approved keyframes)
     slug: stage-06-page-system
     sop_stage: 6
-    objective: Create reusable page and component patterns that scale across treatments, concerns, practitioners, locations and future growth.
+    objective: Reverse-engineer the approved Stage 05T keyframes into reusable Elementor globals, Atomic components, page patterns, responsive behaviour and content rules. The component library is derived from the creative, not the creative from the component library.
     owner: Designer / UX Lead
     reviewer: Strategist
     client_involved: "No"
@@ -252,6 +260,8 @@ stages:
       - Core components are reusable.
       - Responsive behaviour is defined.
       - New treatments/practitioners/locations can be added without redesigning the system.
+      - "**The component system reproduces the approved creative keyframes without materially flattening their visual character** (side-by-side check against 05T)."
+      - Do not start until Stage 05V, including the asset gate, has passed.
     gate_checks:
       - {check: "6E scalability validator shows no routine growth scenario requiring an architecture change", source: "Workflow Index step 7 / prompt 6E"}
 
@@ -286,6 +296,7 @@ stages:
       - Photography requirements are defined.
       - Patient/model consent requirements are identified.
       - Design does not depend on evidence nobody can supply.
+      - The shoot brief derives from the Stage 05 asset matrix; every SHOOT item has a date and owner; nothing marked DO NOT FAKE is substituted.
     gate_checks:
       - {check: "7D claims validator shows no UNSUPPORTED claim left in client copy", source: "Workflow Index step 7 / prompt 7D"}
 
@@ -413,6 +424,8 @@ stages:
       - Desktop/mobile states are implemented.
       - SEO/migration requirements are implemented.
       - Tracking requirements are implemented.
+      - "**Native implementation pilot first**: hero plus 2 to 3 core sections built in Elementor and checked for motion, imagery, responsive behaviour, Core Web Vitals, editability and visual impact at desktop and mobile. Pilot approved before rolling through the remaining pages."
+      - "Roll-out scales without flattening: commodity pages templated, high-value pages keep bespoke moments."
     gate_checks:
       - {check: "11D shows no outstanding CRITICAL variance", source: "Workflow Index step 7 / prompt 11D"}
 
@@ -420,24 +433,24 @@ stages:
     name: QA
     slug: stage-12-qa
     sop_stage: 12
-    objective: Run separate regulated-content, strategy/UX and technical/SEO sign-offs so one type of QA cannot hide another.
+    objective: Run separate regulated-content, strategy/UX, technical/SEO and creative sign-offs so one type of QA cannot hide another.
     owner: Named QA owners (see gates)
     reviewer: Independent reviewers
     client_involved: "No"
     approval: Internal sign-off
     approval_type: internal
     gate: Internal sign-off
-    route: "12A + 12B + 12C → 12D → 12E"
+    route: "12A + 12B + 12C + 12F → 12D → 12E"
     prompts:
       - {id: 12A, kind: run, note: Compliance gate}
       - {id: 12B, kind: run, note: Strategy / UX gate}
       - {id: 12C, kind: run, note: Technical / SEO gate}
       - {id: 12D, kind: validate}
       - {id: 12E, kind: validate, note: only if launching with open P0/P1 items}
-    output: Compliance + Strategy + Technical QA sign-off
+    output: Compliance + Strategy + Technical + Creative QA sign-off
     templates: [compliance-launch-qa]
     tracker_tabs: [QA]
-    qa_gates: [compliance, strategy-ux, technical-seo]
+    qa_gates: [compliance, strategy-ux, technical-seo, creative]
     playbook: [20, 23]
     handoffs: [H07]
     client_comms: [C07]
@@ -446,6 +459,7 @@ stages:
       - Compliance gate signed off.
       - Strategy/UX gate signed off.
       - Technical/SEO gate signed off.
+      - Creative gate (12F) signed off.
       - Blocking issues resolved or explicitly accepted.
     gate_checks:
       - {check: "12D consolidated triage complete; any open P0 has a 12E GO / CONDITIONAL GO decision recorded with owner and rollback trigger", source: "Workflow Index step 7 / prompts 12D–12E"}
@@ -517,6 +531,12 @@ stages:
     gate_checks:
       - {check: "Reusable learning logged as GitHub Issues (IMPROVEMENT / TEST)", source: "SOP Stage 14 (\"Feed reusable learning back into the operating system\")"}
 
+# v1.1 stages that sit between numbered stages. Their cards are hand-written (not generated);
+# this list drives the README stage table only. Stage numbers 06 to 14 are unchanged.
+interstitial_stages:
+  - {id: 05T, after: "05", name: Creative Translation, slug: stage-05t-creative-translation, owner: Designer / Creative Lead, output: High-fidelity keyframes + Brand Swap Test note, approval: Internal}
+  - {id: 05V, after: "05", name: Creative Validation, slug: stage-05v-creative-validation, owner: Strategist + SEO Lead, output: Collision test + asset gate + client-approved keyframes, approval: "Yes"}
+
 # Templates: number from the Template Pack v1.0. `source` = filename in the Source Pack.
 templates:
   project-strategy-brief:   {number: "01", title: Project Strategy Brief, source: 01_Project_Strategy_Brief.md}
@@ -542,6 +562,7 @@ qa_gates:
   compliance:    {title: Compliance Review, file: qa/compliance.md, prompt: 12A, owner: Compliance Reviewer}
   strategy-ux:   {title: Strategy / UX QA, file: qa/strategy-ux.md, prompt: 12B, owner: Independent QA Reviewer}
   technical-seo: {title: Technical / SEO QA, file: qa/technical-seo.md, prompt: 12C, owner: Developer + SEO Lead}
+  creative:      {title: Creative QA (12F), file: qa/creative.md, owner: Independent reviewer who did not design the site}
 
 # Status vocabularies: Operational Tracker v1.0, "Lists" sheet.
 statuses:

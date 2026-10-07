@@ -2,6 +2,27 @@
 
 All material changes to the CosmediSites Website OS. Versioning: [docs/governance.md#versioning](docs/governance.md#versioning).
 
+## v1.1 (7 October 2026): Creative Translation layer
+
+**Why.** The HAUS of DRA redesign exposed a repeatable failure mode: strategy, IA, CRO and SEO were solved, then the design was translated into a safe component system too early. The site was technically good and visually generic. The fix is a formal creative layer between visual direction and the component system.
+
+**Added**
+- Stage 05T Creative Translation: 3 to 4 high-fidelity keyframes with real client assets; Brand Swap Test; generic-design red team.
+- Stage 05V Creative Validation: CRO/SEO/compliance/mobile/motion/performance collision test; hard asset gate; client approves keyframes, not mood boards.
+- Creative Intensity rating at Stage 00 (Conservative / Elevated / High-expression) and a LOCKED list of strategic invariants.
+- Brand reality audit, MATCH / BEAT / AVOID benchmark, asset matrix (USE / SHOOT / SOURCE / DO NOT FAKE) and creative thesis at Stage 05 (renamed Brand + Visual Direction).
+- Stage 06 is now derived from the approved keyframes, with a DoD line forbidding visual flattening.
+- Native implementation pilot at Stage 11 before roll-out.
+- Fourth independent QA gate, 12F Creative.
+- Principles: "The design system follows the creative direction, not the other way around." and "SEO and CRO are constraints to design within, not excuses for generic design."
+
+**Unchanged**
+- Stage numbers 06 to 14 (new stages are 05T and 05V), so v1.0 projects, Drive folders and pipeline columns remain valid.
+
+**Where it is applied**
+- Chirply (CosmediSites): project template "Website Redesign (OS v1.1)"; the Website Redesign deal template now creates projects from it (`os_version: v1.1`); pipeline columns 05 Brand + Visual Direction, 05T, 05V. The v1.0 template is kept for projects already running.
+- Drive (`_Website OS`): template folder renamed to OS v1.1 with S05T and S05V subfolders; tracker, README and Master Project Context v1.1; v1.0 originals in `_Archive – Website OS v1.0`.
+
 ## [Unreleased]
 
 ### Operational design (Chirply; no SOP change)

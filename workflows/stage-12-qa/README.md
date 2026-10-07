@@ -13,7 +13,7 @@ Status values: Not Started · In Progress · Blocked · Ready for Review · Comp
 
 ## Objective
 
-Run separate regulated-content, strategy/UX and technical/SEO sign-offs so one type of QA cannot hide another.
+Run separate regulated-content, strategy/UX, technical/SEO and creative sign-offs so one type of QA cannot hide another.
 
 ## Inputs
 
@@ -33,7 +33,7 @@ Run separate regulated-content, strategy/UX and technical/SEO sign-offs so one t
 
 ## Run
 
-Route: **12A + 12B + 12C → 12D → 12E**
+Route: **12A + 12B + 12C + 12F → 12D → 12E**
 
 - **[12A — Compliance QA](prompts.md#12a--compliance-qa)** *(Compliance gate)* — Before launch candidate approval. → *Compliance QA report.*
 - **[12B — Strategy / UX QA](prompts.md#12b--strategy--ux-qa)** *(Strategy / UX gate)* — Before launch. → *Strategy/UX QA report.*
@@ -46,12 +46,13 @@ Route: **12A + 12B + 12C → 12D → 12E**
 
 ## Output
 
-**Compliance + Strategy + Technical QA sign-off**
+**Compliance + Strategy + Technical + Creative QA sign-off**
 
 - Template 15 — [Compliance + Launch QA](../../templates/compliance-launch-qa.md)
 - QA gate — [Compliance Review](../../qa/compliance.md) *(owner: Compliance Reviewer)*
 - QA gate — [Strategy / UX QA](../../qa/strategy-ux.md) *(owner: Independent QA Reviewer)*
 - QA gate — [Technical / SEO QA](../../qa/technical-seo.md) *(owner: Developer + SEO Lead)*
+- QA gate — [Creative QA (12F)](../../qa/creative.md) *(owner: Independent reviewer who did not design the site)*
 - Project Tracker tab(s): QA ([structure](../../templates/operational-tracker.md))
 
 ## Definition of Done
@@ -61,6 +62,7 @@ Route: **12A + 12B + 12C → 12D → 12E**
 - [ ] Compliance gate signed off.
 - [ ] Strategy/UX gate signed off.
 - [ ] Technical/SEO gate signed off.
+- [ ] Creative gate (12F) signed off.
 - [ ] Blocking issues resolved or explicitly accepted.
 
 **Also required before moving stage:**

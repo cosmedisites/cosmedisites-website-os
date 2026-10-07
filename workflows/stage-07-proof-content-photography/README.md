@@ -63,6 +63,7 @@ Route: **7A + 7B + 7C → 7D + 7E**
 - [ ] Photography requirements are defined.
 - [ ] Patient/model consent requirements are identified.
 - [ ] Design does not depend on evidence nobody can supply.
+- [ ] The shoot brief derives from the Stage 05 asset matrix; every SHOOT item has a date and owner; nothing marked DO NOT FAKE is substituted.
 
 **Also required before moving stage:**
 

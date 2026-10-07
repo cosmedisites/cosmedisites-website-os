@@ -61,6 +61,10 @@ If the clinic wants to become known for regenerative medicine, do not bury regen
 
 **Architecture follows business strategy.**
 
+**The design system follows the creative direction, not the other way around.**
+
+**SEO and CRO are constraints to design within, not excuses for generic design.**
+
 ---
 
 # 3. Evidence Before Preference
